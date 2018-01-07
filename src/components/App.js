@@ -19,7 +19,7 @@ class App extends Component {
         <div className="main">
 
           <LogInOut />
-          
+
         </div>
       </div>
     );
