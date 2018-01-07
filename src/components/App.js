@@ -15,11 +15,11 @@ class App extends Component {
           <div className="nav-item"><Link to="/cards/new">Add Card</Link></div>
           <div className="nav-item"><Link to="/login">Login</Link></div>
         </div>
-        
+
         <div className="main">
 
           <LogInOut />
-
+          
         </div>
       </div>
     );
