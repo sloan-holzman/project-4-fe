@@ -5,20 +5,21 @@ import {
 } from "react-router-dom"
 import LogInOut from "./LogInOut"
 import Dashboard from "./Dashboard"
+import Navbar from "./Navbar"
+
 
 class App extends Component {
+
+
+
+
   render() {
+    // var elem = document.querySelector('.sidenav');
+    // var instance = M.Sidenav.init(elem, options);
     return (
       <div>
-        <div className="nav">
-          <div className="nav-item"><span className="nav-logo">iStocks</span></div>
-          <div className="nav-item"><Link to="/cards">Home</Link></div>
-          <div className="nav-item"><Link to="/cards/new">Add Card</Link></div>
-          <div className="nav-item"><Link to="/login">Login</Link></div>
-        </div>
-
+        <Navbar />
         <div className="main">
-
           <LogInOut />
           <Dashboard />
         </div>

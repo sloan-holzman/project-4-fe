@@ -44,7 +44,7 @@ class LogInOut extends Component {
             {this.props.user.email}
           </div>
           <div>
-            <button onClick={this.logout} className="button" >
+            <button onClick={this.logout} className="waves-effect waves-light btn" >
               Log out
             </button>
           </div>
