@@ -13,6 +13,12 @@ class Navbar extends Component {
     super();
   }
 
+  // componentDidMount(){
+  //   // var elem = document.querySelector('.sidenav');
+  //   var elem = this.refs.sidenav
+  //   var instance = M.Sidenav.init(elem, options);
+  // }
+
   render() {
         return (
           <nav>
@@ -28,7 +34,7 @@ class Navbar extends Component {
                     <li><Link to="/login">Login</Link></li>
                 }
               </ul>
-              <ul className="sidenav" id="mobile-demo">
+              <ul ref="sidenav" className="sidenav" id="mobile-demo">
                 <li><Link to="/cards">Home</Link></li>
                 <li><Link to="/cards/new">Add Card</Link></li>
                 {

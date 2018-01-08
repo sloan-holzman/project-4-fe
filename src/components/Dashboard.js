@@ -12,7 +12,8 @@ class Dashboard extends Component {
 
   render() {
     let cards = this.props.cards.map((card, i) => {
-      let balance = card.balance.toFixed(2)
+      let balance = card.balance && card.balance> 0 ? card.balance.toFixed(2) : "N/A"
+
       return (
         <li key={i}>
           Retailer: {card.retailer} Balance: ${balance} Last updated: {card.updated}
