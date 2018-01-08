@@ -4,6 +4,7 @@ import {
   withRouter
 } from "react-router-dom"
 import LogInOut from "./LogInOut"
+import Dashboard from "./Dashboard"
 
 class App extends Component {
   render() {
@@ -19,7 +20,7 @@ class App extends Component {
         <div className="main">
 
           <LogInOut />
-
+          <Dashboard />
         </div>
       </div>
     );
