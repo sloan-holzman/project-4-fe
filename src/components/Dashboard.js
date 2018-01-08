@@ -16,7 +16,7 @@ class Dashboard extends Component {
 
       return (
         <li key={i}>
-          Retailer: {card.retailer} Balance: ${balance} Last updated: {card.updated}
+          Retailer: {card.retailer} Balance: ${balance} Number: {card.number} Last updated: {card.updated}
         </li>
       )
     })

@@ -24,7 +24,6 @@ class App extends Component {
             <Route exact path="/login" component={LogInOut} />
             <Route exact path="/logout" component={LogOut} />
             <Route exact path="/cards/new" component={NewCard} />
-            {/* <Route exact path="/cards/:symbol" component={Stock} /> */}
             <Route exact path="/" render={() => <Redirect to="/login" />} />
           </Switch>
         </div>

@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT } from '../constants/cards'
+import { LOG_IN, LOG_OUT, UPDATE_CARDS_AFTER_POST } from '../constants/cards'
 import { combineReducers } from 'redux'
 
 function cardReducer(
@@ -24,6 +24,10 @@ function cardReducer(
         user: null,
         cards: [],
         token: ''
+      })
+    case UPDATE_CARDS_AFTER_POST:
+      return Object.assign({}, state, {
+        cards: action.payload.cards,
       })
     default:
       return state

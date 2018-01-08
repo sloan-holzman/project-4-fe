@@ -19,7 +19,7 @@ class LogInOut extends Component {
     response.json().then(user => {
       if (token) {
         this.props.dispatch(login(user, token))
-        // this.setState({isAuthenticated: true, user: user, token: token});
+        this.props.history.push(`/cards`)
       }
     });
   };

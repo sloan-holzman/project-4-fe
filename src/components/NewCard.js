@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import axios from "axios";
+import { update_cards_after_post } from '../actions/cards'
 
 
 class NewCard extends Component {
@@ -25,6 +26,7 @@ class NewCard extends Component {
     .then(response => {
       console.log(response)
       if (response.data) {
+        this.props.dispatch(update_cards_after_post(response.data))
         this.props.history.push(`/cards`)
       }
     })
