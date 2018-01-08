@@ -11,17 +11,6 @@ class NewCard extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // let data = {
-    //   retailer: e.target[0].value,
-    //   number: e.target[1].value,
-    //   expiration: e.target[2].value,
-    //   balance: e.target[3].value
-    // }
-    // console.log(data)
-    // fetch(`http://localhost:1337/api/v1/cards`,
-    //   {method: 'POST', body: JSON.stringify(data)}
-    //  )
-    console.log()
      axios({
       method: "POST",
       url: `http://localhost:1337/api/v1/cards`,
@@ -35,21 +24,30 @@ class NewCard extends Component {
     })
     .then(response => {
       console.log(response)
-      if (response.symbol) {
+      if (response.data) {
         this.props.history.push(`/cards`)
       }
     })
     .catch(err => {console.log(err)})
   }
   render () {
+    let content = !!this.props.isAuthenticated ?
+      (<form onSubmit={this.handleSubmit}>
+        <label for="retailer">Retailer:</label>
+        <input type="text" id="retailer" name="retailer" placeholder="e.g. JCrew, Amazon, etc."/>
+        <label for="number">Gift Card Number:</label>
+        <input type="text" id="number" name="number" placeholder="e.g. 0123456789"/>
+        <label for="expiration">Expiration Date:</label>
+        <input type="date" id="expiration" name="expiration"/>
+        <label for="balance">Remaining Balance ($):</label>
+        <input type="number" id="balance" name="balance" placeholder="e.g. $100.00"/>
+        <input className="waves-effect waves-light btn" type="submit" value="Add"/>
+      </form>) :
+      (<p>You must be logged in before adding a card</p>)
     return (
-      <form onSubmit={this.handleSubmit}>
-        <p><input type="text" name="retailer" placeholder="Retailer"/></p>
-        <p><input type="text" name="number" placeholder="Card Number"/></p>
-        <p><input type="date" name="expiration" placeholder="Expiration Date"/></p>
-        <p><input type="number" name="balance" placeholder="Remaining Balance"/></p>
-        <p><input type="submit" value="Add"/></p>
-      </form>
+      <div>
+        {content}
+      </div>
     )
   }
 }
