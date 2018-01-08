@@ -4,7 +4,7 @@ import axios from "axios";
 import { update_cards_after_post } from '../actions/cards'
 
 
-class NewCard extends Component {
+class EditCard extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -13,8 +13,8 @@ class NewCard extends Component {
   handleSubmit(e) {
     e.preventDefault();
      axios({
-      method: "POST",
-      url: `http://localhost:1337/api/v1/cards`,
+      method: "PUT",
+      url: `http://localhost:1337/api/v1/cards/${this.props.match.params.id}`,
       headers: {'Authorization': "Bearer " + this.props.token},
       data: {
         retailer: e.target[0].value,
@@ -32,23 +32,24 @@ class NewCard extends Component {
     })
     .catch(err => {console.log(err)})
   }
-
   render () {
-    console.log(this.props)
-    let content = !!this.props.isAuthenticated ?
-      ( <div><h3>Enter New Card</h3>
+    let card = this.props.cards.find((card) => card._id === this.props.match.params.id)
+    let content = card ? (
+      <div>
+        <h3>Enter New Card</h3>
         <form onSubmit={this.handleSubmit}>
           <label for="retailer">Retailer:</label>
-          <input type="text" id="retailer" name="retailer" placeholder="e.g. JCrew, Amazon, etc."/>
+          <input type="text" id="retailer" name="retailer" defaultValue={card.retailer}/>
           <label for="number">Gift Card Number:</label>
-          <input type="text" id="number" name="number" placeholder="e.g. 0123456789"/>
+          <input type="text" id="number" name="number" defaultValue={card.number}/>
           <label for="expiration">Expiration Date:</label>
-          <input type="date" id="expiration" name="expiration"/>
+          <input type="date" id="expiration" name="expiration" defaultValue={card.expiration}/>
           <label for="balance">Remaining Balance ($):</label>
-          <input type="number" id="balance" name="balance" placeholder="e.g. $100.00"/>
+          <input type="number" id="balance" name="balance" defaultValue={card.balance}/>
           <input className="waves-effect waves-light btn" type="submit" value="Add"/>
-        </form></div>) :
-      (<p>You must be logged in before adding a card</p>)
+        </form>
+      </div>) :
+      (<p>Card does not exist.  Ensure you are logged in</p>)
     return (
       <div>
         {content}
@@ -59,8 +60,8 @@ class NewCard extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.cardReducer.isAuthenticated,
-  user: state.cardReducer.user,
-  token: state.cardReducer.token
+  token: state.cardReducer.token,
+  cards: state.cardReducer.cards
 })
 
-export default connect(mapStateToProps)(NewCard)
+export default connect(mapStateToProps)(EditCard)

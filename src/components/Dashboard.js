@@ -14,7 +14,7 @@ class Dashboard extends Component {
     let cards = this.props.cards.map((card, i) => {
       return (
         <li key={i}>
-          <Card card={card}/>
+          <Card card={card} history={this.props.history}/>
         </li>
       )
     })
