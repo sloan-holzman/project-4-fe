@@ -1,27 +1,32 @@
 import React, { Component } from 'react'
 import {
+  Route,
   Link,
+  Redirect,
+  Switch,
   withRouter
 } from "react-router-dom"
 import LogInOut from "./LogInOut"
+import LogOut from "./LogOut"
 import Dashboard from "./Dashboard"
 import Navbar from "./Navbar"
+import NewCard from "./NewCard"
 
 
 class App extends Component {
-
-
-
-
   render() {
-    // var elem = document.querySelector('.sidenav');
-    // var instance = M.Sidenav.init(elem, options);
     return (
       <div>
         <Navbar />
         <div className="main">
-          <LogInOut />
-          <Dashboard />
+          <Switch>
+            <Route exact path="/cards" component={Dashboard} />
+            <Route exact path="/login" component={LogInOut} />
+            <Route exact path="/logout" component={LogOut} />
+            <Route exact path="/cards/new" component={NewCard} />
+            {/* <Route exact path="/cards/:symbol" component={Stock} /> */}
+            <Route exact path="/" render={() => <Redirect to="/login" />} />
+          </Switch>
         </div>
       </div>
     );

@@ -57,7 +57,7 @@ class LogInOut extends Component {
       );
 
     return (
-      <div className="App">
+      <div>
         {content}
       </div>
     );
