@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom"
-
+import Card from "./Card"
 
 
 class Dashboard extends Component {
@@ -12,11 +12,9 @@ class Dashboard extends Component {
 
   render() {
     let cards = this.props.cards.map((card, i) => {
-      let balance = card.balance && card.balance> 0 ? card.balance.toFixed(2) : "N/A"
-
       return (
         <li key={i}>
-          Retailer: {card.retailer} Balance: ${balance} Number: {card.number} Last updated: {card.updated}
+          <Card card={card}/>
         </li>
       )
     })
