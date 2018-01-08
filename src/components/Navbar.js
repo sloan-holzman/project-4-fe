@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TwitterLogin from 'react-twitter-auth';
-import { login, logout } from '../actions/login'
+import { login, logout } from '../actions/cards'
 import { connect } from 'react-redux'
 import {
   Link,
@@ -50,7 +50,7 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.loginReducer.isAuthenticated,
+  isAuthenticated: state.cardReducer.isAuthenticated,
 })
 
 

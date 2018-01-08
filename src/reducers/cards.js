@@ -1,7 +1,7 @@
-import { LOG_IN, LOG_OUT } from '../constants/login'
+import { LOG_IN, LOG_OUT } from '../constants/cards'
 import { combineReducers } from 'redux'
 
-function loginReducer(
+function cardReducer(
   state = {
     isAuthenticated: false,
     user: null,
@@ -31,7 +31,7 @@ function loginReducer(
 }
 
 const rootReducer = combineReducers({
-  loginReducer
+  cardReducer
 })
 
 export default rootReducer

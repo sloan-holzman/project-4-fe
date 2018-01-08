@@ -53,9 +53,9 @@ class NewCard extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.loginReducer.isAuthenticated,
-  user: state.loginReducer.user,
-  token: state.loginReducer.token
+  isAuthenticated: state.cardReducer.isAuthenticated,
+  user: state.cardReducer.user,
+  token: state.cardReducer.token
 })
 
 export default connect(mapStateToProps)(NewCard)

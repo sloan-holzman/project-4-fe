@@ -1,4 +1,4 @@
-import rootReducer from './reducers/login'
+import rootReducer from './reducers/cards'
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux'

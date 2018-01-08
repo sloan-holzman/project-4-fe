@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TwitterLogin from 'react-twitter-auth';
-import { login, logout } from '../actions/login'
+import { login, logout } from '../actions/cards'
 import { connect } from 'react-redux'
 
 
@@ -30,9 +30,9 @@ class LogOut extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.loginReducer.isAuthenticated,
-  user: state.loginReducer.user,
-  token: state.loginReducer.token
+  isAuthenticated: state.cardReducer.isAuthenticated,
+  user: state.cardReducer.user,
+  token: state.cardReducer.token
 })
 
 

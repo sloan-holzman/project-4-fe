@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT } from '../constants/login'
+import { LOG_IN, LOG_OUT } from '../constants/cards'
 import 'babel-polyfill'
 
 
