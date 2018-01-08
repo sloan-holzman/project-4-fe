@@ -25,7 +25,7 @@ class Dashboard extends Component {
         {cards.length > 0 &&
           <div>
             <h2>Cards</h2>
-            <ul className="stocks-list">
+            <ul>
               {cards}
             </ul>
           </div>
