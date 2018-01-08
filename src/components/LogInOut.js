@@ -15,10 +15,11 @@ class LogInOut extends Component {
 
   onSuccessLogin = (response) => {
     console.log("success")
-    const token = response.headers.get('x-auth-token');
-    response.json().then(user => {
-      if (token) {
-        this.props.dispatch(login(user, token))
+    response.json()
+    .then(user => {
+      if (response.headers.get('x-auth-token')) {
+        localStorage.token = response.headers.get('x-auth-token');
+        this.props.dispatch(login(user))
         this.props.history.push(`/cards`)
       }
     });
@@ -31,6 +32,7 @@ class LogInOut extends Component {
   };
 
   logout = () => {
+    localStorage.token.clear()
     this.props.dispatch(logout())
   };
 

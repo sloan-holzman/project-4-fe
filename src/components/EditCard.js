@@ -15,7 +15,7 @@ class EditCard extends Component {
      axios({
       method: "PUT",
       url: `http://localhost:1337/api/v1/cards/${this.props.match.params.id}`,
-      headers: {'Authorization': "Bearer " + this.props.token},
+      headers: {'Authorization': "Bearer " + localStorage.token},
       data: {
         retailer: e.target[0].value,
         number: e.target[1].value,

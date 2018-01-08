@@ -5,7 +5,6 @@ function cardReducer(
   state = {
     isAuthenticated: false,
     user: null,
-    token: '',
     cards: []
   },
   action
@@ -15,15 +14,13 @@ function cardReducer(
       return Object.assign({}, state, {
         isAuthenticated: true,
         user: action.payload.user,
-        cards: action.payload.user.cards,
-        token: action.payload.token
+        cards: action.payload.user.cards
       })
     case LOG_OUT:
       return Object.assign({}, state, {
         isAuthenticated: false,
         user: null,
-        cards: [],
-        token: ''
+        cards: []
       })
     case UPDATE_CARDS_AFTER_POST:
       return Object.assign({}, state, {

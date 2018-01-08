@@ -15,7 +15,7 @@ class NewCard extends Component {
      axios({
       method: "POST",
       url: `http://localhost:1337/api/v1/cards`,
-      headers: {'Authorization': "Bearer " + this.props.token},
+      headers: {'Authorization': "Bearer " + localStorage.token},
       data: {
         retailer: e.target[0].value,
         number: e.target[1].value,

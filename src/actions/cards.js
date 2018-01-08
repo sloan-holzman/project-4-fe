@@ -2,12 +2,11 @@ import { LOG_IN, LOG_OUT, UPDATE_CARDS_AFTER_POST } from '../constants/cards'
 import 'babel-polyfill'
 
 
-export function login(user, token) {
+export function login(user) {
   return {
     type: LOG_IN,
     payload: {
-      user,
-      token
+      user
     }
   }
 }

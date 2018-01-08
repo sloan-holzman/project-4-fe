@@ -17,7 +17,7 @@ class Card extends Component {
      axios({
       method: "DELETE",
       url: `http://localhost:1337/api/v1/cards`,
-      headers: {'Authorization': "Bearer " + this.props.token},
+      headers: {'Authorization': "Bearer " + localStorage.token},
       data: {
         card_id: this.props.card._id
       }
