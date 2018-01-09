@@ -45,11 +45,12 @@ class Card extends Component {
       day: '2-digit'
     }
     return (
-      <div>
+      <div className="card">
         <div>
           <p>Retailer: {this.props.card.retailer}</p>
           <p>Balance: ${balance}</p>
           <p>Number: {this.props.card.number}</p>
+          <p>Pin: {this.props.card.pin}</p>
           <p>Expiration: {new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(this.props.card.expiration))}</p>
           <p>Last updated: {new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(this.props.card.updated))}</p>
         </div>

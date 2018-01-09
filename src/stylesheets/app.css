@@ -5,4 +5,23 @@
   align-items: center;
   align-content: center;
   text-align: center;
+  margin: 0 20%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid #FF5C69;
+  padding: 40px;
+  text-align: left;
+}
+
+nav {
+  padding: 0 5%;
+}
+
+.card {
+  border: 2px solid #FF5C69;
+  padding: 40px;
 }
