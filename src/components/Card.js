@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from "axios";
 import backend from "../BackendVariable";
+import Barcode from 'react-barcode'
+
 
 class Card extends Component {
   constructor(props) {
@@ -37,15 +39,29 @@ class Card extends Component {
 
   render() {
     let balance = (this.props.card.balance && this.props.card.balance> 0 ? this.props.card.balance.toFixed(2) : "N/A")
+    let date_options = {
+      year: 'numeric',
+      month: 'long',
+      day: '2-digit'
+    }
     return (
       <div>
-        <p>Retailer: {this.props.card.retailer} Balance: ${balance} Number: {this.props.card.number} Last updated: {this.props.card.updated} expiration: {this.props.card.expiration}</p>
-        <button onClick={this.deleteCard} className="waves-effect waves-light btn" >
-          Delete Card
-        </button>
-        <button onClick={this.goToEdit} className="waves-effect waves-light btn" >
-          Edit Card
-        </button>
+        <div>
+          <p>Retailer: {this.props.card.retailer}</p>
+          <p>Balance: ${balance}</p>
+          <p>Number: {this.props.card.number}</p>
+          <p>Expiration: {new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(this.props.card.expiration))}</p>
+          <p>Last updated: {new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(this.props.card.updated))}</p>
+        </div>
+        <Barcode value={this.props.card.number} />
+        <div>
+          <button onClick={this.deleteCard} className="waves-effect waves-light btn" >
+            Delete Card
+          </button>
+          <button onClick={this.goToEdit} className="waves-effect waves-light btn" >
+            Edit Card
+          </button>
+        </div>
       </div>
     );
   }

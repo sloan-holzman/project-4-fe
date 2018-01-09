@@ -13,6 +13,7 @@ import NewCard from "../components/NewCard"
 import EditCard from "../components/EditCard"
 import { login, logout, fetchUser } from '../actions/cards'
 import { connect } from 'react-redux'
+import '../stylesheets/app.css'
 
 
 class App extends Component {
