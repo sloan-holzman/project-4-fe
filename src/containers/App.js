@@ -43,6 +43,7 @@ class App extends Component {
   };
 
   onFailedLogin = (error) => {
+    localStorage.clear()
     alert(error);
   };
 

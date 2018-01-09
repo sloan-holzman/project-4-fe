@@ -28,7 +28,11 @@ class Card extends Component {
         this.props.history.push(`/login`)
       }
     })
-    .catch(err => {console.log(err)})
+    .catch(err => {
+      console.log(err)
+      localStorage.clear()
+      this.props.history.push(`/login`)
+    })
   }
 
   goToEdit(e) {

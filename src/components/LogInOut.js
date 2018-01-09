@@ -6,7 +6,7 @@ import backend from "../BackendVariable";
 class LogInOut extends Component {
 
   componentDidMount(){
-    if (localStorage.token) {
+    if (this.props.isAuthenticated) {
       this.props.history.push(`/cards`)
     }
   }
