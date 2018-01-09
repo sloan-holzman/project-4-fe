@@ -18,8 +18,9 @@ class EditCard extends Component {
       data: {
         retailer: e.target[0].value,
         number: e.target[1].value,
-        expiration: e.target[2].value,
-        balance: e.target[3].value
+        pin: e.target[2].value,
+        expiration: e.target[3].value,
+        balance: e.target[4].value
       }
     })
     .then(response => {
@@ -45,6 +46,8 @@ class EditCard extends Component {
           <input type="text" id="retailer" name="retailer" defaultValue={card.retailer}/>
           <label for="number">Gift Card Number:</label>
           <input type="text" id="number" name="number" defaultValue={card.number}/>
+          <label for="number">Gift Card PIN:</label>
+          <input type="text" id="number" name="pin" defaultValue={card.pin}/>
           <label for="expiration">Expiration Date:</label>
           <input type="date" id="expiration" name="expiration" defaultValue={card.expiration}/>
           <label for="balance">Remaining Balance ($):</label>

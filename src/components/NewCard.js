@@ -18,8 +18,9 @@ class NewCard extends Component {
       data: {
         retailer: e.target[0].value,
         number: e.target[1].value,
-        expiration: e.target[2].value,
-        balance: e.target[3].value
+        pin: e.target[2].value,
+        expiration: e.target[3].value,
+        balance: e.target[4].value
       }
     })
     .then(response => {
@@ -40,6 +41,8 @@ class NewCard extends Component {
           <input type="text" id="retailer" name="retailer" placeholder="e.g. JCrew, Amazon, etc."/>
           <label for="number">Gift Card Number:</label>
           <input type="text" id="number" name="number" placeholder="e.g. 0123456789"/>
+          <label for="number">Gift Card PIN:</label>
+          <input type="text" id="number" name="pin" placeholder="e.g. 1234"/>
           <label for="expiration">Expiration Date:</label>
           <input type="date" id="expiration" name="expiration"/>
           <label for="balance">Remaining Balance ($):</label>
