@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import axios from "axios";
-import { update_cards_after_post } from '../actions/cards'
 
 
 class EditCard extends Component {
@@ -26,14 +24,18 @@ class EditCard extends Component {
     .then(response => {
       console.log(response)
       if (response.data) {
-        this.props.dispatch(update_cards_after_post(response.data))
         this.props.history.push(`/cards`)
       }
     })
     .catch(err => {console.log(err)})
   }
+
   render () {
-    let card = this.props.cards.find((card) => card._id === this.props.match.params.id)
+    console.log(this.props)
+    let card
+    if (this.props.cards) {
+      card = this.props.cards.find((card) => card._id === this.props.match.params.id)
+    }
     let content = card ? (
       <div>
         <h3>Enter New Card</h3>
@@ -58,10 +60,5 @@ class EditCard extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.cardReducer.isAuthenticated,
-  token: state.cardReducer.token,
-  cards: state.cardReducer.cards
-})
 
-export default connect(mapStateToProps)(EditCard)
+export default EditCard

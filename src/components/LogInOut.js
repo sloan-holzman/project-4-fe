@@ -1,40 +1,16 @@
 import React, { Component } from 'react';
 import TwitterLogin from 'react-twitter-auth';
-import { login, logout } from '../actions/cards'
-import { connect } from 'react-redux'
 
 
 class LogInOut extends Component {
 
-  constructor() {
-    super();
-    this.onSuccessLogin = this.onSuccessLogin.bind(this)
-    this.onFailedLogin = this.onFailedLogin.bind(this)
-    this.logout = this.logout.bind(this)
+  componentDidMount(){
+    if (localStorage.token) {
+      this.props.history.push(`/cards`)
+    }
   }
 
-  onSuccessLogin = (response) => {
-    console.log("success")
-    response.json()
-    .then(user => {
-      if (response.headers.get('x-auth-token')) {
-        localStorage.token = response.headers.get('x-auth-token');
-        this.props.dispatch(login(user))
-        this.props.history.push(`/cards`)
-      }
-    });
-  };
 
-  onFailedLogin = (error) => {
-    console.log("failed")
-    console.log(error)
-    alert(error);
-  };
-
-  logout = () => {
-    localStorage.token.clear()
-    this.props.dispatch(logout())
-  };
 
   render() {
     let content = !!this.props.isAuthenticated ?
@@ -45,7 +21,7 @@ class LogInOut extends Component {
             {this.props.user.email}
           </div>
           <div>
-            <button onClick={this.logout} className="waves-effect waves-light btn" >
+            <button onClick={this.props.logout} className="waves-effect waves-light btn" >
               Log out
             </button>
           </div>
@@ -53,7 +29,7 @@ class LogInOut extends Component {
       ) :
       (
         <TwitterLogin loginUrl="http://localhost:1337/api/v1/auth/twitter"
-          onFailure={this.onFailedLogin} onSuccess={this.onSuccessLogin}
+          onFailure={this.props.onFailedLogin} onSuccess={this.props.onSuccessLogin}
         requestTokenUrl="http://localhost:1337/api/v1/auth/twitter/reverse"/>
       );
 
@@ -65,11 +41,4 @@ class LogInOut extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.cardReducer.isAuthenticated,
-  user: state.cardReducer.user,
-  token: state.cardReducer.token
-})
-
-
-export default connect(mapStateToProps)(LogInOut)
+export default LogInOut

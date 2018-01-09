@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import axios from "axios";
-import { update_cards_after_post } from '../actions/cards'
 
 
 class NewCard extends Component {
@@ -26,7 +24,6 @@ class NewCard extends Component {
     .then(response => {
       console.log(response)
       if (response.data) {
-        this.props.dispatch(update_cards_after_post(response.data))
         this.props.history.push(`/cards`)
       }
     })
@@ -57,10 +54,5 @@ class NewCard extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.cardReducer.isAuthenticated,
-  user: state.cardReducer.user,
-  token: state.cardReducer.token
-})
 
-export default connect(mapStateToProps)(NewCard)
+export default NewCard

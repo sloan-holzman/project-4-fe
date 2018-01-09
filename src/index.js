@@ -4,13 +4,12 @@ import {
   BrowserRouter as Router
 } from "react-router-dom"
 
-import App from './components/App';
+import App from './containers/App';
 import { Provider } from 'react-redux'
 import store from './store'
 
 
 
-console.log(store.getState())
 store.subscribe(() => console.log(store.getState()))
 
 

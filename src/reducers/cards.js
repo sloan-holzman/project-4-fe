@@ -1,11 +1,13 @@
-import { LOG_IN, LOG_OUT, UPDATE_CARDS_AFTER_POST } from '../constants/cards'
+import { LOG_IN, LOG_OUT, INVALIDATE_USER, REQUEST_USER, RECEIVE_USER } from '../constants/cards'
 import { combineReducers } from 'redux'
 
 function cardReducer(
   state = {
     isAuthenticated: false,
     user: null,
-    cards: []
+    cards: [],
+    isFetching: false,
+    didInvalidate: false,
   },
   action
 ) {
@@ -20,11 +22,31 @@ function cardReducer(
       return Object.assign({}, state, {
         isAuthenticated: false,
         user: null,
-        cards: []
+        cards: [],
+        isFetching: false,
+        didInvalidate: false
       })
-    case UPDATE_CARDS_AFTER_POST:
+    // case UPDATE_CARDS_AFTER_POST:
+    //   return Object.assign({}, state, {
+    //     cards: action.payload.cards,
+    //   })
+    case INVALIDATE_USER:
       return Object.assign({}, state, {
-        cards: action.payload.cards,
+        isFetching: true,
+        didInvalidate: false
+      })
+    case REQUEST_USER:
+    return Object.assign({}, state, {
+      isFetching: true,
+      didInvalidate: false
+    })
+    case RECEIVE_USER:
+      return Object.assign({}, state, {
+        isFetching: false,
+        didInvalidate: false,
+        isAuthenticated: true,
+        user: action.payload.user,
+        cards: action.payload.user.data.cards
       })
     default:
       return state

@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from "react-router-dom"
-import Card from "./Card"
+import Card from "../components/Card"
+import { fetchUser } from '../actions/cards'
 
 
 class Dashboard extends Component {
-  constructor(props) {
-    super(props)
+
+
+  componentDidMount(){
+    if (localStorage.token) {
+      this.props.dispatch(fetchUser())
+    }
   }
 
 
@@ -14,7 +18,10 @@ class Dashboard extends Component {
     let cards = this.props.cards.map((card, i) => {
       return (
         <li key={i}>
-          <Card card={card} history={this.props.history}/>
+          <Card
+            card={card}
+            history={this.props.history}
+          />
         </li>
       )
     })
@@ -36,8 +43,12 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
+  isAuthenticated: state.cardReducer.isAuthenticated,
+  user: state.cardReducer.user,
+  token: state.cardReducer.token,
   cards: state.cardReducer.cards,
-  isAuthenticated: state.cardReducer.isAuthenticated
+  isFetching: state.cardReducer.isFetching,
+  didInvalidate: state.cardReducer.didInvalidate
 })
 
 

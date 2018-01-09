@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import axios from "axios";
-import { update_cards_after_post } from '../actions/cards'
 
 class Card extends Component {
   constructor(props) {
     super(props);
     this.deleteCard = this.deleteCard.bind(this);
     this.goToEdit = this.goToEdit.bind(this);
-
   }
 
   deleteCard(e) {
@@ -25,8 +22,7 @@ class Card extends Component {
     .then(response => {
       console.log(response)
       if (response.data) {
-        this.props.dispatch(update_cards_after_post(response.data))
-        this.props.history.push(`/cards`)
+        this.props.history.push(`/login`)
       }
     })
     .catch(err => {console.log(err)})
@@ -38,9 +34,7 @@ class Card extends Component {
     this.props.history.push(`/cards/edit/${this.props.card._id}`)
   }
 
-
   render() {
-    console.log(this.props)
     let balance = (this.props.card.balance && this.props.card.balance> 0 ? this.props.card.balance.toFixed(2) : "N/A")
     return (
       <div>
@@ -51,14 +45,11 @@ class Card extends Component {
         <button onClick={this.goToEdit} className="waves-effect waves-light btn" >
           Edit Card
         </button>
-        </div>
+      </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  token: state.cardReducer.token
-})
 
 
-export default connect(mapStateToProps)(Card)
+export default Card
