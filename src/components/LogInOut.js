@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TwitterLogin from 'react-twitter-auth';
+import backend from "../BackendVariable";
 
 
 class LogInOut extends Component {
@@ -13,6 +14,8 @@ class LogInOut extends Component {
 
 
   render() {
+    let loginUrl=`${backend}api/v1/auth/twitter`
+    let requestTokenUrl=`${backend}api/v1/auth/twitter/reverse`
     let content = !!this.props.isAuthenticated ?
       (
         <div>
@@ -28,9 +31,9 @@ class LogInOut extends Component {
         </div>
       ) :
       (
-        <TwitterLogin loginUrl="http://localhost:1337/api/v1/auth/twitter"
+        <TwitterLogin loginUrl={loginUrl}
           onFailure={this.props.onFailedLogin} onSuccess={this.props.onSuccessLogin}
-        requestTokenUrl="http://localhost:1337/api/v1/auth/twitter/reverse"/>
+          requestTokenUrl={requestTokenUrl}/>
       );
 
     return (

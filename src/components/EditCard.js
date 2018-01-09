@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
+import backend from "../BackendVariable";
 
 
 class EditCard extends Component {
@@ -12,7 +13,7 @@ class EditCard extends Component {
     e.preventDefault();
      axios({
       method: "PUT",
-      url: `http://localhost:1337/api/v1/cards/${this.props.match.params.id}`,
+      url: `${backend}api/v1/cards/${this.props.match.params.id}`,
       headers: {'Authorization': "Bearer " + localStorage.token},
       data: {
         retailer: e.target[0].value,
@@ -48,7 +49,7 @@ class EditCard extends Component {
           <input type="date" id="expiration" name="expiration" defaultValue={card.expiration}/>
           <label for="balance">Remaining Balance ($):</label>
           <input type="number" id="balance" name="balance" defaultValue={card.balance}/>
-          <input className="waves-effect waves-light btn" type="submit" value="Add"/>
+          <input className="waves-effect waves-light btn" type="submit" value="Update"/>
         </form>
       </div>) :
       (<p>Card does not exist.  Ensure you are logged in</p>)

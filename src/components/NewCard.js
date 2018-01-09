@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
+import backend from "../BackendVariable";
 
 
 class NewCard extends Component {
@@ -12,7 +13,7 @@ class NewCard extends Component {
     e.preventDefault();
      axios({
       method: "POST",
-      url: `http://localhost:1337/api/v1/cards`,
+      url: `${backend}api/v1/cards`,
       headers: {'Authorization': "Bearer " + localStorage.token},
       data: {
         retailer: e.target[0].value,

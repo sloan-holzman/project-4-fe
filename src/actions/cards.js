@@ -1,6 +1,7 @@
 import { LOG_IN, LOG_OUT, INVALIDATE_USER, REQUEST_USER, RECEIVE_USER } from '../constants/cards'
 import 'babel-polyfill'
 import axios from "axios";
+import backend from "../BackendVariable";
 
 
 export function login(user) {
@@ -79,7 +80,7 @@ export function fetchUser() {
     dispatch(requestUser())
     return axios({
           method: "GET",
-          url: `http://localhost:1337/api/v1/cards`,
+          url: `${backend}api/v1/cards`,
           headers: {'Authorization': "Bearer " + localStorage.token}
       })
       .then(

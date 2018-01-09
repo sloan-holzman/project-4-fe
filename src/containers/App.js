@@ -93,10 +93,10 @@ class App extends Component {
                 return (
                   <EditCard
                     cards={this.props.cards}
-                  {...props}
-                />
-              );
-            }}  />
+                    {...props}
+                  />
+                );
+              }}  />
             <Route exact path="/" render={() => <Redirect to="/login" />} />
           </Switch>
         </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
+import backend from "../BackendVariable";
 
 class Card extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Card extends Component {
     console.log(this.props.card._id)
      axios({
       method: "DELETE",
-      url: `http://localhost:1337/api/v1/cards`,
+      url: `${backend}api/v1/cards`,
       headers: {'Authorization': "Bearer " + localStorage.token},
       data: {
         card_id: this.props.card._id
