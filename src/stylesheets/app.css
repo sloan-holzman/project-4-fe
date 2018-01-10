@@ -128,7 +128,10 @@ form, .card {
   background: transparent; /* make scrollbar invisible */
 }
 
-
+.twitter-logout a {
+  text-decoration: none;
+  color: black !important;
+}
 
 @media screen and (min-width: 521px) and (max-width: 750px) {
   form, .card {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import TwitterLogin from 'react-twitter-auth';
 import backend from "../BackendVariable";
-import coverPhoto from "../imgs/gift-cards.jpg"
 
 class LogInOut extends Component {
 
@@ -39,7 +38,10 @@ class LogInOut extends Component {
               className="login-button" onFailure={this.props.onFailedLogin} onSuccess={this.props.onSuccessLogin}
               requestTokenUrl={requestTokenUrl}/>
           </div>
-        </div>
+          <div className="twitter-logout" >
+            <a href="https://twitter.com/logout" target="_blank">log out of your twitter account</a>
+          </div>
+          </div>
       );
 
     return (

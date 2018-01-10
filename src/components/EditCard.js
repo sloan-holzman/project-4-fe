@@ -10,7 +10,6 @@ class EditCard extends Component {
   }
 
   handleSubmit(e) {
-    let balance = (e.target[4].value > 0 ? e.target[4].value.toFixed(2) : e.target[4].value)
     e.preventDefault();
      axios({
       method: "PUT",
@@ -21,7 +20,7 @@ class EditCard extends Component {
         number: e.target[1].value,
         pin: e.target[2].value,
         expiration: e.target[3].value,
-        balance: balance
+        balance: e.target[4].value
       }
     })
     .then(response => {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
 import backend from "../BackendVariable";
-import {Row, Input} from 'react-materialize'
 
 
 class NewCard extends Component {
@@ -13,7 +12,6 @@ class NewCard extends Component {
 
 
   handleSubmit(e) {
-    let balance = (e.target[4].value > 0 ? e.target[4].value.toFixed(2) : e.target[4].value)
     e.preventDefault();
      axios({
       method: "POST",
@@ -24,7 +22,7 @@ class NewCard extends Component {
         number: e.target[1].value,
         pin: e.target[2].value,
         expiration: e.target[3].value,
-        balance: balance
+        balance: e.target[4].value
       }
     })
     .then(response => {
@@ -46,16 +44,17 @@ class NewCard extends Component {
       ( <div>
         <h3>enter new card</h3>
         <form onSubmit={this.handleSubmit}>
-          <label for="retailer">retailer:</label>
           <input type="text" id="retailer" name="retailer" required placeholder="e.g. j crew, amazon, etc."/>
-          <label for="number">gift card number:</label>
+          <label for="retailer">retailer</label>
           <input type="number" id="number" required name="number" placeholder="e.g. 0123456789"/>
-          <label for="number">gift card pin:</label>
+          <label for="number">gift card number</label>
           <input type="number" id="number" name="pin" placeholder="e.g. 1234"/>
-          <label for="expiration">expiration date:</label>
+          <label for="number">gift card pin</label>
           <input type="date" id="expiration" name="expiration"/>
-          <label for="balance">remaining balance ($):</label>
+          <label for="expiration">expiration date</label>
           <input type="number" id="balance" name="balance" min= "0" step="0.01" placeholder="e.g. $100.00"/>
+          <label for="balance">remaining balance ($)</label>
+          <br/>
           <input className="waves-effect waves-light btn" type="submit" value="add"/>
         </form>
         {/* <Row>

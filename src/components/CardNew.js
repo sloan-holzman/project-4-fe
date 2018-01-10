@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
 import backend from "../BackendVariable";
-import Barcode from 'react-barcode'
 import CardBack from './CardBack'
 import CardFront from './CardFront'
 import ReactCardFlip from 'react-card-flip';
