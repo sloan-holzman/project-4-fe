@@ -67,13 +67,13 @@ class Card extends Component {
         <Barcode value={this.props.card.number} />
         <div>
           <button onClick={this.deleteCard} className="waves-effect waves-light btn" >
-            Delete Card
+            delete card
           </button>
           <button onClick={this.goToEdit} className="waves-effect waves-light btn" >
-            Edit Card
+            edit card
           </button>
           <button onClick={()=> window.open(checkValueSite, "_blank")} className="waves-effect waves-light btn" >
-            Check Value
+            check value
           </button>
         </div>
       </div>

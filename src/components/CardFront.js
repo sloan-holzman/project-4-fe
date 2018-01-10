@@ -7,7 +7,7 @@ class CardFront extends Component {
     let balance = (this.props.card.balance && this.props.card.balance> 0 ? this.props.card.balance.toFixed(2) : "N/A")
     let date_options = {
       year: 'numeric',
-      month: 'long',
+      month: 'short',
       day: '2-digit'
     }
     let expiration = (this.props.card.expiration ? (new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(this.props.card.expiration.substring(0,10)))) : "N/A")

@@ -8,7 +8,7 @@ class CardBack extends Component {
     let balance = (this.props.card.balance && this.props.card.balance> 0 ? this.props.card.balance.toFixed(2) : "N/A")
     let date_options = {
       year: 'numeric',
-      month: 'long',
+      month: 'short',
       day: '2-digit'
     }
     let pin = this.props.card.pin ? this.props.card.pin : "N/A"

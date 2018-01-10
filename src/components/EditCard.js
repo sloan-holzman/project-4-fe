@@ -16,7 +16,7 @@ class EditCard extends Component {
       url: `${backend}api/v1/cards/${this.props.match.params.id}`,
       headers: {'Authorization': "Bearer " + localStorage.token},
       data: {
-        retailer: e.target[0].value,
+        retailer: e.target[0].value.toLowerCase(),
         number: e.target[1].value,
         pin: e.target[2].value,
         expiration: e.target[3].value,
