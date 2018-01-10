@@ -48,15 +48,19 @@ class Card extends Component {
       month: 'long',
       day: '2-digit'
     }
+    let pin = this.props.card.pin ? this.props.card.pin : "N/A"
+    let expiration = (this.props.card.expiration ? (new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(this.props.card.expiration.substring(0,10)))) : "N/A")
+    let updated = (this.props.card.updated ? (new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(this.props.card.updated.substring(0,10)))) : "N/A")
+
     return (
       <div className="card">
         <div>
           <p>Retailer: {this.props.card.retailer}</p>
           <p>Balance: ${balance}</p>
           <p>Number: {this.props.card.number}</p>
-          <p>Pin: {this.props.card.pin}</p>
-          <p>Expiration: {new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(this.props.card.expiration))}</p>
-          <p>Last updated: {new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(this.props.card.updated))}</p>
+          <p>Pin: {pin}</p>
+          <p>Expiration: {expiration}</p>
+          <p>Last updated: {updated}</p>
         </div>
         <Barcode value={this.props.card.number} />
         <div>

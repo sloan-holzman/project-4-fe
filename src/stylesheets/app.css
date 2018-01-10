@@ -5,7 +5,13 @@
   align-items: center;
   align-content: center;
   text-align: center;
-  margin: 0 20%;
+}
+
+
+
+html {
+  background-color: #F2F2F2;
+  height: 100%;
 }
 
 form {
@@ -15,6 +21,7 @@ form {
   border: 2px solid #FF5C69;
   padding: 40px;
   text-align: left;
+  background-color: white;
 }
 
 nav {
@@ -24,4 +31,65 @@ nav {
 .card {
   border: 2px solid #FF5C69;
   padding: 40px;
+}
+
+.btn {
+  margin: 2px;
+}
+
+.background {
+    height: 100%;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.background::after {
+  content: "";
+  background-image: url("../imgs/gift-cards.jpg");
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+h1 {
+  font-size: 100px;
+  font-weight: 900;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.login-button {
+  padding: 2% 30%;
+}
+
+form, .card {
+  min-width: 500px;
+}
+
+::-webkit-scrollbar {
+  width: 0px; /* remove scrollbar space, if we want to do that */
+  background: transparent; /* make scrollbar invisible */
+}
+
+
+@media screen and (max-width: 520px) {
+
+  form, .card {
+    min-width: 0px;
+    max-width: 85vw;
+  }
+
+  h1 {
+    font-size: 50px;
+    font-weight: 900;
+  }
+
 }

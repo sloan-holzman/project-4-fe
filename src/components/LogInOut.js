@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import TwitterLogin from 'react-twitter-auth';
 import backend from "../BackendVariable";
-
+import coverPhoto from "../imgs/gift-cards.jpg"
 
 class LogInOut extends Component {
 
   componentDidMount(){
-    if (this.props.isAuthenticated) {
+    if (localStorage.token) {
       this.props.history.push(`/cards`)
     }
   }
@@ -31,9 +31,15 @@ class LogInOut extends Component {
         </div>
       ) :
       (
-        <TwitterLogin loginUrl={loginUrl}
-          onFailure={this.props.onFailedLogin} onSuccess={this.props.onSuccessLogin}
-          requestTokenUrl={requestTokenUrl}/>
+        <div className="background">
+          <h1>VIRTUAL WALLET</h1>
+          <h5>The one site to save all your gift cards</h5>
+          <div className="login-button">
+            <TwitterLogin loginUrl={loginUrl}
+              className="login-button" onFailure={this.props.onFailedLogin} onSuccess={this.props.onSuccessLogin}
+              requestTokenUrl={requestTokenUrl}/>
+          </div>
+        </div>
       );
 
     return (

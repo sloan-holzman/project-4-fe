@@ -27,11 +27,11 @@ class Dashboard extends Component {
     })
     return (
       <div>
-        {!this.props.isAuthenticated && cards.length === 0 && <h2>You must log in...</h2>}
-        {this.props.isAuthenticated && cards.length === 0 && <h2>Empty.</h2>}
+        {!this.props.isAuthenticated && cards.length === 0 && <p>You must be logged in before viewing your cards</p>}
+        {this.props.isAuthenticated && cards.length === 0 && <p>You do not currently have  any cards saved...</p>}
         {cards.length > 0 &&
           <div>
-            <h2>Cards</h2>
+            <h3>Gift Cards</h3>
             <ul>
               {cards}
             </ul>

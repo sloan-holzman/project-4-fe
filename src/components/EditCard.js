@@ -42,18 +42,19 @@ class EditCard extends Component {
     if (this.props.cards) {
       card = this.props.cards.find((card) => card._id === this.props.match.params.id)
     }
+    let expiration = card.expiration ? card.expiration.substring(0,10) : null
     let content = card ? (
       <div>
-        <h3>Enter New Card</h3>
+        <h3>Update Card Info</h3>
         <form onSubmit={this.handleSubmit}>
           <label for="retailer">Retailer:</label>
           <input type="text" id="retailer" name="retailer" defaultValue={card.retailer}/>
           <label for="number">Gift Card Number:</label>
-          <input type="text" id="number" name="number" defaultValue={card.number}/>
+          <input type="number" id="number" name="number" defaultValue={card.number}/>
           <label for="number">Gift Card PIN:</label>
-          <input type="text" id="number" name="pin" defaultValue={card.pin}/>
+          <input type="number" id="number" name="pin" defaultValue={card.pin}/>
           <label for="expiration">Expiration Date:</label>
-          <input type="date" id="expiration" name="expiration" defaultValue={card.expiration}/>
+          <input type="date" id="expiration" name="expiration" defaultValue={expiration}/>
           <label for="balance">Remaining Balance ($):</label>
           <input type="number" id="balance" name="balance" defaultValue={card.balance}/>
           <input className="waves-effect waves-light btn" type="submit" value="Update"/>

@@ -34,19 +34,6 @@ function receiveUser(user) {
   }
 }
 
-// function shouldFetchUser(state) {
-//   console.log("should fetch user")
-//   console.log(state)
-//   return true
-//   // if (state.cardReducer.cards.length === 0) {
-//   //   console.log("true")
-//   //   return true
-//   // } else if (state.cardReducer.isFetching) {
-//   //   return false
-//   // } else {
-//   //   return state.cardReducer.didInvalidate
-//   // }
-// }
 
 export function invalidateUser() {
   return {
@@ -54,25 +41,6 @@ export function invalidateUser() {
   }
 }
 
-// export function fetchUser() {
-//
-//   return function (dispatch) {
-//     dispatch(requestUser())
-//
-//     return
-//     console.log("fetching user...")
-//       axios({
-//           method: "GET",
-//           url: `http://localhost:1337/api/v1/cards'`,
-//           headers: {'Authorization': "Bearer " + localStorage.token}
-//       })
-//       .then(response => {
-//         console.log(response)
-//         dispatch(receiveUser(response))
-//       })
-//       .catch(err => console.log(err))
-//   }
-// }
 
 
 export function fetchUser() {
@@ -87,18 +55,9 @@ export function fetchUser() {
         response => dispatch(receiveUser(response))
         // error => console.log('An error occurred.', error)
       )
+      .catch(err => {
+        console.log("error!!!")
+        localStorage.clear()
+      })
   }
 }
-
-
-// export function fetchUserIfNeeded() {
-//   console.log("fetch user if needed")
-//   return (dispatch, getState) => {
-//     if (shouldFetchUser(getState())) {
-//       console.log("need to fetch user now")
-//       return dispatch(fetchUser())
-//     } else {
-//       return Promise.resolve()
-//     }
-//   }
-// }
