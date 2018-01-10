@@ -10,6 +10,7 @@ class EditCard extends Component {
   }
 
   handleSubmit(e) {
+    let balance = (e.target[4].value > 0 ? e.target[4].value.toFixed(2) : e.target[4].value)
     e.preventDefault();
      axios({
       method: "PUT",
@@ -20,7 +21,7 @@ class EditCard extends Component {
         number: e.target[1].value,
         pin: e.target[2].value,
         expiration: e.target[3].value,
-        balance: e.target[4].value
+        balance: balance
       }
     })
     .then(response => {
@@ -39,24 +40,28 @@ class EditCard extends Component {
   render () {
     console.log(this.props)
     let card
+    let expiration
     if (this.props.cards) {
       card = this.props.cards.find((card) => card._id === this.props.match.params.id)
     }
-    let expiration = card.expiration ? card.expiration.substring(0,10) : null
+    if (card) {
+      expiration = card.expiration ? card.expiration.substring(0,10) : null
+    }
+
     let content = card ? (
       <div>
         <h3>update card info</h3>
         <form onSubmit={this.handleSubmit}>
           <label for="retailer">retailer:</label>
-          <input type="text" id="retailer" name="retailer" defaultValue={card.retailer}/>
+          <input type="text" id="retailer" name="retailer" required defaultValue={card.retailer}/>
           <label for="number">gift card number:</label>
-          <input type="number" id="number" name="number" defaultValue={card.number}/>
+          <input type="number" id="number" name="number" required defaultValue={card.number}/>
           <label for="number">gift card pin:</label>
           <input type="number" id="number" name="pin" defaultValue={card.pin}/>
           <label for="expiration">expiration date:</label>
           <input type="date" id="expiration" name="expiration" defaultValue={expiration}/>
           <label for="balance">remaining balance ($):</label>
-          <input type="number" id="balance" name="balance" defaultValue={card.balance}/>
+          <input type="number" id="balance" min= "0" step="0.01" name="balance" defaultValue={card.balance}/>
           <input className="waves-effect waves-light btn" type="submit" value="Update"/>
         </form>
       </div>) :

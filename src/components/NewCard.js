@@ -13,6 +13,7 @@ class NewCard extends Component {
 
 
   handleSubmit(e) {
+    let balance = (e.target[4].value > 0 ? e.target[4].value.toFixed(2) : e.target[4].value)
     e.preventDefault();
      axios({
       method: "POST",
@@ -23,7 +24,7 @@ class NewCard extends Component {
         number: e.target[1].value,
         pin: e.target[2].value,
         expiration: e.target[3].value,
-        balance: e.target[4].value
+        balance: balance
       }
     })
     .then(response => {
@@ -46,15 +47,15 @@ class NewCard extends Component {
         <h3>enter new card</h3>
         <form onSubmit={this.handleSubmit}>
           <label for="retailer">retailer:</label>
-          <input type="text" id="retailer" name="retailer" placeholder="e.g. j crew, amazon, etc."/>
+          <input type="text" id="retailer" name="retailer" required placeholder="e.g. j crew, amazon, etc."/>
           <label for="number">gift card number:</label>
-          <input type="number" id="number" name="number" placeholder="e.g. 0123456789"/>
+          <input type="number" id="number" required name="number" placeholder="e.g. 0123456789"/>
           <label for="number">gift card pin:</label>
           <input type="number" id="number" name="pin" placeholder="e.g. 1234"/>
           <label for="expiration">expiration date:</label>
           <input type="date" id="expiration" name="expiration"/>
           <label for="balance">remaining balance ($):</label>
-          <input type="number" id="balance" name="balance" step="0.01" placeholder="e.g. $100.00"/>
+          <input type="number" id="balance" name="balance" min= "0" step="0.01" placeholder="e.g. $100.00"/>
           <input className="waves-effect waves-light btn" type="submit" value="add"/>
         </form>
         {/* <Row>
