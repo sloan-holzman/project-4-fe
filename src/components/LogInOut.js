@@ -10,8 +10,6 @@ class LogInOut extends Component {
     }
   }
 
-
-
   render() {
     let loginUrl=`${backend}api/v1/auth/twitter`
     let requestTokenUrl=`${backend}api/v1/auth/twitter/reverse`

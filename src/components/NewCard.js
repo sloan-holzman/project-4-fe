@@ -9,8 +9,6 @@ class NewCard extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
-
   handleSubmit(e) {
     e.preventDefault();
      axios({
@@ -54,14 +52,6 @@ class NewCard extends Component {
           <br/>
           <input className="waves-effect waves-light btn" type="submit" value="add"/>
         </form>
-        {/* <Row>
-          <Input type="text" id="retailer" s={12} name="retailer" placeholder="e.g. JCrew, Amazon, etc."/>
-          <Input label="Gift Card Number" type="number" id="number" s={12} name="number" placeholder="e.g. 0123456789"/>
-          <Input label="Gift Card Number" type="number" id="pin" s={12} name="pin" placeholder="e.g. 1234"/>
-          <Input label= "Expiration Date" type="date" id="expiration" s={12} name="expiration"/>
-          <Input label="Remaining Balance" type="number" id="balance" s={12} name="balance" placeholder="e.g. $100.00"/>
-          <Input className="waves-effect waves-light btn" type="submit" value="Add"/>
-        </Row> */}
       </div>) :
       (
         <p>You must be logged in before adding a card</p>

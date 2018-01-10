@@ -13,7 +13,7 @@ class Card extends Component {
     this.state = {
       isFlipped: false
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.flipCard = this.flipCard.bind(this);
     this.deleteCard = this.deleteCard.bind(this);
     this.goToEdit = this.goToEdit.bind(this);
   }
@@ -44,23 +44,18 @@ class Card extends Component {
     this.props.history.push(`/cards/edit/${this.props.card._id}`)
   }
 
-  handleClick(e) {
+  flipCard(e) {
     e.preventDefault();
     this.setState({ isFlipped: !this.state.isFlipped });
   }
 
   render() {
     let checkValueSite = `https://www.giftcardgranny.com/gift-card-balance-check/${this.props.card.retailer.split(' ').join('-')}`
-    let date_options = {
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit'
-    }
     return (
       <div className="card">
         <ReactCardFlip isFlipped={this.state.isFlipped}>
-          <CardFront key="front" date_options={date_options} card={this.props.card} handleClick={this.handleClick} />
-          <CardBack key="back" date_options={date_options} card={this.props.card} handleClick={this.handleClick} />
+          <CardFront key="front" card={this.props.card} flipCard={this.flipCard} />
+          <CardBack key="back" card={this.props.card} flipCard={this.flipCard} />
         </ReactCardFlip>
         <br/>
         <div className="card__buttons">
