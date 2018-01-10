@@ -71,12 +71,18 @@ body {
 }
 
 form, .card {
-  min-width: 500px;
+  min-width: 700px;
 }
 
 ::-webkit-scrollbar {
   width: 0px; /* remove scrollbar space, if we want to do that */
   background: transparent; /* make scrollbar invisible */
+}
+
+@media screen and (min-width: 521px) and (max-width: 750px) {
+  form, .card {
+    min-width: 500px;
+  }
 }
 
 

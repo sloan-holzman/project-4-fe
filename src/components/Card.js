@@ -42,6 +42,8 @@ class Card extends Component {
   }
 
   render() {
+    let checkValueSite = `https://www.giftcardgranny.com/gift-card-balance-check/${this.props.card.retailer.split(' ').join('-')}`
+    console.log(checkValueSite)
     let balance = (this.props.card.balance && this.props.card.balance> 0 ? this.props.card.balance.toFixed(2) : "N/A")
     let date_options = {
       year: 'numeric',
@@ -69,6 +71,9 @@ class Card extends Component {
           </button>
           <button onClick={this.goToEdit} className="waves-effect waves-light btn" >
             Edit Card
+          </button>
+          <button onClick={()=> window.open(checkValueSite, "_blank")} className="waves-effect waves-light btn" >
+            Check Value
           </button>
         </div>
       </div>
