@@ -40,15 +40,15 @@ class NewCard extends Component {
         <h3>enter new card</h3>
         <form onSubmit={this.handleSubmit}>
           <input type="text" id="retailer" name="retailer" required placeholder="e.g. j crew, amazon, etc."/>
-          <label for="retailer">retailer</label>
+          <label htmlFor="retailer">retailer</label>
           <input type="number" id="number" required name="number" placeholder="e.g. 0123456789"/>
-          <label for="number">gift card number</label>
+          <label htmlFor="number">gift card number</label>
           <input type="number" id="number" name="pin" placeholder="e.g. 1234"/>
-          <label for="number">gift card pin</label>
+          <label htmlFor="number">gift card pin</label>
           <input type="date" id="expiration" name="expiration"/>
-          <label for="expiration">expiration date</label>
+          <label htmlFor="expiration">expiration date</label>
           <input type="number" id="balance" name="balance" min= "0" step="0.01" placeholder="e.g. $100.00"/>
-          <label for="balance">remaining balance ($)</label>
+          <label htmlFor="balance">remaining balance ($)</label>
           <br/>
           <input className="waves-effect waves-light btn" type="submit" value="add"/>
         </form>

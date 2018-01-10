@@ -107,6 +107,10 @@ nav {
   z-index: -1;
 }
 
+.expired {
+  color: red;
+}
+
 h1 {
   font-size: 100px;
   font-weight: 900;

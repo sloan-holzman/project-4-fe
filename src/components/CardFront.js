@@ -7,15 +7,23 @@ const CardFront = ({...props}) => {
     month: 'short',
     day: '2-digit'
   }
-  let expiration = (props.card.expiration ? (new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(props.card.expiration.substring(0,10)))) : "n/a")
-  let updated = (props.card.updated ? (new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(props.card.updated.substring(0,10)))) : "n/a")
+  let expiration
+  let expiration_class
+  if (props.card.expiration) {
+    expiration = new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(props.card.expiration.substring(0,10)))
+    expiration_class = new Date(props.card.expiration) > new Date()  ? "valid" : "expired"
+  } else {
+    expiration = "n/a"
+    expiration_class = "valid"
+  }
 
+  let updated = (props.card.updated ? (new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(props.card.updated.substring(0,10)))) : "n/a")
 
   return (
     <div className="card__side">
       <h2>{props.card.retailer}</h2>
-      <h4>balance: ${balance}</h4>
-      <p>expiration: {expiration}</p>
+      <h4>balance: ${balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h4>
+      <p>expiration: <span className={expiration_class}>{expiration}</span></p>
       <p>last updated: {updated}</p>
       <button onClick={props.flipCard}>click to see back</button>
     </div>

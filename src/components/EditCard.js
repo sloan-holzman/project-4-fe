@@ -48,15 +48,15 @@ class EditCard extends Component {
       <div>
         <h3>update card info</h3>
         <form onSubmit={this.handleSubmit}>
-          <label for="retailer">retailer:</label>
+          <label htmlFor="retailer">retailer:</label>
           <input type="text" id="retailer" name="retailer" required defaultValue={card.retailer}/>
-          <label for="number">gift card number:</label>
+          <label htmlFor="number">gift card number:</label>
           <input type="number" id="number" name="number" required defaultValue={card.number}/>
-          <label for="number">gift card pin:</label>
+          <label htmlFor="number">gift card pin:</label>
           <input type="number" id="number" name="pin" defaultValue={card.pin}/>
-          <label for="expiration">expiration date:</label>
+          <label htmlFor="expiration">expiration date:</label>
           <input type="date" id="expiration" name="expiration" defaultValue={expiration}/>
-          <label for="balance">remaining balance ($):</label>
+          <label htmlFor="balance">remaining balance ($):</label>
           <input type="number" id="balance" min= "0" step="0.01" name="balance" defaultValue={card.balance}/>
           <input className="waves-effect waves-light btn" type="submit" value="Update"/>
         </form>
