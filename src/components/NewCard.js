@@ -26,20 +26,17 @@ class NewCard extends Component {
       }
     })
     .then(response => {
-      console.log(response)
       if (response.data) {
         this.props.history.push(`/cards`)
       }
     })
     .catch(err => {
-      console.log(err)
       localStorage.clear()
       this.props.history.push(`/login`)
     })
   }
 
   render () {
-    console.log(this.props)
     let content = !!this.props.isAuthenticated ?
       ( <div>
         <h3>enter new card</h3>

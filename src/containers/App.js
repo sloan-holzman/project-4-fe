@@ -100,6 +100,12 @@ class App extends Component {
                 );
               }}  />
             <Route exact path="/" render={() => <Redirect to="/login" />} />
+            <Route
+              path="/*"
+              render={props => {
+                return <Redirect to="/cards" />;
+              }}
+            />
           </Switch>
         </div>
       </div>

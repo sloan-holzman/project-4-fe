@@ -39,7 +39,7 @@ class LogInOut extends Component {
               requestTokenUrl={requestTokenUrl}/>
           </div>
           <div className="twitter-logout" >
-            <a href="https://twitter.com/logout" target="_blank">log out of your twitter account</a>
+            <a href="https://twitter.com/logout" target="_blank" rel="noopener noreferrer">log out of your twitter account</a>
           </div>
           </div>
       );

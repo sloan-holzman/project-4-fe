@@ -13,7 +13,6 @@ class Card extends Component {
 
   deleteCard(e) {
     e.preventDefault();
-    console.log(this.props.card._id)
      axios({
       method: "DELETE",
       url: `${backend}api/v1/cards`,
@@ -23,27 +22,23 @@ class Card extends Component {
       }
     })
     .then(response => {
-      console.log(response)
       if (response.data) {
         this.props.history.push(`/login`)
       }
     })
     .catch(err => {
-      console.log(err)
       localStorage.clear()
       this.props.history.push(`/login`)
     })
   }
 
   goToEdit(e) {
-    console.log(this.props)
     e.preventDefault();
     this.props.history.push(`/cards/edit/${this.props.card._id}`)
   }
 
   render() {
     let checkValueSite = `https://www.giftcardgranny.com/gift-card-balance-check/${this.props.card.retailer.split(' ').join('-')}`
-    console.log(checkValueSite)
     let balance = (this.props.card.balance && this.props.card.balance> 0 ? this.props.card.balance.toFixed(2) : "N/A")
     let date_options = {
       year: 'numeric',

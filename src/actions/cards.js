@@ -53,10 +53,8 @@ export function fetchUser() {
       })
       .then(
         response => dispatch(receiveUser(response))
-        // error => console.log('An error occurred.', error)
       )
       .catch(err => {
-        console.log("error!!!")
         localStorage.clear()
       })
   }

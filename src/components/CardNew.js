@@ -20,7 +20,6 @@ class CardNew extends Component {
 
   deleteCard(e) {
     e.preventDefault();
-    console.log(this.props.card._id)
      axios({
       method: "DELETE",
       url: `${backend}api/v1/cards`,
@@ -30,34 +29,28 @@ class CardNew extends Component {
       }
     })
     .then(response => {
-      console.log(response)
       if (response.data) {
         this.props.history.push(`/login`)
       }
     })
     .catch(err => {
-      console.log(err)
       localStorage.clear()
       this.props.history.push(`/login`)
     })
   }
 
   goToEdit(e) {
-    console.log(this.props)
     e.preventDefault();
     this.props.history.push(`/cards/edit/${this.props.card._id}`)
   }
 
   handleClick(e) {
     e.preventDefault();
-    console.log("flip!")
-    console.log(this.state.isFlipped)
     this.setState({ isFlipped: !this.state.isFlipped });
   }
 
   render() {
-    console.log(this.props.card)
-        let checkValueSite = `https://www.giftcardgranny.com/gift-card-balance-check/${this.props.card.retailer.split(' ').join('-')}`
+    let checkValueSite = `https://www.giftcardgranny.com/gift-card-balance-check/${this.props.card.retailer.split(' ').join('-')}`
     return (
       <div className="card">
         <ReactCardFlip isFlipped={this.state.isFlipped}>
