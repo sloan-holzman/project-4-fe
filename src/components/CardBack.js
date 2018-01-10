@@ -5,22 +5,15 @@ import Barcode from 'react-barcode'
 class CardBack extends Component {
 
   render() {
-    let date_options = {
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit'
-    }
-    let pin = this.props.card.pin ? this.props.card.pin : "n/a"
-    let expiration = (this.props.card.expiration ? (new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(this.props.card.expiration.substring(0,10)))) : "n/a")
+    let pin = this.props.card.pin ? `pin: ${this.props.card.pin}` : " "
 
     return (
       <div className="card__side card__back">
         <br/>
-        <p>retailer: {this.props.card.retailer}</p>
-        <p>expiration: {expiration}</p>
-        <p>pin: {pin}</p>
+        <p>{pin}</p>
         <br/>
         <Barcode value={this.props.card.number} />
+        <br/>
         <br/>
         <button onClick={this.props.handleClick}>click to see front</button>
       </div>

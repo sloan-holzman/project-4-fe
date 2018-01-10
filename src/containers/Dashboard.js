@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import CardNew from "../components/CardNew"
+import Card from "../components/Card"
 import { fetchUser } from '../actions/cards'
 
 
@@ -18,7 +18,7 @@ class Dashboard extends Component {
     let cards = this.props.cards.map((card, i) => {
       return (
         <li key={i}>
-          <CardNew
+          <Card
             card={card}
             history={this.props.history}
           />

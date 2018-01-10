@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
 import axios from "axios";
 import backend from "../BackendVariable";
-import Barcode from 'react-barcode'
+import CardBack from './CardBack'
+import CardFront from './CardFront'
+import ReactCardFlip from 'react-card-flip';
+
 
 
 class Card extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isFlipped: false
+    };
+    this.handleClick = this.handleClick.bind(this);
     this.deleteCard = this.deleteCard.bind(this);
     this.goToEdit = this.goToEdit.bind(this);
   }
@@ -37,42 +44,38 @@ class Card extends Component {
     this.props.history.push(`/cards/edit/${this.props.card._id}`)
   }
 
+  handleClick(e) {
+    e.preventDefault();
+    this.setState({ isFlipped: !this.state.isFlipped });
+  }
+
   render() {
     let checkValueSite = `https://www.giftcardgranny.com/gift-card-balance-check/${this.props.card.retailer.split(' ').join('-')}`
-    let balance = (this.props.card.balance && this.props.card.balance> 0 ? this.props.card.balance.toFixed(2) : "N/A")
     let date_options = {
       year: 'numeric',
-      month: 'long',
+      month: 'short',
       day: '2-digit'
     }
-    let pin = this.props.card.pin ? this.props.card.pin : "N/A"
-    let expiration = (this.props.card.expiration ? (new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(this.props.card.expiration.substring(0,10)))) : "N/A")
-    let updated = (this.props.card.updated ? (new Intl.DateTimeFormat('en-US', date_options).format(Date.parse(this.props.card.updated.substring(0,10)))) : "N/A")
-
     return (
       <div className="card">
-        <div>
-          <p>Retailer: {this.props.card.retailer}</p>
-          <p>Balance: ${balance}</p>
-          <p>Number: {this.props.card.number}</p>
-          <p>Pin: {pin}</p>
-          <p>Expiration: {expiration}</p>
-          <p>Last updated: {updated}</p>
-        </div>
-        <Barcode value={this.props.card.number} />
-        <div>
+        <ReactCardFlip isFlipped={this.state.isFlipped}>
+          <CardFront key="front" date_options={date_options} card={this.props.card} handleClick={this.handleClick} />
+          <CardBack key="back" date_options={date_options} card={this.props.card} handleClick={this.handleClick} />
+        </ReactCardFlip>
+        <br/>
+        <div className="card__buttons">
           <button onClick={this.deleteCard} className="waves-effect waves-light btn" >
-            delete card
+            Delete Card
           </button>
           <button onClick={this.goToEdit} className="waves-effect waves-light btn" >
-            edit card
+            Edit Card
           </button>
           <button onClick={()=> window.open(checkValueSite, "_blank")} className="waves-effect waves-light btn" >
-            check value
+            Check Value
           </button>
         </div>
       </div>
-    );
+    )
   }
 }
 
