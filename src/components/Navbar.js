@@ -12,14 +12,14 @@ class Navbar extends Component {
           <div className="navbar-fixed">
             <nav>
               <div className="nav-wrapper">
-                <a href="/login" className="brand-logo  hide-on-med-and-down">Virtual Wallet</a>
+                <a href="/login" className="brand-logo  hide-on-med-and-down">virtual wallet</a>
                 <ul className="right">
-                  <li><Link to="/cards">Home</Link></li>
-                  <li><Link to="/cards/new">Add Card</Link></li>
+                  <li><Link to="/cards">home</Link></li>
+                  <li><Link to="/cards/new">add card</Link></li>
                   {
                     this.props.isAuthenticated ?
-                      <li><Link to="/logout">Logout</Link></li> :
-                      <li><Link to="/login">Login</Link></li>
+                      <li><Link to="/logout">logout</Link></li> :
+                      <li><Link to="/login">login</Link></li>
                   }
                 </ul>
               </div>

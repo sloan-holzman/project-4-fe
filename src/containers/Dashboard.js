@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Card from "../components/Card"
+import CardNew from "../components/CardNew"
 import { fetchUser } from '../actions/cards'
 
 
@@ -18,7 +18,7 @@ class Dashboard extends Component {
     let cards = this.props.cards.map((card, i) => {
       return (
         <li key={i}>
-          <Card
+          <CardNew
             card={card}
             history={this.props.history}
           />
@@ -26,12 +26,12 @@ class Dashboard extends Component {
       )
     })
     return (
-      <div>
+      <div className="dashboard">
         {!this.props.isAuthenticated && cards.length === 0 && <p>You must be logged in before viewing your cards</p>}
         {this.props.isAuthenticated && cards.length === 0 && <p>You do not currently have  any cards saved...</p>}
         {cards.length > 0 &&
           <div>
-            <h3>Gift Cards</h3>
+            <h3>gift cards</h3>
             <ul>
               {cards}
             </ul>

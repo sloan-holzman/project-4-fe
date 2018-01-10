@@ -43,19 +43,19 @@ class NewCard extends Component {
     console.log(this.props)
     let content = !!this.props.isAuthenticated ?
       ( <div>
-        <h3>Enter New Card</h3>
+        <h3>enter new card</h3>
         <form onSubmit={this.handleSubmit}>
-          <label for="retailer">Retailer:</label>
-          <input type="text" id="retailer" name="retailer" placeholder="e.g. J Crew, Amazon, etc."/>
-          <label for="number">Gift Card Number:</label>
+          <label for="retailer">retailer:</label>
+          <input type="text" id="retailer" name="retailer" placeholder="e.g. j crew, amazon, etc."/>
+          <label for="number">gift card number:</label>
           <input type="number" id="number" name="number" placeholder="e.g. 0123456789"/>
-          <label for="number">Gift Card PIN:</label>
+          <label for="number">gift card pin:</label>
           <input type="number" id="number" name="pin" placeholder="e.g. 1234"/>
-          <label for="expiration">Expiration Date:</label>
+          <label for="expiration">expiration date:</label>
           <input type="date" id="expiration" name="expiration"/>
-          <label for="balance">Remaining Balance ($):</label>
-          <input type="number" id="balance" name="balance" placeholder="e.g. $100.00"/>
-          <input className="waves-effect waves-light btn" type="submit" value="Add"/>
+          <label for="balance">remaining balance ($):</label>
+          <input type="number" id="balance" name="balance" step="0.01" placeholder="e.g. $100.00"/>
+          <input className="waves-effect waves-light btn" type="submit" value="add"/>
         </form>
         {/* <Row>
           <Input type="text" id="retailer" s={12} name="retailer" placeholder="e.g. JCrew, Amazon, etc."/>

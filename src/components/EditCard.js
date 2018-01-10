@@ -45,22 +45,22 @@ class EditCard extends Component {
     let expiration = card.expiration ? card.expiration.substring(0,10) : null
     let content = card ? (
       <div>
-        <h3>Update Card Info</h3>
+        <h3>update card info</h3>
         <form onSubmit={this.handleSubmit}>
-          <label for="retailer">Retailer:</label>
+          <label for="retailer">retailer:</label>
           <input type="text" id="retailer" name="retailer" defaultValue={card.retailer}/>
-          <label for="number">Gift Card Number:</label>
+          <label for="number">gift card number:</label>
           <input type="number" id="number" name="number" defaultValue={card.number}/>
-          <label for="number">Gift Card PIN:</label>
+          <label for="number">gift card pin:</label>
           <input type="number" id="number" name="pin" defaultValue={card.pin}/>
-          <label for="expiration">Expiration Date:</label>
+          <label for="expiration">expiration date:</label>
           <input type="date" id="expiration" name="expiration" defaultValue={expiration}/>
-          <label for="balance">Remaining Balance ($):</label>
+          <label for="balance">remaining balance ($):</label>
           <input type="number" id="balance" name="balance" defaultValue={card.balance}/>
           <input className="waves-effect waves-light btn" type="submit" value="Update"/>
         </form>
       </div>) :
-      (<p>Card does not exist.  Ensure you are logged in</p>)
+      (<p>card does not exist.  ensure you are logged in</p>)
     return (
       <div>
         {content}

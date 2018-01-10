@@ -32,8 +32,8 @@ class LogInOut extends Component {
       ) :
       (
         <div className="background">
-          <h1>VIRTUAL WALLET</h1>
-          <h5>The one site to save all your gift cards.</h5>
+          <h1>virtual wallet</h1>
+          <h5>the one site to save all your gift cards.</h5>
           <div className="login-button">
             <TwitterLogin loginUrl={loginUrl}
               className="login-button" onFailure={this.props.onFailedLogin} onSuccess={this.props.onSuccessLogin}
