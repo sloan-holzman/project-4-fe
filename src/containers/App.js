@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {
   Route,
   Redirect,
@@ -7,12 +8,11 @@ import {
 } from "react-router-dom"
 import LogInOut from "../components/LogInOut"
 import LogOut from "../components/LogOut"
-import Dashboard from "./Dashboard"
 import Navbar from "../components/Navbar"
 import NewCard from "../components/NewCard"
 import EditCard from "../components/EditCard"
+import Dashboard from "./Dashboard"
 import { login, logout, fetchUser } from '../actions/cards'
-import { connect } from 'react-redux'
 import '../stylesheets/app.css'
 
 
@@ -68,6 +68,8 @@ class App extends Component {
                     onSuccessLogin={this.onSuccessLogin}
                     onFailedLogin={this.onFailedLogin}
                     logout={this.logout}
+                    email={this.props.email}
+                    isAuthenticated={this.props.isAuthenticated}
                     {...props}
                   />
                 );
@@ -115,6 +117,7 @@ class App extends Component {
 const mapStateToProps = state => ({
   isAuthenticated: state.cardReducer.isAuthenticated,
   user: state.cardReducer.user,
+  email: state.cardReducer.email,
   token: state.cardReducer.token,
   cards: state.cardReducer.cards,
   isFetching: state.cardReducer.isFetching,

@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 class LogInOut extends Component {
 
   componentDidMount(){
-    if (localStorage.token) {
+    if (localStorage.token && !this.props.isAuthenticated) {
       this.props.dispatch(fetchUser())
     }
   }
@@ -16,20 +16,7 @@ class LogInOut extends Component {
   render() {
     let loginUrl=`${backend}api/v1/auth/twitter`
     let requestTokenUrl=`${backend}api/v1/auth/twitter/reverse`
-    let content = !!this.props.isAuthenticated ?
-      (
-        <div>
-          <p>Authenticated</p>
-          <div>
-            {this.props.user.email}
-          </div>
-          <div>
-            <button onClick={this.props.logout} className="waves-effect waves-light btn" >
-              Log out
-            </button>
-          </div>
-        </div>
-      ) :
+    let content =
       (
         <div className="background">
           <h1>virtual wallet</h1>
@@ -46,11 +33,14 @@ class LogInOut extends Component {
                   <a href="https://twitter.com/logout" target="_blank" rel="noopener noreferrer">log out of your twitter account</a>
                 </div>
               </div>
-            : <div></div>
+            : <div>
+              <br/>
+              {this.props.email? `Hello ${this.props.email}` : ""}
+            </div>
           }
 
         </div>
-      );
+      )
 
     return (
       <div>

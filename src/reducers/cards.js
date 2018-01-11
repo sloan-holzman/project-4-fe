@@ -8,6 +8,7 @@ function cardReducer(
     cards: [],
     isFetching: false,
     didInvalidate: false,
+    email: null
   },
   action
 ) {
@@ -16,7 +17,8 @@ function cardReducer(
       return Object.assign({}, state, {
         isAuthenticated: true,
         user: action.payload.user,
-        cards: action.payload.user.cards
+        cards: action.payload.user.cards,
+        email: action.payload.user.email
       })
     case LOG_OUT:
       return Object.assign({}, state, {
@@ -24,12 +26,9 @@ function cardReducer(
         user: null,
         cards: [],
         isFetching: false,
-        didInvalidate: false
+        didInvalidate: false,
+        email: null
       })
-    // case UPDATE_CARDS_AFTER_POST:
-    //   return Object.assign({}, state, {
-    //     cards: action.payload.cards,
-    //   })
     case INVALIDATE_USER:
       return Object.assign({}, state, {
         isFetching: true,
@@ -46,7 +45,8 @@ function cardReducer(
         didInvalidate: false,
         isAuthenticated: true,
         user: action.payload.user,
-        cards: action.payload.user.data.cards
+        cards: action.payload.user.data.cards,
+        email: action.payload.user.data.email
       })
     default:
       return state

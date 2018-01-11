@@ -11,6 +11,10 @@
     text-transform: lowercase;
 }
 
+.barcode {
+  border: 1px solid black;
+}
+
 .card__side{
   min-height: 300px;
   min-width: 500px;
