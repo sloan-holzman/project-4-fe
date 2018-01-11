@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT, INVALIDATE_USER, REQUEST_USER, RECEIVE_USER } from '../constants/cards'
+import { LOG_IN, LOG_OUT, REQUEST_USER, RECEIVE_USER } from '../constants/cards'
 import { combineReducers } from 'redux'
 
 function cardReducer(
@@ -29,16 +29,11 @@ function cardReducer(
         didInvalidate: false,
         email: null
       })
-    case INVALIDATE_USER:
+    case REQUEST_USER:
       return Object.assign({}, state, {
         isFetching: true,
         didInvalidate: false
       })
-    case REQUEST_USER:
-    return Object.assign({}, state, {
-      isFetching: true,
-      didInvalidate: false
-    })
     case RECEIVE_USER:
       return Object.assign({}, state, {
         isFetching: false,

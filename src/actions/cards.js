@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT, INVALIDATE_USER, REQUEST_USER, RECEIVE_USER } from '../constants/cards'
+import { LOG_IN, LOG_OUT, REQUEST_USER, RECEIVE_USER } from '../constants/cards'
 import 'babel-polyfill'
 import axios from "axios";
 import backend from "../BackendVariable";
@@ -33,15 +33,6 @@ function receiveUser(user) {
     }
   }
 }
-
-
-export function invalidateUser() {
-  return {
-    type: INVALIDATE_USER,
-  }
-}
-
-
 
 export function fetchUser() {
   return function (dispatch) {
