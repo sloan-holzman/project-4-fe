@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import axios from "axios";
-import backend from "../BackendVariable";
 import CardBack from './CardBack'
 import CardFront from './CardFront'
 import ReactCardFlip from 'react-card-flip';
@@ -14,30 +12,10 @@ class Card extends Component {
       isFlipped: false
     };
     this.flipCard = this.flipCard.bind(this);
-    this.deleteCard = this.deleteCard.bind(this);
     this.goToEdit = this.goToEdit.bind(this);
   }
 
-  deleteCard(e) {
-    e.preventDefault();
-     axios({
-      method: "DELETE",
-      url: `${backend}api/v1/cards`,
-      headers: {'Authorization': "Bearer " + localStorage.token},
-      data: {
-        card_id: this.props.card._id
-      }
-    })
-    .then(response => {
-      if (response.data) {
-        this.props.history.push(`/login`)
-      }
-    })
-    .catch(err => {
-      localStorage.clear()
-      this.props.history.push(`/login`)
-    })
-  }
+
 
   goToEdit(e) {
     e.preventDefault();
@@ -59,7 +37,7 @@ class Card extends Component {
         </ReactCardFlip>
         <br/>
         <div className="card__buttons">
-          <button onClick={this.deleteCard} className="waves-effect waves-light btn" >
+          <button onClick={ (e) => this.props.deleteCard(e, this.props.card._id) } className="waves-effect waves-light btn" >
             Delete Card
           </button>
           <button onClick={this.goToEdit} className="waves-effect waves-light btn" >

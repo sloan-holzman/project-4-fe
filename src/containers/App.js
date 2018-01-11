@@ -61,7 +61,7 @@ class App extends Component {
         <div className="main">
           <Switch>
             <Route exact path="/cards" component={Dashboard} />
-            <Route exact path="/login"
+            <Route exact path="/"
               render={props => {
                 return (
                   <LogInOut
@@ -99,11 +99,10 @@ class App extends Component {
                   />
                 );
               }}  />
-            <Route exact path="/" render={() => <Redirect to="/login" />} />
             <Route
               path="/*"
               render={props => {
-                return <Redirect to="/cards" />;
+                return <Redirect to="/" />;
               }}
             />
           </Switch>

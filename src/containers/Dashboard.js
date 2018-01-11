@@ -2,15 +2,41 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Card from "../components/Card"
 import { fetchUser } from '../actions/cards'
-
+import axios from "axios";
+import backend from "../BackendVariable";
 
 class Dashboard extends Component {
+  constructor() {
+    super();
+    this.deleteCard = this.deleteCard.bind(this);
+  }
 
 
   componentDidMount(){
     if (localStorage.token) {
       this.props.dispatch(fetchUser())
     }
+  }
+
+  deleteCard(e, id) {
+    e.preventDefault();
+     axios({
+      method: "DELETE",
+      url: `${backend}api/v1/cards`,
+      headers: {'Authorization': "Bearer " + localStorage.token},
+      data: {
+        card_id: id
+      }
+    })
+    .then(response => {
+      if (response.data) {
+        this.props.dispatch(fetchUser())
+      }
+    })
+    .catch(err => {
+      localStorage.clear()
+      this.props.history.push(`/login`)
+    })
   }
 
 
@@ -21,6 +47,7 @@ class Dashboard extends Component {
           <Card
             card={card}
             history={this.props.history}
+            deleteCard={this.deleteCard}
           />
         </li>
       )
