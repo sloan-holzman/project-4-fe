@@ -78,7 +78,7 @@ class Dashboard extends Component {
         {this.props.isAuthenticated && !this.props.selectedRetailer && cards.length === 0 && <p>You do not currently have  any cards saved...</p>}
         {this.props.cards.length > 0 &&
           <div>
-            <h2>gift cards</h2>
+            <h2>gift cards and coupons</h2>
             {!this.props.selectedRetailer?
               <MuiThemeProvider muiTheme={muiTheme}>
                 <AutoCompleteFilters retailers={retailers} limitByRetailer={this.limitByRetailer}/>

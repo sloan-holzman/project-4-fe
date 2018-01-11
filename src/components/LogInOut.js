@@ -20,7 +20,7 @@ class LogInOut extends Component {
       (
         <div className="background">
           <h1>virtual wallet</h1>
-          <h5>the one site to save all your gift cards.</h5>
+          <h5>the one site to save all your gift cards and coupons.</h5>
           {
             !localStorage.token ?
               <div>

@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import axios from "axios";
 import backend from "../BackendVariable";
-
+import $ from 'jquery'
 
 class NewCard extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  componentDidMount(){
+    $('select').material_select();
+  }
+
 
   handleSubmit(e) {
     e.preventDefault();
@@ -37,8 +42,18 @@ class NewCard extends Component {
   render () {
     let content = !!this.props.isAuthenticated ?
       ( <div>
-        <h2>enter new card</h2>
+        <h2>enter new gift card or coupon</h2>
         <form onSubmit={this.handleSubmit}>
+          <label>Browser Select</label>
+          <div class="input-field col s12">
+            <select ref="select">
+              <option value="" disabled selected>Choose your option</option>
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+              <option value="3">Option 3</option>
+            </select>
+            <label>Materialize Select</label>
+          </div>
           <input type="text" id="retailer" name="retailer" required placeholder="e.g. j crew, amazon, etc."/>
           <label htmlFor="retailer">retailer</label>
           <input type="number" id="number" required name="number" placeholder="e.g. 0123456789"/>
@@ -54,7 +69,7 @@ class NewCard extends Component {
         </form>
       </div>) :
       (
-        <p>You must be logged in before adding a card</p>
+        <p>you must be logged in before adding a card</p>
       )
     return (
       <div>

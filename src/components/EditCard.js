@@ -46,7 +46,7 @@ class EditCard extends Component {
 
     let content = card ? (
       <div>
-        <h2>update card info</h2>
+        <h2>update gift card or coupon info</h2>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="retailer">retailer:</label>
           <input type="text" id="retailer" name="retailer" required defaultValue={card.retailer}/>
