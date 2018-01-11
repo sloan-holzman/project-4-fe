@@ -6,6 +6,7 @@ import axios from "axios";
 import backend from "../BackendVariable";
 import AutoCompleteFilters from "../components/AutoCompleteFilters"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import SearchSuggestions from '../components/SearchSuggestions'
 
 class Dashboard extends Component {
   constructor() {
@@ -73,8 +74,8 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         {!this.props.isAuthenticated && cards.length === 0 && <p>You must be logged in before viewing your cards</p>}
-        {this.props.isAuthenticated && cards.length === 0 && <p>You do not currently have  any cards saved...</p>}
-        {cards.length > 0 &&
+        {this.props.isAuthenticated && !this.props.selectedRetailer && cards.length === 0 && <p>You do not currently have  any cards saved...</p>}
+        {this.props.cards.length > 0 &&
           <div>
             <h2>gift cards</h2>
             {!this.props.selectedRetailer?
@@ -84,6 +85,8 @@ class Dashboard extends Component {
             {filterExplanation}
             <ul>
               {cards}
+              {this.props.isAuthenticated && this.props.selectedRetailer && cards.length === 0 && <h5 className="no-results">you do not have any gift cards saved for {this.props.selectedRetailer}</h5>}
+              {this.props.selectedRetailer && <SearchSuggestions selectedRetailer={this.props.selectedRetailer}/>}
             </ul>
           </div>
         }

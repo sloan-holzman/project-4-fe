@@ -35,7 +35,7 @@ class LogInOut extends Component {
               </div>
             : <div>
               <br/>
-              {this.props.email? `Hello ${this.props.email}` : ""}
+              {this.props.email? `hello ${this.props.email}` : ""}
             </div>
           }
 

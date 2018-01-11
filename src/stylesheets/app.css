@@ -32,6 +32,11 @@
 
 }
 
+.search-links a {
+  color: #26a69a;
+  text-decoration: none;
+}
+
 .card__side{
   min-height: 300px;
   min-width: 500px;
@@ -39,6 +44,11 @@
   border-radius: 25px;
   padding: 10px;
   border: 1px solid black;
+}
+
+.no-results {
+  border-top: 1px solid black;
+  padding-top: 15px;
 }
 
 .card__back {
