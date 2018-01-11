@@ -58,7 +58,7 @@ class Dashboard extends Component {
         {this.props.isAuthenticated && cards.length === 0 && <p>You do not currently have  any cards saved...</p>}
         {cards.length > 0 &&
           <div>
-            <h3>gift cards</h3>
+            <h2>gift cards</h2>
             <ul>
               {cards}
             </ul>

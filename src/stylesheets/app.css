@@ -15,6 +15,13 @@
   border: 1px solid black;
 }
 
+.flip-button {
+  bottom: 5px;
+  right: 11px;
+  position: absolute;
+
+}
+
 .card__side{
   min-height: 300px;
   min-width: 500px;

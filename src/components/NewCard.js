@@ -37,7 +37,7 @@ class NewCard extends Component {
   render () {
     let content = !!this.props.isAuthenticated ?
       ( <div>
-        <h3>enter new card</h3>
+        <h2>enter new card</h2>
         <form onSubmit={this.handleSubmit}>
           <input type="text" id="retailer" name="retailer" required placeholder="e.g. j crew, amazon, etc."/>
           <label htmlFor="retailer">retailer</label>
