@@ -5,15 +5,15 @@ import Barcode from 'react-barcode'
 const CardBack = ({...props}) => {
   let pin = props.card.pin ? `pin: ${props.card.pin}` : " "
   return (
-    <div className="card__side card__back">
+    <div className="card__side card__back" onClick={props.flipCard}>
       <br/>
       <div className="barcode">
         <Barcode value={props.card.number} />
         <br/>
       </div>
       <p className="pin">{pin}</p>
-      
-      <button className="flip-button" onClick={props.flipCard}>click to see front</button>
+
+      <p className="flip-button">click to see front</p>
     </div>
   )
 }
