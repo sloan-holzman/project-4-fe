@@ -7,11 +7,11 @@ const CardBack = ({...props}) => {
   return (
     <div className="card__side card__back">
       <br/>
-      <p>{pin}</p>
-      <br/>
       <div className="barcode">
         <Barcode value={props.card.number} />
       </div>
+      <br/>
+      <p className="pin">{pin}</p>
       <button className="flip-button" onClick={props.flipCard}>click to see front</button>
     </div>
   )
