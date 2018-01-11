@@ -7,6 +7,7 @@ import backend from "../BackendVariable";
 import AutoCompleteFilters from "../components/AutoCompleteFilters"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SearchSuggestions from '../components/SearchSuggestions'
+import muiTheme from '../components/muiTheme'
 
 class Dashboard extends Component {
   constructor() {
@@ -79,7 +80,7 @@ class Dashboard extends Component {
           <div>
             <h2>gift cards</h2>
             {!this.props.selectedRetailer?
-              <MuiThemeProvider>
+              <MuiThemeProvider muiTheme={muiTheme}>
                 <AutoCompleteFilters retailers={retailers} limitByRetailer={this.limitByRetailer}/>
               </MuiThemeProvider> : <p></p>  }
             {filterExplanation}

@@ -40,7 +40,6 @@ export default class AutoCompleteExampleControlled extends Component {
           onUpdateInput={this.handleUpdateInput}
           onNewRequest={this.handleNewRequest}
           dataSource={this.props.retailers}
-          // filter={(searchText, key) => (key.indexOf(searchText) !== -1)}
           filter={AutoComplete.fuzzyFilter}
           openOnFocus={true}
         />

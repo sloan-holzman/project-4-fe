@@ -63,10 +63,18 @@
 }
 
 .card__side button, .filter-explanation button {
-  background-color: #F2F2F2;
   border: 0;
   color: rgba(0,0,0,0.87);
   font-weight: normal;
+  background-color: #F2F2F2;
+}
+
+.card__side button {
+  color: rgba(0,0,0,0.87);
+}
+
+.filter-explanation button {
+  color: #26a69a;
 }
 
 .dashboard {
