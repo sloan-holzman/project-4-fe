@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT, REQUEST_USER, RECEIVE_USER } from '../constants/cards'
+import { LOG_IN, LOG_OUT, REQUEST_USER, RECEIVE_USER, FILTER_CARDS, UNFILTER_CARDS } from '../constants/cards'
 import { combineReducers } from 'redux'
 
 function cardReducer(
@@ -8,7 +8,9 @@ function cardReducer(
     cards: [],
     isFetching: false,
     didInvalidate: false,
-    email: null
+    email: null,
+    selectedRetailer: null,
+    hasSelected: false
   },
   action
 ) {
@@ -42,6 +44,16 @@ function cardReducer(
         user: action.payload.user,
         cards: action.payload.user.data.cards,
         email: action.payload.user.data.email
+      })
+    case FILTER_CARDS:
+      return Object.assign({}, state, {
+        selectedRetailer: action.payload.selectedRetailer,
+        hasSelected: true
+      })
+    case UNFILTER_CARDS:
+      return Object.assign({}, state, {
+        selectedRetailer: null,
+        hasSelected: false
       })
     default:
       return state

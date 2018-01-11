@@ -11,6 +11,16 @@
     text-transform: lowercase;
 }
 
+.filter-explanation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+/* .search {
+  max-height: 50px;
+} */
+
 .barcode {
   border: 1px solid black;
 }
@@ -42,7 +52,7 @@
   line-height: 20px;
 }
 
-.card__side button {
+.card__side button, .filter-explanation button {
   background-color: #F2F2F2;
   border: 0;
   color: rgba(0,0,0,0.87);

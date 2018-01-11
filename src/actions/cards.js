@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT, REQUEST_USER, RECEIVE_USER } from '../constants/cards'
+import { LOG_IN, LOG_OUT, REQUEST_USER, RECEIVE_USER, FILTER_CARDS, UNFILTER_CARDS } from '../constants/cards'
 import 'babel-polyfill'
 import axios from "axios";
 import backend from "../BackendVariable";
@@ -48,5 +48,20 @@ export function fetchUser() {
       .catch(err => {
         localStorage.clear()
       })
+  }
+}
+
+export function filterCards(selectedRetailer) {
+  return {
+    type: FILTER_CARDS,
+    payload: {
+      selectedRetailer
+    }
+  }
+}
+
+export function unFilterCards() {
+  return {
+    type: UNFILTER_CARDS,
   }
 }

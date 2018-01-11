@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Card from "../components/Card"
-import { fetchUser } from '../actions/cards'
+import { fetchUser, filterCards, unFilterCards } from '../actions/cards'
 import axios from "axios";
 import backend from "../BackendVariable";
+import AutoCompleteFilters from "../components/AutoCompleteFilters"
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class Dashboard extends Component {
   constructor() {
     super();
     this.deleteCard = this.deleteCard.bind(this);
+    this.limitByRetailer = this.limitByRetailer.bind(this);
+    this.unFilter = this.unFilter.bind(this);
+
   }
 
 
@@ -39,9 +44,19 @@ class Dashboard extends Component {
     })
   }
 
+  limitByRetailer(selectedRetailer) {
+    this.props.dispatch(filterCards(selectedRetailer))
+  }
+
+  unFilter(e){
+    e.preventDefault();
+    this.props.dispatch(unFilterCards())
+  }
 
   render() {
-    let cards = this.props.cards.map((card, i) => {
+    let filterExplanation = (this.props.selectedRetailer ? (<div className="filter-explanation"><p>only showing cards for {this.props.selectedRetailer}</p><button onClick={this.unFilter}>[clear]</button></div>) : <p> </p>)
+    let filteredCards = !this.props.selectedRetailer ? this.props.cards : this.props.cards.filter(card => card.retailer === this.props.selectedRetailer)
+    let cards = filteredCards.map((card, i) => {
       return (
         <li key={i}>
           <Card
@@ -52,6 +67,9 @@ class Dashboard extends Component {
         </li>
       )
     })
+    let retailers = this.props.cards.map((card, i) => {
+      return (card.retailer)
+    })
     return (
       <div className="dashboard">
         {!this.props.isAuthenticated && cards.length === 0 && <p>You must be logged in before viewing your cards</p>}
@@ -59,6 +77,11 @@ class Dashboard extends Component {
         {cards.length > 0 &&
           <div>
             <h2>gift cards</h2>
+            {!this.props.selectedRetailer?
+              <MuiThemeProvider>
+                <AutoCompleteFilters retailers={retailers} limitByRetailer={this.limitByRetailer}/>
+              </MuiThemeProvider> : <p></p>  }
+            {filterExplanation}
             <ul>
               {cards}
             </ul>
@@ -75,7 +98,9 @@ const mapStateToProps = state => ({
   token: state.cardReducer.token,
   cards: state.cardReducer.cards,
   isFetching: state.cardReducer.isFetching,
-  didInvalidate: state.cardReducer.didInvalidate
+  didInvalidate: state.cardReducer.didInvalidate,
+  selectedRetailer: state.cardReducer.selectedRetailer,
+  hasSelected: state.cardReducer.selectedRetailer
 })
 
 
