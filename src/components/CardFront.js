@@ -17,12 +17,12 @@ const CardFront = ({...props}) => {
   let updated = moment(props.card.updated.substring(0,10)).format('ll')
 
   return (
-    <div className="card__side">
+    <div className="card__side" onClick={props.flipCard}>
       <h2>{props.card.retailer}</h2>
       <h4>balance: ${balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h4>
       <p>expiration: <span className={expiration_class}>{expiration}</span></p>
       <p>last updated: {updated}</p>
-      <button className="flip-button" onClick={props.flipCard}>click to see back</button>
+      <p className="flip-button" >click to see back</p>
     </div>
   );
 }

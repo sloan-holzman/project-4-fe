@@ -5,6 +5,7 @@
   align-items: center;
   align-content: center;
   text-align: center;
+  margin: 0 auto;
 }
 
 .btn {
@@ -23,6 +24,7 @@
 
 .barcode {
   border: 1px solid black;
+  background-color: white;
 }
 
 .flip-button {
@@ -44,6 +46,7 @@
   border-radius: 25px;
   padding: 10px;
   border: 1px solid black;
+  word-wrap: break-word;
 }
 
 .no-results {
@@ -83,6 +86,7 @@
   justify-content: space-around;
   align-items: center;
   align-content: center;
+  margin: 0 auto;
 }
 
 html {
@@ -115,6 +119,7 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 }
 
 .card img {
@@ -182,28 +187,67 @@ form, .card {
   color: black !important;
 }
 
-@media screen and (min-width: 521px) and (max-width: 750px) {
+@media screen and (min-width: 540px) and (max-width: 750px) {
   form, .card {
     min-width: 500px;
   }
 }
 
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 540px) {
 
-  form, .card {
-    min-width: 0px;
-    max-width: 85vw;
+  .card {
+    height: 99vh;
+    /* flex-direction: row; */
+    flex-shrink: 0;
   }
+
+  .dashboard {
+    flex-direction: row;
+  }
+
+  form {
+    max-width: 99vw;
+    min-width: 0px;
+  }
+
 
   h1 {
     font-size: 50px;
     font-weight: 900;
   }
 
-  .card__side{
-    min-width: 275px;
-    max-width: 80vw;
+  h2 {
+    font-size: 14vw;
+  }
+
+  h4 {
+    font-size: 6vw;
+  }
+  .card {
+    justify-content: space-around;
+    transform: rotate(90deg);
+  }
+
+
+  .card__buttons {
+    flex-shrink: 2;
+  }
+
+  .react-card-flip {
+    height: 95vw;
+    width: 80vh;
+    flex-shrink: 1;
+  }
+
+  .react-card-flipper, .react-card-front, .react-card-back, .card__side {
+    height: 100%
+  }
+
+  .flip-button {
+    right: 2px;
+    bottom: 0px;
+    position: absolute;
   }
 
 }
