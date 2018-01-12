@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT, REQUEST_USER, RECEIVE_USER, FILTER_CARDS, UNFILTER_CARDS } from '../constants/cards'
+import { LOG_IN, LOG_OUT, REQUEST_USER, RECEIVE_USER, FILTER_CARDS, UNFILTER_CARDS, CLEAR_ALERT, SET_ALERT, SET_ALERT_SEEN, FORCE_UPDATE } from '../constants/cards'
 import { combineReducers } from 'redux'
 
 function cardReducer(
@@ -10,7 +10,10 @@ function cardReducer(
     didInvalidate: false,
     email: null,
     selectedRetailer: null,
-    hasSelected: false
+    hasSelected: false,
+    upToDate: false,
+    alert: " ",
+    alertOn: true
   },
   action
 ) {
@@ -18,18 +21,22 @@ function cardReducer(
     case LOG_IN:
       return Object.assign({}, state, {
         isAuthenticated: true,
+        upToDate: true,
         user: action.payload.user,
         cards: action.payload.user.cards,
-        email: action.payload.user.email
+        email: action.payload.user.email,
       })
     case LOG_OUT:
       return Object.assign({}, state, {
         isAuthenticated: false,
+        upToDate: false,
         user: null,
         cards: [],
         isFetching: false,
         didInvalidate: false,
-        email: null
+        email: null,
+        alertOn: true,
+        alert: " "
       })
     case REQUEST_USER:
       return Object.assign({}, state, {
@@ -41,6 +48,7 @@ function cardReducer(
         isFetching: false,
         didInvalidate: false,
         isAuthenticated: true,
+        upToDate: true,
         user: action.payload.user,
         cards: action.payload.user.data.cards,
         email: action.payload.user.data.email
@@ -54,6 +62,23 @@ function cardReducer(
       return Object.assign({}, state, {
         selectedRetailer: null,
         hasSelected: false
+      })
+    case SET_ALERT:
+      return Object.assign({}, state, {
+        alert: action.payload.alert,
+      })
+    case SET_ALERT_SEEN:
+      return Object.assign({}, state, {
+        alertOn: false
+      })
+    case CLEAR_ALERT:
+      return Object.assign({}, state, {
+        alertOn: true,
+        alert: " "
+      })
+    case FORCE_UPDATE:
+      return Object.assign({}, state, {
+        upToDate: false
       })
     default:
       return state

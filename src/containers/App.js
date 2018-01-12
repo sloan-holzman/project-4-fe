@@ -12,7 +12,7 @@ import Navbar from "../components/Navbar"
 import NewCard from "../components/NewCard"
 import EditCard from "../components/EditCard"
 import Dashboard from "./Dashboard"
-import { login, logout, fetchUser } from '../actions/cards'
+import { login, logout, fetchUser, setAlert, clearAlert, setAlertSeen, forceUpdate } from '../actions/cards'
 import '../stylesheets/app.css'
 
 
@@ -23,6 +23,10 @@ class App extends Component {
     this.onSuccessLogin = this.onSuccessLogin.bind(this)
     this.onFailedLogin = this.onFailedLogin.bind(this)
     this.logout = this.logout.bind(this)
+    this.clearAlert = this.clearAlert.bind(this)
+    this.setAlert = this.setAlert.bind(this)
+    this.setAlertSeen = this.setAlertSeen.bind(this)
+    this.forceUpdate = this.forceUpdate.bind(this)
   }
 
   componentDidMount(){
@@ -37,6 +41,7 @@ class App extends Component {
       if (response.headers.get('x-auth-token')) {
         localStorage.token = response.headers.get('x-auth-token');
         this.props.dispatch(login(user))
+        this.props.dispatch(setAlert("congrats, you logged in successfully"))
         this.props.history.push(`/cards`)
       }
     });
@@ -52,15 +57,38 @@ class App extends Component {
     this.props.dispatch(logout())
   };
 
+  clearAlert = () => {
+    this.props.dispatch(clearAlert())
+  }
 
+  setAlertSeen = () => {
+    this.props.dispatch(setAlertSeen())
+  }
+
+  setAlert = (alert) => {
+    this.props.dispatch(setAlert(alert))
+  }
+
+  forceUpdate = () => {
+    this.props.dispatch(forceUpdate())
+  }
 
   render() {
     return (
       <div>
-        <Navbar isAuthenticated={this.props.isAuthenticated}/>
+        <Navbar user={this.props.user} alert={this.props.alert}/>
         <div className="main">
           <Switch>
-            <Route exact path="/cards" component={Dashboard} />
+            <Route exact path="/cards" render={props => {
+              return (
+                <Dashboard
+                  clearAlert={this.clearAlert}
+                  setAlertSeen={this.setAlertSeen}
+                  setAlert={this.setAlert}
+                  {...props}
+                />
+              );
+            }} />
             <Route exact path="/"
               render={props => {
                 return (
@@ -69,7 +97,7 @@ class App extends Component {
                     onFailedLogin={this.onFailedLogin}
                     logout={this.logout}
                     email={this.props.email}
-                    isAuthenticated={this.props.isAuthenticated}
+                    user={this.props.user}
                     {...props}
                   />
                 );
@@ -88,6 +116,11 @@ class App extends Component {
                 return (
                   <NewCard
                     isAuthenticated={this.props.isAuthenticated}
+                    isFetching={this.props.isFetching}
+                    clearAlert={this.clearAlert}
+                    setAlertSeen={this.setAlertSeen}
+                    setAlert={this.setAlert}
+                    forceUpdate={this.forceUpdate}
                     {...props}
                   />
                 );
@@ -97,6 +130,11 @@ class App extends Component {
                 return (
                   <EditCard
                     cards={this.props.cards}
+                    isFetching={this.props.isFetching}
+                    clearAlert={this.clearAlert}
+                    setAlertSeen={this.setAlertSeen}
+                    setAlert={this.setAlert}
+                    forceUpdate={this.forceUpdate}
                     {...props}
                   />
                 );
@@ -121,7 +159,9 @@ const mapStateToProps = state => ({
   token: state.cardReducer.token,
   cards: state.cardReducer.cards,
   isFetching: state.cardReducer.isFetching,
-  didInvalidate: state.cardReducer.didInvalidate
+  didInvalidate: state.cardReducer.didInvalidate,
+  alert: state.cardReducer.alert,
+  alertOn: state.cardReducer.alertOn
 })
 
 

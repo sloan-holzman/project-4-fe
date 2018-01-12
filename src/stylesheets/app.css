@@ -22,6 +22,10 @@
   max-height: 50px;
 } */
 
+.alert {
+  text-align: center;
+}
+
 .barcode {
   border: 1px solid black;
   background-color: white;
@@ -58,11 +62,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.card__back p {
-  margin: 0 0;
-  line-height: 20px;
 }
 
 .card__side button, .filter-explanation button {

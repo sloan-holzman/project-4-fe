@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 class LogInOut extends Component {
 
   componentDidMount(){
-    if (localStorage.token && !this.props.isAuthenticated) {
+    if (localStorage.token && !this.props.user) {
       this.props.dispatch(fetchUser())
     }
   }
@@ -22,7 +22,7 @@ class LogInOut extends Component {
           <h1>virtual wallet</h1>
           <h5>the one site to save all your gift cards.</h5>
           {
-            !localStorage.token ?
+            !this.props.user ?
               <div>
                 <div className="login-button">
                   <TwitterLogin loginUrl={loginUrl}
@@ -35,7 +35,7 @@ class LogInOut extends Component {
               </div>
             : <div>
               <br/>
-              {this.props.email? `hello ${this.props.email}` : ""}
+              {this.props.email? `welcome, ${this.props.email}` : ""}
             </div>
           }
 
