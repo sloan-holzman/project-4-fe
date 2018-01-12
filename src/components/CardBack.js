@@ -1,5 +1,6 @@
 import React from 'react'
 import Barcode from 'react-barcode'
+import '../stylesheets/card.css'
 
 
 const CardBack = ({...props}) => {
@@ -7,13 +8,13 @@ const CardBack = ({...props}) => {
   return (
     <div className="card__side card__back" onClick={props.flipCard}>
       <br/>
-      <div className="barcode">
+      <div className="card__back__barcode">
         <Barcode value={props.card.number} />
         <br/>
       </div>
       <p className="pin">{pin}</p>
 
-      <p className="flip-button">click to see front</p>
+      <p className="card__side__flip-button">click to see front</p>
     </div>
   )
 }

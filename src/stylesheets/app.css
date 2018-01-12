@@ -1,3 +1,18 @@
+html {
+  background-color: #F2F2F2;
+  height: 100%;
+}
+
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 0px; /* remove scrollbar space, if we want to do that */
+  background: transparent; /* make scrollbar invisible */
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -8,91 +23,6 @@
   margin: 0 auto;
 }
 
-.btn {
-    text-transform: lowercase;
-}
-
-.filter-explanation {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-/* .search {
-  max-height: 50px;
-} */
-
-.alert {
-  text-align: center;
-}
-
-.barcode {
-  border: 1px solid black;
-  background-color: white;
-}
-
-.flip-button {
-  bottom: 5px;
-  right: 11px;
-  position: absolute;
-
-}
-
-.search-links a {
-  color: #26a69a;
-  text-decoration: none;
-}
-
-.card__side{
-  min-height: 300px;
-  min-width: 500px;
-  background-color: #F2F2F2;
-  border-radius: 25px;
-  padding: 10px;
-  border: 1px solid black;
-  word-wrap: break-word;
-}
-
-.no-results {
-  border-top: 1px solid black;
-  padding-top: 15px;
-}
-
-.card__back {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.card__side button, .filter-explanation button {
-  border: 0;
-  color: rgba(0,0,0,0.87);
-  font-weight: normal;
-  background-color: #F2F2F2;
-}
-
-.card__side button {
-  color: rgba(0,0,0,0.87);
-}
-
-.filter-explanation button {
-  color: #26a69a;
-}
-
-.dashboard {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  align-content: center;
-  margin: 0 auto;
-}
-
-html {
-  background-color: #F2F2F2;
-  height: 100%;
-}
-
 form {
   display: flex;
   flex-direction: column;
@@ -101,62 +31,9 @@ form {
   padding: 40px;
   text-align: left;
   background-color: white;
+  min-width: 700px;
 }
 
-.react-card-front {
-  position: relative !important
-}
-
-nav {
-  padding: 0 5%;
-}
-
-.card {
-  border: 2px solid #FF5C69;
-  padding: 40px 20px 40px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
-
-.card img {
-  height: 100px;
-  width: 100px;
-}
-
-.btn {
-  margin: 2px;
-}
-
-.background {
-    height: 100%;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.background::after {
-  content: "";
-  background-image: url("../imgs/gift-cards.jpg");
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  z-index: -1;
-}
-
-input#expiration {
-  color: grey;
-}
-
-.expired {
-  color: red;
-}
 
 h1 {
   font-size: 100px;
@@ -164,89 +41,7 @@ h1 {
   margin-top: 10vh;
 }
 
-body {
-  font-family: 'Montserrat', sans-serif;
-}
-
-.login-button {
-  padding: 2% 30%;
-}
-
-form, .card {
-  min-width: 700px;
-}
-
-::-webkit-scrollbar {
-  width: 0px; /* remove scrollbar space, if we want to do that */
-  background: transparent; /* make scrollbar invisible */
-}
-
-.twitter-logout a {
-  text-decoration: none;
-  color: black !important;
-}
-
-@media screen and (min-width: 540px) and (max-width: 750px) {
-  form, .card {
-    min-width: 500px;
-  }
-}
-
-
-@media screen and (max-width: 540px) {
-
-  .card {
-    height: 99vh;
-    /* flex-direction: row; */
-    flex-shrink: 0;
-  }
-
-  .dashboard {
-    flex-direction: row;
-  }
-
-  form {
-    max-width: 99vw;
-    min-width: 0px;
-  }
-
-
-  h1 {
-    font-size: 50px;
-    font-weight: 900;
-  }
-
-  h2 {
-    font-size: 14vw;
-  }
-
-  h4 {
-    font-size: 6vw;
-  }
-  .card {
-    justify-content: space-around;
-    transform: rotate(90deg);
-  }
-
-
-  .card__buttons {
-    flex-shrink: 2;
-  }
-
-  .react-card-flip {
-    height: 95vw;
-    width: 80vh;
-    flex-shrink: 1;
-  }
-
-  .react-card-flipper, .react-card-front, .react-card-back, .card__side {
-    height: 100%
-  }
-
-  .flip-button {
-    right: 2px;
-    bottom: 0px;
-    position: absolute;
-  }
-
+.btn {
+  text-transform: lowercase;
+  margin: 2px;
 }

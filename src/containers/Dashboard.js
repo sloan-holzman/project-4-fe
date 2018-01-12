@@ -8,6 +8,9 @@ import AutoCompleteFilters from "../components/AutoCompleteFilters"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SearchSuggestions from '../components/SearchSuggestions'
 import muiTheme from '../components/muiTheme'
+import '../stylesheets/dashboard.css'
+
+
 
 class Dashboard extends Component {
   constructor() {

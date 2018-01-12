@@ -3,6 +3,7 @@ import TwitterLogin from 'react-twitter-auth';
 import backend from "../BackendVariable";
 import { fetchUser } from '../actions/cards'
 import { connect } from 'react-redux'
+import '../stylesheets/loginout.css'
 
 
 class LogInOut extends Component {

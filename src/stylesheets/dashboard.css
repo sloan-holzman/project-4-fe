@@ -1,0 +1,27 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  margin: 0 auto;
+}
+
+.filter-explanation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.filter-explanation button {
+  border: 0;
+  color: #26a69a;
+  font-weight: normal;
+  background-color: #F2F2F2;
+}
+
+
+.no-results {
+  border-top: 1px solid black;
+  padding-top: 15px;
+}

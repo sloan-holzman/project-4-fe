@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import CardBack from './CardBack'
 import CardFront from './CardFront'
 import ReactCardFlip from 'react-card-flip';
+import '../stylesheets/card.css'
 
 
 
