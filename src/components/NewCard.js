@@ -58,7 +58,8 @@ class NewCard extends Component {
       )
     return (
       <div>
-        {content}
+        {/* {this.props.isFetching && <p>Loading...</p>} */}
+        {!this.props.isFetching && content}
       </div>
     )
   }

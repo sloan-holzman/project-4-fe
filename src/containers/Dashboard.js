@@ -74,8 +74,9 @@ class Dashboard extends Component {
     })
     return (
       <div className="dashboard">
-        {!this.props.isAuthenticated && cards.length === 0 && <p>You must be logged in before viewing your cards</p>}
-        {this.props.isAuthenticated && !this.props.selectedRetailer && cards.length === 0 && <p>You do not currently have  any cards saved...</p>}
+        {/* {this.props.isFetching && <p>Loading...</p>} */}
+        {!this.props.isFetching && !this.props.isAuthenticated && cards.length === 0 && <p>You must be logged in before viewing your cards</p>}
+        {!this.props.isFetching && this.props.isAuthenticated && !this.props.selectedRetailer && cards.length === 0 && <p>You do not currently have  any cards saved...</p>}
         {this.props.cards.length > 0 &&
           <div>
             <h2>gift cards</h2>

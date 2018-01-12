@@ -22,7 +22,7 @@ const CardFront = ({...props}) => {
       <h4>balance: ${balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h4>
       <p>expiration: <span className={expiration_class}>{expiration}</span></p>
       <p>last updated: {updated}</p>
-      <p className="flip-button" >click to see back</p>
+      <p className="flip-button">click to see back</p>
     </div>
   );
 }

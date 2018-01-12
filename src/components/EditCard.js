@@ -64,7 +64,8 @@ class EditCard extends Component {
       (<p>card does not exist.  ensure you are logged in</p>)
     return (
       <div>
-        {content}
+        {/* {this.props.isFetching && <p>Loading...</p>} */}
+        {!this.props.isFetching && content}
       </div>
     )
   }

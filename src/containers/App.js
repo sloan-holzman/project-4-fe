@@ -88,6 +88,7 @@ class App extends Component {
                 return (
                   <NewCard
                     isAuthenticated={this.props.isAuthenticated}
+                    isFetching={this.props.isFetching}
                     {...props}
                   />
                 );
@@ -97,6 +98,7 @@ class App extends Component {
                 return (
                   <EditCard
                     cards={this.props.cards}
+                    isFetching={this.props.isFetching}
                     {...props}
                   />
                 );

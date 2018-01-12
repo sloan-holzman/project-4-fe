@@ -60,11 +60,6 @@
   align-items: center;
 }
 
-.card__back p {
-  margin: 0 0;
-  line-height: 20px;
-}
-
 .card__side button, .filter-explanation button {
   border: 0;
   color: rgba(0,0,0,0.87);
