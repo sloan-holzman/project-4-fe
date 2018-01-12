@@ -9,7 +9,7 @@ const SearchSuggestions = ({...props}) => {
   let googleCoupons = `https://www.google.com/search?q=${props.selectedRetailer}+coupons`
   return (
     <div className="search-links">
-      <p>additional customized links for finding discount gift cards / coupons for {props.selectedRetailer}...</p>
+      <p>search results for {props.selectedRetailer} at the following sites...</p>
       <p><a href={coupons} target="_blank" rel="noopener noreferrer">coupons.com</a> | <a href={retailmenot} target="_blank" rel="noopener noreferrer">retailmenot.com</a> | <a href={raise} target="_blank" rel="noopener noreferrer">raise.com</a> | <a href={googleGiftCards} target="_blank" rel="noopener noreferrer">google.com (gift cards)</a> | <a href={googleCoupons} target="_blank" rel="noopener noreferrer">google.com (coupons)</a></p>
       </div>
   )

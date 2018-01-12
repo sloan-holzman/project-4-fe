@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT, REQUEST_USER, RECEIVE_USER, FILTER_CARDS, UNFILTER_CARDS } from '../constants/cards'
+import { LOG_IN, LOG_OUT, REQUEST_USER, RECEIVE_USER, FILTER_CARDS, UNFILTER_CARDS, CLEAR_ALERT, SET_ALERT, SET_ALERT_SEEN, FORCE_UPDATE } from '../constants/cards'
 import 'babel-polyfill'
 import axios from "axios";
 import backend from "../BackendVariable";
@@ -16,6 +16,27 @@ export function login(user) {
 export function logout() {
   return {
     type: LOG_OUT,
+  }
+}
+
+export function clearAlert() {
+  return {
+    type: CLEAR_ALERT,
+  }
+}
+
+export function setAlert(alert) {
+  return {
+    type: SET_ALERT,
+    payload: {
+      alert
+    }
+  }
+}
+
+export function setAlertSeen() {
+  return {
+    type: SET_ALERT_SEEN
   }
 }
 
@@ -48,6 +69,12 @@ export function fetchUser() {
       .catch(err => {
         localStorage.clear()
       })
+  }
+}
+
+export function forceUpdate() {
+  return {
+    type: FORCE_UPDATE
   }
 }
 

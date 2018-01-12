@@ -9,6 +9,15 @@ class EditCard extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount(){
+    if (!this.props.alertOn) {
+      this.props.clearAlert()
+    }
+    if (this.props.alertOn && this.props.alert !== " ") {
+      this.props.setAlertSeen()
+    }
+  }
+
   handleSubmit(e) {
     e.preventDefault();
      axios({
@@ -25,11 +34,14 @@ class EditCard extends Component {
     })
     .then(response => {
       if (response.data) {
+        this.props.forceUpdate()
+        this.props.setAlert("card updated successfully")
         this.props.history.push(`/cards`)
       }
     })
     .catch(err => {
       localStorage.clear()
+      this.props.setAlert("woops, something went wrong")
       this.props.history.push(`/login`)
     })
   }

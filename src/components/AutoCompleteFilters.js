@@ -33,7 +33,7 @@ export default class AutoCompleteExampleControlled extends Component {
 
   render() {
     return (
-      <div>
+      <div className="autocomplete">
         <AutoComplete
           hintText="filter by retailer"
           searchText={this.state.searchText}

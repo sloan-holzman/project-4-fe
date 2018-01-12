@@ -18,12 +18,19 @@ class Dashboard extends Component {
 
   }
 
-
   componentDidMount(){
-    if (localStorage.token) {
+    if (localStorage.token && !this.props.upToDate) {
+      console.log("updated!")
       this.props.dispatch(fetchUser())
     }
+    if (!this.props.alertOn) {
+      this.props.clearAlert()
+    }
+    if (this.props.alertOn && this.props.alert !== " ") {
+      this.props.setAlertSeen()
+    }
   }
+
 
   deleteCard(e, id) {
     e.preventDefault();
@@ -38,11 +45,13 @@ class Dashboard extends Component {
     .then(response => {
       if (response.data) {
         this.props.dispatch(fetchUser())
+        this.props.setAlert("card delete successfully")
       }
     })
     .catch(err => {
       localStorage.clear()
       this.props.history.push(`/login`)
+      this.props.setAlert("woops, something went wrong")
     })
   }
 
@@ -105,7 +114,10 @@ const mapStateToProps = state => ({
   isFetching: state.cardReducer.isFetching,
   didInvalidate: state.cardReducer.didInvalidate,
   selectedRetailer: state.cardReducer.selectedRetailer,
-  hasSelected: state.cardReducer.selectedRetailer
+  hasSelected: state.cardReducer.selectedRetailer,
+  upToDate: state.cardReducer.upToDate,
+  alert: state.cardReducer.alert,
+  alertOn: state.cardReducer.alertOn
 })
 
 
