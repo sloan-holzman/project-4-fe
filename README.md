@@ -1,4 +1,4 @@
-#Virtual Wallet
+# Virtual Wallet
 
 ## Table of Contents
 
@@ -78,9 +78,9 @@ The fully functioning site can be found here: http://virtual-wallet.surge.sh/
 
 ### Installation instructions for all dependencies
 
-1. I install all dependencies using npm...
+1. I installed all dependencies using npm...
 2. if you haven't already, you need to first run `npm i -g create-react-app` then run `create-react-app` following by the app-name (or just `.`) if you want to create in the current folder
-3. then install all other dependencies using npm
+3. then you can install all other dependencies using npm
 
 ## Deployment instructions
 
