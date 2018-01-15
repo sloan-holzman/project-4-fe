@@ -46,11 +46,11 @@ function requestUser() {
   }
 }
 
-function receiveUser(user) {
+function receiveUser(response) {
   return {
     type: RECEIVE_USER,
     payload: {
-      user
+      response
     }
   }
 }
@@ -65,6 +65,7 @@ export function fetchUser() {
       })
       .then(
         response => dispatch(receiveUser(response))
+        // response => console.log(response)
       )
       .catch(err => {
         localStorage.clear()

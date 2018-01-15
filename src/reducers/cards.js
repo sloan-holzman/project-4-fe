@@ -6,6 +6,7 @@ function cardReducer(
     isAuthenticated: false,
     user: null,
     cards: [],
+    retailers: [],
     isFetching: false,
     didInvalidate: false,
     email: null,
@@ -25,6 +26,7 @@ function cardReducer(
         user: action.payload.user,
         cards: action.payload.user.cards,
         email: action.payload.user.email,
+        retailers: action.payload.retailers
       })
     case LOG_OUT:
       return Object.assign({}, state, {
@@ -32,6 +34,7 @@ function cardReducer(
         upToDate: false,
         user: null,
         cards: [],
+        retailers: [],
         isFetching: false,
         didInvalidate: false,
         email: null,
@@ -49,9 +52,10 @@ function cardReducer(
         didInvalidate: false,
         isAuthenticated: true,
         upToDate: true,
-        user: action.payload.user,
-        cards: action.payload.user.data.cards,
-        email: action.payload.user.data.email
+        user: action.payload.response.data.user,
+        retailers: action.payload.response.data.retailers,
+        cards: action.payload.response.data.user.cards,
+        email: action.payload.response.data.user.email
       })
     case FILTER_CARDS:
       return Object.assign({}, state, {
