@@ -4,11 +4,11 @@ import axios from "axios";
 import backend from "../BackendVariable";
 
 
-export function login(user) {
+export function login(response) {
   return {
     type: LOG_IN,
     payload: {
-      user
+      response
     }
   }
 }

@@ -36,7 +36,7 @@ class NewCard extends Component {
     .then(response => {
       if (response.data) {
         this.props.forceUpdate()
-        this.props.setAlert("card updated successfully")
+        this.props.setAlert("card added successfully")
         this.props.history.push(`/cards`)
       }
     })

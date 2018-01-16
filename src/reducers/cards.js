@@ -23,10 +23,10 @@ function cardReducer(
       return Object.assign({}, state, {
         isAuthenticated: true,
         upToDate: true,
-        user: action.payload.user,
-        cards: action.payload.user.cards,
-        email: action.payload.user.email,
-        retailers: action.payload.retailers
+        user: action.payload.response.user,
+        retailers: action.payload.response.retailers,
+        cards: action.payload.response.user.cards,
+        email: action.payload.response.user.email
       })
     case LOG_OUT:
       return Object.assign({}, state, {
