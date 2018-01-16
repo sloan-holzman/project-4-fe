@@ -9,7 +9,7 @@ import {
 import LogInOut from "../components/LogInOut"
 import LogOut from "../components/LogOut"
 import Navbar from "../components/Navbar"
-import NewCard from "../components/NewCard"
+import NewCard2 from "../components/NewCard2"
 import EditCard from "../components/EditCard"
 import Dashboard from "./Dashboard"
 import { login, logout, fetchUser, setAlert, clearAlert, setAlertSeen, forceUpdate } from '../actions/cards'
@@ -115,13 +115,14 @@ class App extends Component {
             <Route exact path="/cards/new"
               render={props => {
                 return (
-                  <NewCard
+                  <NewCard2
                     isAuthenticated={this.props.isAuthenticated}
                     isFetching={this.props.isFetching}
                     clearAlert={this.clearAlert}
                     setAlertSeen={this.setAlertSeen}
                     setAlert={this.setAlert}
                     forceUpdate={this.forceUpdate}
+                    retailers={this.props.retailers}
                     {...props}
                   />
                 );
@@ -162,7 +163,8 @@ const mapStateToProps = state => ({
   isFetching: state.cardReducer.isFetching,
   didInvalidate: state.cardReducer.didInvalidate,
   alert: state.cardReducer.alert,
-  alertOn: state.cardReducer.alertOn
+  alertOn: state.cardReducer.alertOn,
+  retailers: state.cardReducer.retailers
 })
 
 

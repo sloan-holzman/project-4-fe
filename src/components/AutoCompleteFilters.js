@@ -14,7 +14,7 @@ import AutoComplete from 'material-ui/AutoComplete';
 //
 // export default AutoCompleteFilters;
 
-export default class AutoCompleteExampleControlled extends Component {
+export default class AutoCompleteControlled extends Component {
   state = {
     searchText: '',
   };
