@@ -1,4 +1,4 @@
-import {teal400, green500} from 'material-ui/styles/colors';
+import {teal400} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 // This replaces the textColor value on the palette

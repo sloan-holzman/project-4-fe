@@ -46,7 +46,7 @@ class Card extends Component {
           {
             this.props.card.type === 'gift card' && this.props.card.cardHtml ?
               <button onClick={()=> window.open(this.props.card.cardHtml, "_blank")} className="waves-effect waves-light btn" >
-                Check Value
+                Check Balance
               </button> : <p></p>
           }
 

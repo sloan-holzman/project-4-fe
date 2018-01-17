@@ -68,7 +68,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    let filterExplanation = (this.props.selectedRetailer ? (<div className="filter-explanation"><p>only showing cards for {this.props.selectedRetailer}</p><button onClick={this.unFilter}>[clear]</button></div>) : <p> </p>)
+    let filterExplanation = (this.props.selectedRetailer ? (<div className="filter-explanation"><p>only showing cards & coupons for {this.props.selectedRetailer}</p><button onClick={this.unFilter}>[clear]</button></div>) : <p> </p>)
     let filteredCards = !this.props.selectedRetailer ? this.props.cards : this.props.cards.filter(card => card.retailer === this.props.selectedRetailer)
     let cards = filteredCards.map((card, i) => {
       return (
@@ -91,7 +91,7 @@ class Dashboard extends Component {
         {!this.props.isFetching && this.props.isAuthenticated && !this.props.selectedRetailer && cards.length === 0 && <p>You do not currently have  any cards or coupons saved...</p>}
         {this.props.cards.length > 0 &&
           <div>
-            <h2>gift cards and coupons</h2>
+            <h2>gift cards & coupons</h2>
             {!this.props.selectedRetailer?
               <MuiThemeProvider muiTheme={muiTheme}>
                 <AutoCompleteFilters retailers={retailers} limitByRetailer={this.limitByRetailer}/>
