@@ -3,9 +3,9 @@ html {
   height: 100%;
 }
 
-
 body {
   font-family: 'Montserrat', sans-serif;
+  padding-bottom: 3%;
 }
 
 ::-webkit-scrollbar {

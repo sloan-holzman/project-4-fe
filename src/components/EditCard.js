@@ -11,7 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import '../stylesheets/form.css'
 
 
-class NewCard2 extends Component {
+class EditCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +26,6 @@ class NewCard2 extends Component {
   }
 
   handleUpdateInput = (searchText) => {
-    console.log(this.state.searchText)
     this.setState({
       searchText: searchText,
     });
@@ -62,7 +61,6 @@ class NewCard2 extends Component {
     }
     let card
     if (this.props.cards) {
-      console.log(this.props.cards)
       card = this.props.cards.find((card) => card._id === this.props.match.params.id)
       if (card) {
         this.setState({
@@ -144,7 +142,6 @@ class NewCard2 extends Component {
                 floatingLabelText="retailer"
                 searchText={this.state.searchText}
                 onUpdateInput={this.handleUpdateInput}
-                // onNewRequest={this.handleNewRequest}
                 dataSource={retailerNames}
                 filter={AutoComplete.fuzzyFilter}
                 openOnFocus={true}
@@ -196,4 +193,4 @@ class NewCard2 extends Component {
 }
 
 
-export default NewCard2
+export default EditCard

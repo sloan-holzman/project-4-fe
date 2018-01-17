@@ -26,7 +26,6 @@ class NewCard2 extends Component {
   }
 
   handleUpdateInput = (searchText) => {
-    console.log(this.state.searchText)
     this.setState({
       searchText: searchText,
     });
@@ -126,7 +125,6 @@ class NewCard2 extends Component {
                 floatingLabelText="retailer"
                 searchText={this.state.searchText}
                 onUpdateInput={this.handleUpdateInput}
-                // onNewRequest={this.handleNewRequest}
                 dataSource={retailerNames}
                 filter={AutoComplete.fuzzyFilter}
                 openOnFocus={true}

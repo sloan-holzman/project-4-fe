@@ -3,7 +3,6 @@ import {
   Link
 } from "react-router-dom"
 import '../stylesheets/navbar.css'
-import '../stylesheets/materialize.css'
 
 
 
@@ -16,7 +15,7 @@ const Navbar = ({...props}) => {
             <a href="/" className="brand-logo  hide-on-med-and-down">virtual wallet</a>
             <ul className="right">
               <li><Link to="/cards">wallet</Link></li>
-              <li><Link to="/cards/new">add card/coupon</Link></li>
+              <li><Link to="/cards/new">add new</Link></li>
               {
                 props.user ?
                   <li><Link to="/logout">logout</Link></li> :

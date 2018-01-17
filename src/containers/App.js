@@ -15,6 +15,7 @@ import Dashboard from "./Dashboard"
 import { login, logout, fetchUser, setAlert, clearAlert, setAlertSeen, forceUpdate } from '../actions/cards'
 import '../stylesheets/app.css'
 import '../stylesheets/mobile.css'
+import '../stylesheets/materialize.css'
 
 
 class App extends Component {
