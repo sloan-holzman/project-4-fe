@@ -87,11 +87,11 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         {/* {this.props.isFetching && <p>Loading...</p>} */}
-        {!this.props.isFetching && !this.props.isAuthenticated && cards.length === 0 && <p>You must be logged in before viewing your cards</p>}
-        {!this.props.isFetching && this.props.isAuthenticated && !this.props.selectedRetailer && cards.length === 0 && <p>You do not currently have  any cards saved...</p>}
+        {!this.props.isFetching && !this.props.isAuthenticated && cards.length === 0 && <p>You must be logged in before viewing your wallet</p>}
+        {!this.props.isFetching && this.props.isAuthenticated && !this.props.selectedRetailer && cards.length === 0 && <p>You do not currently have  any cards or coupons saved...</p>}
         {this.props.cards.length > 0 &&
           <div>
-            <h2>gift cards</h2>
+            <h2>gift cards and coupons</h2>
             {!this.props.selectedRetailer?
               <MuiThemeProvider muiTheme={muiTheme}>
                 <AutoCompleteFilters retailers={retailers} limitByRetailer={this.limitByRetailer}/>
@@ -99,7 +99,7 @@ class Dashboard extends Component {
             {filterExplanation}
             <ul>
               {cards}
-              {this.props.isAuthenticated && this.props.selectedRetailer && cards.length === 0 && <h5 className="no-results">you do not have any gift cards saved for {this.props.selectedRetailer}</h5>}
+              {this.props.isAuthenticated && this.props.selectedRetailer && cards.length === 0 && <h5 className="no-results">you do not have any gift cards or coupons saved for {this.props.selectedRetailer}</h5>}
               {this.props.selectedRetailer && <SearchSuggestions selectedRetailer={this.props.selectedRetailer}/>}
             </ul>
           </div>

@@ -8,6 +8,7 @@ import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
+import '../stylesheets/form.css'
 
 
 class NewCard2 extends Component {
@@ -58,18 +59,30 @@ class NewCard2 extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-     axios({
-      method: "POST",
-      url: `${backend}api/v1/cards`,
-      headers: {'Authorization': "Bearer " + localStorage.token},
-      data: {
+    console.log(e.target[2].value.toLowerCase())
+    console.log(this.props.retailers)
+    let chosenRetailer = this.props.retailers.find(retailer => retailer.name === e.target[2].value.toLowerCase())
+    let cardData = (chosenRetailer && this.state.type === 'gift card' ? {
         type: this.state.type,
         retailer: e.target[2].value.toLowerCase(),
         number: e.target[3].value,
         pin: e.target[4].value,
         amount: e.target[5].value,
-        expiration: e.target[6].value
-      }
+        expiration: e.target[6].value,
+        cardHtml: chosenRetailer.cardSite
+      } : {
+          type: this.state.type,
+          retailer: e.target[2].value.toLowerCase(),
+          number: e.target[3].value,
+          pin: e.target[4].value,
+          amount: e.target[5].value,
+          expiration: e.target[6].value
+        })
+     axios({
+      method: "POST",
+      url: `${backend}api/v1/cards`,
+      headers: {'Authorization': "Bearer " + localStorage.token},
+      data: cardData
     })
     .then(response => {
       if (response.data) {
@@ -89,7 +102,7 @@ class NewCard2 extends Component {
     let retailerNames = this.props.retailers.map((retailer, i) => retailer.name)
     let content = !!this.props.isAuthenticated ?
       ( <div>
-        <h2>enter new card</h2>
+        <h2>enter new card or coupon</h2>
         <form onSubmit={this.handleSubmit}>
           <MuiThemeProvider muiTheme={muiTheme}>
             <RadioButtonGroup name="shipSpeed" defaultSelected="gift card" onChange={this.onChange}>
@@ -154,7 +167,7 @@ class NewCard2 extends Component {
         </form>
       </div>) :
       (
-        <p>You must be logged in before adding a card</p>
+        <p>You must be logged in before adding a card or coupon</p>
       )
     return (
       <div>

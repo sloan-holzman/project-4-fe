@@ -29,7 +29,6 @@ class Card extends Component {
   }
 
   render() {
-    let checkValueSite = `https://www.giftcardgranny.com/gift-card-balance-check/${this.props.card.retailer.split(' ').join('-')}`
     return (
       <div className="card">
         <ReactCardFlip isFlipped={this.state.isFlipped}>
@@ -44,9 +43,13 @@ class Card extends Component {
           <button onClick={this.goToEdit} className="waves-effect waves-light btn" >
             Edit Card
           </button>
-          <button onClick={()=> window.open(checkValueSite, "_blank")} className="waves-effect waves-light btn" >
-            Check Value
-          </button>
+          {
+            this.props.card.type === 'gift card' && this.props.card.cardHtml ?
+              <button onClick={()=> window.open(this.props.card.cardHtml, "_blank")} className="waves-effect waves-light btn" >
+                Check Value
+              </button> : <p></p>
+          }
+
         </div>
       </div>
     )

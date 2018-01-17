@@ -39,11 +39,14 @@
   background-color: #F2F2F2;
 }
 
+.card__side h2 {
+  margin: 0
+}
+
 .card__side__flip-button {
   bottom: 5px;
   right: 11px;
   position: absolute;
-
 }
 
 .card__back {
