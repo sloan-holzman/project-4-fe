@@ -7,6 +7,7 @@ import AutoComplete from 'material-ui/AutoComplete';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 class NewCard2 extends Component {
@@ -14,11 +15,13 @@ class NewCard2 extends Component {
     super(props);
     this.state = {
       searchText: '',
-      type: 'gift card'
+      type: 'gift card',
+      errorText: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleUpdateInput = this.handleUpdateInput.bind(this);
     this.onChange = this.onChange.bind(this);
+    // this.checkError = this.checkError.bind(this);
   }
 
 
@@ -36,6 +39,14 @@ class NewCard2 extends Component {
     });
   }
 
+  // checkError(e) {
+  //   if (e.target.value == '' || e.target.value.match(/a@(?:foo|bar|baz)\b/)) {
+  //     this.setState({ errorText: '' })
+  //   } else {
+  //     this.setState({ errorText: 'Amount must contain a $ or %' })
+  //   }
+  // }
+
   componentDidMount(){
     if (!this.props.alertOn) {
       this.props.clearAlert()
@@ -44,9 +55,6 @@ class NewCard2 extends Component {
       this.props.setAlertSeen()
     }
   }
-
-
-
 
   handleSubmit(e) {
     e.preventDefault();
@@ -106,12 +114,14 @@ class NewCard2 extends Component {
                 openOnFocus={true}
                 maxSearchResults={10}
                 fullWidth={true}
+                required
               />
             </div>
             <TextField
               hintText="e.g. 0123456789"
               floatingLabelText="number"
               fullWidth={true}
+              required
             />
             <TextField
               hintText="e.g. 1234"
@@ -122,22 +132,25 @@ class NewCard2 extends Component {
               hintText="e.g. $100.00 or 15%"
               floatingLabelText="amount ($ or %)"
               fullWidth={true}
+              errorText= {this.state.errorText}
+              // onChange={this.checkError}
             /><br/>
             <DatePicker hintText="expiration date" fullWidth={true}
             />
 
             <br/>
+            {/* <input type="number" id="number" required name="number" placeholder="e.g. 0123456789"/>
+            <label htmlFor="number">gift card number</label> */}
+            {/* <input type="number" id="number" name="pin" placeholder="e.g. 1234"/>
+            <label htmlFor="number">gift card pin</label> */}
+            {/* <input type="date" id="expiration" name="expiration"/>
+            <label htmlFor="expiration">expiration date</label> */}
+            {/* <input type="number" id="balance" name="balance" min= "0" step="0.01" placeholder="e.g. $100.00"/>
+            <label htmlFor="balance">remaining balance ($)</label> */}
+            <br/>
+            <RaisedButton label="add" primary={true} type="submit" />
           </MuiThemeProvider>
-          {/* <input type="number" id="number" required name="number" placeholder="e.g. 0123456789"/>
-          <label htmlFor="number">gift card number</label> */}
-          {/* <input type="number" id="number" name="pin" placeholder="e.g. 1234"/>
-          <label htmlFor="number">gift card pin</label> */}
-          {/* <input type="date" id="expiration" name="expiration"/>
-          <label htmlFor="expiration">expiration date</label> */}
-          {/* <input type="number" id="balance" name="balance" min= "0" step="0.01" placeholder="e.g. $100.00"/>
-          <label htmlFor="balance">remaining balance ($)</label> */}
-          <br/>
-          <input className="waves-effect waves-light btn" type="submit" value="add"/>
+          {/* <input className="waves-effect waves-light btn" type="submit" value="add"/> */}
         </form>
       </div>) :
       (
