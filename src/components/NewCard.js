@@ -22,7 +22,7 @@ class NewCard extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleUpdateInput = this.handleUpdateInput.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.checkError = this.checkError.bind(this);
+    this.checkAmount = this.checkAmount.bind(this);
   }
 
   handleUpdateInput = (searchText) => {
@@ -38,17 +38,27 @@ class NewCard extends Component {
     });
   }
 
-  checkError(e) {
+  checkAmount(e) {
     let blank = e.target.value === '' ? true : false
     let dollarSignStart = e.target.value.charAt(0) === '$' ? true : false
     let percentEnd = e.target.value.substring(e.target.value.length-1) === "%" ? true : false
     let both = dollarSignStart && percentEnd ? false : true
-    if ((dollarSignStart || percentEnd || blank) && both) {
-      this.setState({
-        errorText: ''
-      })
+    if (this.state.type === 'gift card') {
+      if ((dollarSignStart || blank) && both) {
+        this.setState({
+          errorText: ''
+        })
+      } else {
+        this.setState({ errorText: 'Gift card amounts must start with a $ and not end with a %' })
+      }
     } else {
-      this.setState({ errorText: 'Amount must contain a $ at the start or % at the end' })
+      if ((dollarSignStart || percentEnd || blank) && both) {
+        this.setState({
+          errorText: ''
+        })
+      } else {
+        this.setState({ errorText: 'Coupon amounts must start with a $ or end with a %' })
+      }
     }
   }
 
@@ -149,7 +159,7 @@ class NewCard extends Component {
               floatingLabelText="amount ($ or %)"
               fullWidth={true}
               errorText= {this.state.errorText}
-              onChange={this.checkError}
+              onChange={this.checkAmount}
             /><br/>
             <DatePicker hintText="expiration date" fullWidth={true}
             />
