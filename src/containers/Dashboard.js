@@ -89,7 +89,7 @@ class Dashboard extends Component {
 
   render() {
     const { width } = this.state;
-    const isMobile = width <= 500;
+    const isMobile = width <= 540;
     let filterExplanation = (this.props.selectedRetailer ? (<div className="filter-explanation"><p>only showing cards & coupons for {this.props.selectedRetailer}</p><button onClick={this.unFilter}>[clear]</button></div>) : <p> </p>)
     let filteredCards = !this.props.selectedRetailer ? this.props.cards : this.props.cards.filter(card => card.retailer === this.props.selectedRetailer)
     let cards = filteredCards.map((card, i) => {

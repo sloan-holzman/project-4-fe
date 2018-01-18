@@ -42,7 +42,7 @@ class Card extends Component {
 
   render() {
     const { width } = this.state;
-    const isMobile = width <= 500;
+    const isMobile = width <= 540;
     let card
     if (this.props.card) {
       card = this.props.card
