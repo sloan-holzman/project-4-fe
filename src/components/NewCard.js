@@ -11,7 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import '../stylesheets/form.css'
 
 
-class NewCard2 extends Component {
+class NewCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -171,4 +171,4 @@ class NewCard2 extends Component {
 }
 
 
-export default NewCard2
+export default NewCard
