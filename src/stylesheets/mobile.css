@@ -1,4 +1,4 @@
-@media screen and (min-width: 540px) and (max-width: 750px) {
+/* @media screen and (min-width: 540px) and (max-width: 750px) {
   form, .card {
     min-width: 500px;
   }
@@ -58,5 +58,43 @@
     bottom: 0px;
     position: absolute;
   }
+
+} */
+
+@media screen and (max-width: 540px) {
+
+  h2 {
+    font-size: 7vw !important;
+  }
+
+  form {
+    max-width: 100vw;
+    min-width: 0;
+  }
+
+  .card {
+    min-width: 0px;
+    max-width: 100vw;
+  }
+
+  .card__side {
+    width: 99vw;
+    min-height: 0px;
+    min-width: 0px
+  }
+
+  .card button {
+    width: 25vw;
+    height: 6vh;
+    font-size: 10px;
+  }
+
+  .card__side__flip-button {
+    position: relative;
+  }
+
+  /* nav {
+    max-width: 100vw;
+  } */
 
 }

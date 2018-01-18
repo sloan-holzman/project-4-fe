@@ -6,6 +6,10 @@ html {
 body {
   font-family: 'Montserrat', sans-serif;
   padding-bottom: 3%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex: 1 1 auto;
 }
 
 ::-webkit-scrollbar {
