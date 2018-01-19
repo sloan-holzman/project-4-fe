@@ -70,10 +70,10 @@ class Card extends Component {
             <br/>
             <div className="card__buttons">
               <button onClick={ (e) => this.props.deleteCard(e, card._id) } className="waves-effect waves-light btn" >
-                Delete Card
+                Delete
               </button>
               <button onClick={(e) => this.goToEdit(e, card._id)} className="waves-effect waves-light btn" >
-                Edit Card
+                Edit
               </button>
               {
                 card && card.type === 'gift card' && card.cardHtml ?
