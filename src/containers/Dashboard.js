@@ -1,3 +1,5 @@
+// handleWindowSizeChange copied from https://goshakkk.name/different-mobile-desktop-tablet-layouts-react/
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Card from "../components/Card"
@@ -17,6 +19,7 @@ class Dashboard extends Component {
     super();
     this.state = {
       width: window.innerWidth,
+      height: window.innerHeight
     };
     this.deleteCard = this.deleteCard.bind(this);
     this.limitByRetailer = this.limitByRetailer.bind(this);
@@ -34,12 +37,14 @@ class Dashboard extends Component {
   }
 
   handleWindowSizeChange = () => {
-    this.setState({ width: window.innerWidth });
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
   };
 
   componentDidMount(){
     if (localStorage.token && !this.props.upToDate) {
-      console.log("updated!")
       this.props.dispatch(fetchUser())
     }
     if (!this.props.alertOn) {
@@ -88,8 +93,8 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { width } = this.state;
-    const isMobile = width <= 540;
+    const { width, height } = this.state;
+    const isMobile = width <= 540 || height <=540;
     let filterExplanation = (this.props.selectedRetailer ? (<div className="filter-explanation"><p>only showing cards & coupons for {this.props.selectedRetailer}</p><button onClick={this.unFilter}>[clear]</button></div>) : <p> </p>)
     let filteredCards = !this.props.selectedRetailer ? this.props.cards : this.props.cards.filter(card => card.retailer === this.props.selectedRetailer)
     let cards = filteredCards.map((card, i) => {

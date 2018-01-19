@@ -14,7 +14,7 @@ const CardBack = ({...props}) => {
       </div>
       <p className="pin">{pin}</p>
 
-      <p className="card__side__flip-button">click to see front</p>
+      <p className="card__side__flip-button">{props.flipVerb} to see front</p>
     </div>
   )
 }

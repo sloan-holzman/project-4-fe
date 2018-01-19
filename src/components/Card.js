@@ -1,9 +1,10 @@
+// handleWindowSizeChange copied from https://goshakkk.name/different-mobile-desktop-tablet-layouts-react/
+
 import React, { Component } from 'react'
 import CardBack from './CardBack'
 import CardFront from './CardFront'
 import ReactCardFlip from 'react-card-flip';
 import '../stylesheets/card.css'
-
 
 
 class Card extends Component {
@@ -12,6 +13,7 @@ class Card extends Component {
     this.state = {
       isFlipped: false,
       width: window.innerWidth,
+      height: window.innerHeight
     };
     this.flipCard = this.flipCard.bind(this);
     this.goToEdit = this.goToEdit.bind(this);
@@ -27,7 +29,10 @@ class Card extends Component {
   }
 
   handleWindowSizeChange = () => {
-    this.setState({ width: window.innerWidth });
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
   };
 
   goToEdit(e, id) {
@@ -41,8 +46,9 @@ class Card extends Component {
   }
 
   render() {
-    const { width } = this.state;
-    const isMobile = width <= 540;
+    const { width, height } = this.state;
+    const isMobile = width <= 540 || height <=540;
+    let flipVerb = isMobile ? "tap" : "click"
     let card
     if (this.props.card) {
       card = this.props.card
@@ -53,13 +59,13 @@ class Card extends Component {
     if (!isMobile) {
       cardDisplay = (
         <ReactCardFlip isFlipped={this.state.isFlipped}>
-          <CardFront key="front" card={card} flipCard={this.flipCard} />
-          <CardBack key="back" card={card} flipCard={this.flipCard} />
+          <CardFront ref="front" key="front" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />
+          <CardBack ref="back" key="back" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />
         </ReactCardFlip>)
     } else if (this.state.isFlipped) {
-      cardDisplay = (<CardFront key="front" card={card} flipCard={this.flipCard} />)
+      cardDisplay = (<CardFront ref="front" key="front" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />)
     } else {
-      cardDisplay = (<CardBack key="back" card={card} flipCard={this.flipCard} />)
+      cardDisplay = (<CardBack ref="back" key="back" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />)
     }
 
     return (

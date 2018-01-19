@@ -1,4 +1,8 @@
-@media screen and (max-width: 540px) {
+@media screen and (max-height:540px), screen and (max-width: 540px) {
+
+  body {
+    padding: 0;
+  }
 
   h2 {
     font-size: 7vw !important;
@@ -12,17 +16,20 @@
   .card {
     min-width: 0px;
     max-width: 100vw;
+    padding: 2vh 2vw;
+    margin: 0px;
   }
 
   .card__side {
     width: 99vw;
-    min-height: 0px;
+    min-height: 300px;
     min-width: 0px
   }
 
   .card button {
     width: 25vw;
-    height: 6vh;
+    min-height: 12px;
+    max-height: 15vh;
     font-size: 10px;
   }
 
