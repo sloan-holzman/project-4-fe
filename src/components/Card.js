@@ -12,8 +12,8 @@ class Card extends Component {
     super(props);
     this.state = {
       isFlipped: false,
-      width: window.innerWidth,
-      height: window.innerHeight
+      width: window.innerWidth
+      // height: window.innerHeight
     };
     this.flipCard = this.flipCard.bind(this);
     this.goToEdit = this.goToEdit.bind(this);
@@ -30,8 +30,7 @@ class Card extends Component {
 
   handleWindowSizeChange = () => {
     this.setState({
-      width: window.innerWidth,
-      height: window.innerHeight
+      width: window.innerWidth
     });
   };
 
@@ -46,8 +45,8 @@ class Card extends Component {
   }
 
   render() {
-    const { width, height } = this.state;
-    const isMobile = width <= 540 || height <=540;
+    const { width } = this.state;
+    const isMobile = width <= 540
     let flipVerb = isMobile ? "tap" : "click"
     let card
     if (this.props.card) {

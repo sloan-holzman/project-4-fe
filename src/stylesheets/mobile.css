@@ -35,6 +35,8 @@
 
   .card__side__flip-button {
     position: relative;
+    right: auto;
+    bottom: auto;
   }
 
 }
