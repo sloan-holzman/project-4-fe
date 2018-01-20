@@ -5,7 +5,11 @@
   }
 
   h2 {
-    font-size: 7vw !important;
+    font-size: 10vw !important;
+  }
+
+  h4 {
+    font-size: 6vw !important;
   }
 
   form {
