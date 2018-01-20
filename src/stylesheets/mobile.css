@@ -20,17 +20,18 @@
     margin: 0px;
   }
 
-  .card__side {
-    width: 99vw;
-    min-height: 300px;
-    min-width: 0px
-  }
-
   .card button {
     width: 25vw;
     min-height: 12px;
     max-height: 15vh;
     font-size: 10px;
+    padding: 0 !important;
+  }
+
+  .card__side {
+    width: 99vw;
+    min-height: 300px;
+    min-width: 0px
   }
 
   .card__side__flip-button {
