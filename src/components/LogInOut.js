@@ -21,7 +21,7 @@ class LogInOut extends Component {
       (
         <div className="background">
           <h1>virtual wallet</h1>
-          <h5>the one site to save all your gift cards.</h5>
+          <h5>the one site to save all your gift cards & coupons</h5>
           {
             !this.props.user ?
               <div>

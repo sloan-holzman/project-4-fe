@@ -12,11 +12,13 @@ import Navbar from "../components/Navbar"
 import NewCard from "../components/NewCard"
 import EditCard from "../components/EditCard"
 import Dashboard from "./Dashboard"
+import Card from "../components/Card"
 import { login, logout, fetchUser, setAlert, clearAlert, setAlertSeen, forceUpdate } from '../actions/cards'
 import '../stylesheets/app.css'
 import '../stylesheets/mobile.css'
 import '../stylesheets/materialize.css'
-
+import axios from "axios";
+import backend from "../BackendVariable";
 
 class App extends Component {
 
@@ -29,6 +31,8 @@ class App extends Component {
     this.setAlert = this.setAlert.bind(this)
     this.setAlertSeen = this.setAlertSeen.bind(this)
     this.forceUpdate = this.forceUpdate.bind(this)
+    this.goToCard = this.goToCard.bind(this);
+    this.deleteCard = this.deleteCard.bind(this);
   }
 
   componentDidMount(){
@@ -48,6 +52,35 @@ class App extends Component {
       }
     });
   };
+
+  goToCard(e, id) {
+    e.preventDefault();
+    this.props.history.push(`/cards/${id}`)
+  }
+
+  deleteCard(e, id) {
+    e.preventDefault();
+     axios({
+      method: "DELETE",
+      url: `${backend}api/v1/cards`,
+      headers: {'Authorization': "Bearer " + localStorage.token},
+      data: {
+        card_id: id
+      }
+    })
+    .then(response => {
+      if (response.data) {
+        this.props.dispatch(fetchUser())
+        this.props.setAlert("card delete successfully")
+      }
+    })
+    .catch(err => {
+      localStorage.clear()
+      this.props.history.push(`/login`)
+      this.props.setAlert("woops, something went wrong")
+    })
+  }
+
 
   onFailedLogin = (error) => {
     localStorage.clear()
@@ -140,6 +173,17 @@ class App extends Component {
                     forceUpdate={this.forceUpdate}
                     isAuthenticated={this.props.isAuthenticated}
                     retailers={this.props.retailers}
+                    {...props}
+                  />
+                );
+              }}  />
+            <Route exact path="/cards/:id"
+              render={props => {
+                return (
+                  <Card
+                    cards={this.props.cards}
+                    history={this.props.history}
+                    deleteCard={this.deleteCard}
                     {...props}
                   />
                 );

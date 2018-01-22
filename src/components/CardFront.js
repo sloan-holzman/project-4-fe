@@ -16,13 +16,13 @@ const CardFront = ({...props}) => {
   }
 
   return (
-    <div className="card__side" onClick={props.flipCard}>
+    <div className="card__side card__front" onClick={props.flipCard}>
       <p>{props.card.type}</p>
       <h2>{props.card.retailer}</h2>
       <h4>amount: {amount}</h4>
       {/* <h4>balance: ${balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h4> */}
       <p>expiration: <span className={expiration_class}>{expiration}</span></p>
-      <p className="card__side__flip-button">click to see back</p>
+      <p className="card__side__flip-button">{props.flipVerb} to see back</p>
     </div>
   );
 }

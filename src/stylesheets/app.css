@@ -6,6 +6,10 @@ html {
 body {
   font-family: 'Montserrat', sans-serif;
   padding-bottom: 3%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex: 1 1 auto;
 }
 
 ::-webkit-scrollbar {
@@ -34,11 +38,18 @@ form {
   min-width: 700px;
 }
 
+h1, h2 {
+  font-weight: 700 !important;
+}
+
 
 h1 {
   font-size: 100px;
-  font-weight: 900;
   margin-top: 10vh;
+}
+
+h4 {
+  font-weight: 400;
 }
 
 .btn {

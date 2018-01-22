@@ -1,62 +1,47 @@
-@media screen and (min-width: 540px) and (max-width: 750px) {
-  form, .card {
-    min-width: 500px;
-  }
-}
+@media screen and (max-height:540px), screen and (max-width: 540px) {
 
-@media screen and (max-width: 540px) {
-
-  .card {
-    height: 99vh;
-    flex-shrink: 0;
-  }
-
-  .dashboard {
-    flex-direction: row;
-  }
-
-  form {
-    max-width: 99vw;
-    min-width: 0px;
-  }
-
-
-  h1 {
-    font-size: 50px;
-    font-weight: 900;
+  body {
+    padding: 0;
   }
 
   h2 {
-    font-size: 14vw;
+    font-size: 10vw !important;
   }
 
   h4 {
-    font-size: 6vw;
+    font-size: 6vw !important;
   }
+
+  form {
+    max-width: 100vw;
+    min-width: 0;
+  }
+
   .card {
-    justify-content: space-around;
-    transform: rotate(90deg);
+    min-width: 0px;
+    max-width: 100vw;
+    padding: 2vh 2vw;
+    margin: 0px;
   }
 
-
-  .card__buttons {
-    flex-shrink: 2;
+  .card button {
+    width: 25vw;
+    min-height: 12px;
+    max-height: 15vh;
+    font-size: 10px;
+    padding: 0 !important;
   }
 
-  .react-card-flip {
-    height: 95vw;
-    width: 80vh;
-    flex-shrink: 1;
-  }
-
-  .react-card-flipper, .react-card-front, .react-card-back, .card__side {
-    height: 100%
+  .card__side {
+    width: 99vw;
+    min-height: 300px;
+    min-width: 0px
   }
 
   .card__side__flip-button {
-    right: 2px;
-    bottom: 0px;
-    position: absolute;
+    position: relative;
+    right: auto;
+    bottom: auto;
   }
 
 }
