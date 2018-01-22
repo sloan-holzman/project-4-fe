@@ -175,6 +175,13 @@ class NewCard extends Component {
     return (
       <div>
         {!this.props.isFetching && content}
+        {this.props.isFetching &&
+          <div>
+            <p>loading...</p>
+            <br/>
+            <p>if page fails to load, please refresh the page</p>
+          </div>
+        }
       </div>
     )
   }
