@@ -12,7 +12,7 @@ import Navbar from "../components/Navbar"
 import NewCard from "../components/NewCard"
 import EditCard from "../components/EditCard"
 import Dashboard from "./Dashboard"
-import Card from "../components/Card"
+import CardHolder from "../components/CardHolder"
 import { login, logout, fetchUser, setAlert, clearAlert, setAlertSeen, forceUpdate } from '../actions/cards'
 import '../stylesheets/app.css'
 import '../stylesheets/mobile.css'
@@ -36,8 +36,10 @@ class App extends Component {
   }
 
   componentDidMount(){
-    if (localStorage.token) {
+    if (localStorage.token && localStorage.length > 0) {
       this.props.dispatch(fetchUser())
+    } else {
+      this.logout()
     }
   }
 
@@ -71,13 +73,14 @@ class App extends Component {
     .then(response => {
       if (response.data) {
         this.props.dispatch(fetchUser())
-        this.props.setAlert("card delete successfully")
+        this.setAlert("card delete successfully")
+        this.props.history.push(`/cards`)
       }
     })
     .catch(err => {
       localStorage.clear()
       this.props.history.push(`/login`)
-      this.props.setAlert("woops, something went wrong")
+      this.setAlert("woops, something went wrong")
     })
   }
 
@@ -133,6 +136,7 @@ class App extends Component {
                     logout={this.logout}
                     email={this.props.email}
                     user={this.props.user}
+                    alert={this.props.alert}
                     {...props}
                   />
                 );
@@ -180,10 +184,13 @@ class App extends Component {
             <Route exact path="/cards/:id"
               render={props => {
                 return (
-                  <Card
+                  <CardHolder
                     cards={this.props.cards}
                     history={this.props.history}
                     deleteCard={this.deleteCard}
+                    clearAlert={this.clearAlert}
+                    setAlertSeen={this.setAlertSeen}
+                    setAlert={this.setAlert}
                     {...props}
                   />
                 );

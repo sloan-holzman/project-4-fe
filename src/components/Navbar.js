@@ -25,7 +25,9 @@ const Navbar = ({...props}) => {
           </div>
         </nav>
       </div>
-      <p className="alert">{props.alert}</p>
+      <div className="alert">
+        <p id="alert">{props.alert}</p>
+      </div>
     </div>
   )
 }

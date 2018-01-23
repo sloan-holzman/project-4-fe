@@ -1,28 +1,40 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
 .background {
-    height: 100%;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  border-bottom: 4px solid #ff5c69;
 }
 
 .background::after {
   content: "";
   background-image: url("../imgs/gift-cards.jpg");
   opacity: 0.3;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  /* top: 0;
+  left: 0; */
   position: absolute;
   z-index: -1;
 }
 
-.login-button {
-  padding: 2% 30%;
+.background, .background::after {
+  height: 60vh;
+  width: 100vw;
+  min-height: 390px !important;
 }
 
 .twitter-logout a {
   text-decoration: none;
   color: black !important;
+}
+
+.login-button {
+  margin: 1vh 0;
 }

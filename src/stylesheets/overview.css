@@ -1,0 +1,53 @@
+
+.overview {
+  display: flex;
+  flex-direction: row;
+  width: 80vw;
+  height: 100%;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10vh;
+}
+
+.overview__set {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.overview__cell {
+  flex: 1;
+  text-align: left;
+  max-width: 100px;
+  max-height: 100px;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 5vh;
+}
+
+.overview__cell img {
+  flex: 1;
+  text-align: left;
+  max-width: 75px;
+  max-height: 75px;
+  margin-left: 10px;
+}
+
+.left {
+  margin-left: 0;
+}
+
+.arrow {
+  max-width: 20px;
+  height: 50px;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}

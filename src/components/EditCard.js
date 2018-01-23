@@ -73,12 +73,15 @@ class EditCard extends Component {
     if (this.props.cards) {
       card = this.props.cards.find((card) => card._id === this.props.match.params.id)
       if (card) {
+        console.log("card")
         this.setState({
-          searchText: card.retailer
+          searchText: card.retailer,
+          type: card.type
         })
       }
     }
   }
+
 
   handleSubmit(e) {
     e.preventDefault();

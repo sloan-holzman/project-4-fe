@@ -69,6 +69,7 @@ export function fetchUser() {
       )
       .catch(err => {
         localStorage.clear()
+        dispatch(logout())        
       })
   }
 }

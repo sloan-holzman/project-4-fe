@@ -58,13 +58,13 @@ class Card extends Component {
     if (!isMobile) {
       cardDisplay = (
         <ReactCardFlip isFlipped={this.state.isFlipped}>
-          <CardFront ref="front" key="front" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />
-          <CardBack ref="back" key="back" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />
+          <CardFront key="front" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />
+          <CardBack key="back" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />
         </ReactCardFlip>)
     } else if (this.state.isFlipped) {
-      cardDisplay = (<CardFront ref="front" key="front" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />)
+      cardDisplay = (<CardFront key="front" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />)
     } else {
-      cardDisplay = (<CardBack ref="back" key="back" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />)
+      cardDisplay = (<CardBack key="back" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />)
     }
 
     return (

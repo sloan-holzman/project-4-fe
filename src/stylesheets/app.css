@@ -40,12 +40,12 @@ form {
 
 h1, h2 {
   font-weight: 700 !important;
+  padding-top: 50px;
 }
-
 
 h1 {
   font-size: 100px;
-  margin-top: 10vh;
+  /* margin-top: 10vh; */
 }
 
 h4 {
