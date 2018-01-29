@@ -6,33 +6,25 @@ import {
   Switch,
   withRouter
 } from "react-router-dom"
-import LogInOut from "../components/LogInOut"
+import LogInOut from "../containers/LogInOut"
 import LogOut from "../components/LogOut"
 import Navbar from "../components/Navbar"
-import NewCard from "../components/NewCard"
-import EditCard from "../components/EditCard"
 import Dashboard from "./Dashboard"
-import CardHolder from "../components/CardHolder"
-import { login, logout, fetchUser, setAlert, clearAlert, setAlertSeen, forceUpdate } from '../actions/cards'
+import CardHolder from "../containers/CardHolder"
+import { logout, fetchUser, setAlert, clearAlert, setAlertSeen, forceUpdate } from '../actions/cards'
 import '../stylesheets/app.css'
 import '../stylesheets/mobile.css'
 import '../stylesheets/materialize.css'
-import axios from "axios";
-import backend from "../BackendVariable";
 
 class App extends Component {
 
   constructor() {
     super();
-    this.onSuccessLogin = this.onSuccessLogin.bind(this)
-    this.onFailedLogin = this.onFailedLogin.bind(this)
     this.logout = this.logout.bind(this)
     this.clearAlert = this.clearAlert.bind(this)
     this.setAlert = this.setAlert.bind(this)
     this.setAlertSeen = this.setAlertSeen.bind(this)
     this.forceUpdate = this.forceUpdate.bind(this)
-    this.goToCard = this.goToCard.bind(this);
-    this.deleteCard = this.deleteCard.bind(this);
   }
 
   componentDidMount(){
@@ -43,52 +35,9 @@ class App extends Component {
     }
   }
 
-  onSuccessLogin = (response) => {
-    response.json()
-    .then(user => {
-      if (response.headers.get('x-auth-token')) {
-        localStorage.token = response.headers.get('x-auth-token');
-        this.props.dispatch(login(user))
-        this.props.dispatch(setAlert("congrats, you logged in successfully"))
-        this.props.history.push(`/cards`)
-      }
-    });
-  };
-
-  goToCard(e, id) {
-    e.preventDefault();
-    this.props.history.push(`/cards/${id}`)
-  }
-
-  deleteCard(e, id) {
-    e.preventDefault();
-     axios({
-      method: "DELETE",
-      url: `${backend}api/v1/cards`,
-      headers: {'Authorization': "Bearer " + localStorage.token},
-      data: {
-        card_id: id
-      }
-    })
-    .then(response => {
-      if (response.data) {
-        this.props.dispatch(fetchUser())
-        this.setAlert("card delete successfully")
-        this.props.history.push(`/cards`)
-      }
-    })
-    .catch(err => {
-      localStorage.clear()
-      this.props.history.push(`/login`)
-      this.setAlert("woops, something went wrong")
-    })
-  }
 
 
-  onFailedLogin = (error) => {
-    localStorage.clear()
-    alert(error);
-  };
+
 
   logout = () => {
     localStorage.clear()
@@ -131,8 +80,6 @@ class App extends Component {
               render={props => {
                 return (
                   <LogInOut
-                    onSuccessLogin={this.onSuccessLogin}
-                    onFailedLogin={this.onFailedLogin}
                     logout={this.logout}
                     email={this.props.email}
                     user={this.props.user}
@@ -153,14 +100,12 @@ class App extends Component {
             <Route exact path="/cards/new"
               render={props => {
                 return (
-                  <NewCard
-                    isAuthenticated={this.props.isAuthenticated}
-                    isFetching={this.props.isFetching}
+                  <CardHolder
+                    type="New"
                     clearAlert={this.clearAlert}
                     setAlertSeen={this.setAlertSeen}
                     setAlert={this.setAlert}
                     forceUpdate={this.forceUpdate}
-                    retailers={this.props.retailers}
                     {...props}
                   />
                 );
@@ -168,7 +113,8 @@ class App extends Component {
             <Route exact path="/cards/edit/:id"
               render={props => {
                 return (
-                  <EditCard
+                  <CardHolder
+                    type="Edit"
                     cards={this.props.cards}
                     isFetching={this.props.isFetching}
                     clearAlert={this.clearAlert}
@@ -185,6 +131,7 @@ class App extends Component {
               render={props => {
                 return (
                   <CardHolder
+                    type="Show"
                     cards={this.props.cards}
                     history={this.props.history}
                     deleteCard={this.deleteCard}

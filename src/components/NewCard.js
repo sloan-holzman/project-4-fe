@@ -71,46 +71,7 @@ class NewCard extends Component {
     }
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    if (this.state.errorText === '') {
-      let chosenRetailer = this.props.retailers.find(retailer => retailer.name === e.target[2].value.toLowerCase())
-      let cardData = (chosenRetailer && this.state.type === 'gift card' ? {
-          type: this.state.type,
-          retailer: e.target[2].value.toLowerCase(),
-          number: e.target[3].value,
-          pin: e.target[4].value,
-          amount: e.target[5].value,
-          expiration: e.target[6].value,
-          cardHtml: chosenRetailer.cardSite
-        } : {
-            type: this.state.type,
-            retailer: e.target[2].value.toLowerCase(),
-            number: e.target[3].value,
-            pin: e.target[4].value,
-            amount: e.target[5].value,
-            expiration: e.target[6].value
-          })
-       axios({
-        method: "POST",
-        url: `${backend}api/v1/cards`,
-        headers: {'Authorization': "Bearer " + localStorage.token},
-        data: cardData
-      })
-      .then(response => {
-        if (response.data) {
-          this.props.forceUpdate()
-          this.props.setAlert("card added successfully")
-          this.props.history.push(`/cards`)
-        }
-      })
-      .catch(err => {
-        localStorage.clear()
-        this.props.setAlert("woops, something went wrong")
-        this.props.history.push(`/login`)
-      })
-    }
-  }
+
 
   render () {
     let retailerNames = this.props.retailers.map((retailer, i) => retailer.name)
