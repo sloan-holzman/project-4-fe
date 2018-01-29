@@ -19,10 +19,9 @@ const CardForm = ({...props}) => {
       errorText,
       retailerNames
     } = props
-  // let expiration = card.expiration ? new Date(card.expiration.substring(0,10)) : null
-  let expiration = card.expiration ? new Date(card.expiration) : null
+  let expiration = card && card.expiration ? new Date(card.expiration) : null
 
-
+  console.log(card)
   return (
     <div>
       <h2>{title}</h2>
@@ -82,7 +81,6 @@ const CardForm = ({...props}) => {
           {
             expiration ? <DatePicker name="expiration" hintText="expiration date" fullWidth={true} defaultDate={expiration} onChange={handleDateUpdate} /> : <DatePicker name="expiration" hintText="expiration date" fullWidth={true} onChange={handleDateUpdate} />
           }
-
           <br/>
           <br/>
           <RaisedButton label="update" primary={true} type="submit" />

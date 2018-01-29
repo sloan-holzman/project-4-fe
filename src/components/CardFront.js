@@ -8,7 +8,7 @@ const CardFront = ({...props}) => {
   let expiration
   let expiration_class
   if (props.card.expiration) {
-    expiration = moment(props.card.expiration.substring(0,10)).format('ll')
+    expiration = moment(props.card.expiration).format('ll')
     expiration_class = new Date(props.card.expiration) > new Date()  ? "valid" : "expired"
   } else {
     expiration = "n/a"
@@ -20,7 +20,6 @@ const CardFront = ({...props}) => {
       <p>{props.card.type}</p>
       <h2>{props.card.retailer}</h2>
       <h4>amount: {amount}</h4>
-      {/* <h4>balance: ${balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h4> */}
       <p>expiration: <span className={expiration_class}>{expiration}</span></p>
       <p className="card__side__flip-button">{props.flipVerb} to see back</p>
     </div>

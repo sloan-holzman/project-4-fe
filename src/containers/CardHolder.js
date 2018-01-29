@@ -11,7 +11,7 @@ class CardHolder extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      card: this.props.card,
+      card: {type: 'gift card', retailer: '', number: '', pin: '', amount: '', expiration: ''},
       errorText: ''
     };
     this.updateCardState = this.updateCardState.bind(this);
@@ -31,12 +31,16 @@ class CardHolder extends Component {
     if (this.props.alertOn && this.props.alert !== " ") {
       this.props.setAlertSeen()
     }
-    if (this.props.cards && typeof this.props.params !== 'undefined') {
+    if (this.props.cards && typeof this.props.match.params.id !== 'undefined') {
       let card = this.props.cards.find((card) => card._id === this.props.match.params.id)
+      console.log("card")
+      console.log(card)
       this.setState({
         card: card
       })
+      console.log(this.state.card)
     }
+    console.log("test")
   }
 
   checkAmount(e) {
@@ -193,45 +197,56 @@ class CardHolder extends Component {
     let retailerNames = this.props.retailers.map((retailer, i) => retailer.name)
     let display
     if (this.props.type === "Show") {
-      display = (
-        <Card
-          cards={this.props.cards}
-          history={this.props.history}
-          deleteCard={this.deleteCard}
-          clearAlert={this.props.clearAlert}
-          setAlertSeen={this.props.setAlertSeen}
-          setAlert={this.props.setAlert}
-          {...this.props}
-        />
-      )
+      if (this.state.card && this.state.card.retailer && this.state.card.retailer.length > 0) {
+        display = (
+          <Card
+            cards={this.props.cards}
+            history={this.props.history}
+            deleteCard={this.deleteCard}
+            clearAlert={this.props.clearAlert}
+            setAlertSeen={this.props.setAlertSeen}
+            setAlert={this.props.setAlert}
+            {...this.props}
+          />
+        )
+      } else {
+        display = (<p>Loading...</p>)
+      }
     } else if (this.props.type === "Edit") {
-      display = (
-        <CardForm
-          card={this.state.card}
-          title="update card or coupon info"
-          fail="card does not exist.  ensure you are logged in"
-          retailerNames={retailerNames}
-          onChange={this.updateCardState}
-          handleSubmit={this.handleEditSubmit}
-          handleSearchUpdate={this.handleSearchUpdate}
-          handleDateUpdate={this.handleDateUpdate}
-          errorText={this.state.errorText}
-        />
-      )
+        if (this.state.card && this.state.card.retailer && this.state.card.retailer.length > 0) {
+          display = (
+            <CardForm
+              card={this.state.card}
+              title="update card or coupon info"
+              fail="card does not exist.  ensure you are logged in"
+              retailerNames={retailerNames}
+              onChange={this.updateCardState}
+              handleSubmit={this.handleEditSubmit}
+              handleSearchUpdate={this.handleSearchUpdate}
+              handleDateUpdate={this.handleDateUpdate}
+              errorText={this.state.errorText}
+            />
+          )
+        } else {
+          display = (<p>Loading...</p>)
+        }
     } else {
-      display = (
-        <CardForm
-          card={this.state.card}
-          title="enter new card or coupon"
-          fail="You must be logged in before adding a card or coupon"
-          retailerNames={retailerNames}
-          onChange={this.updateCardState}
-          handleSubmit={this.handleNewSubmit}
-          handleSearchUpdate={this.handleSearchUpdate}
-          handleDateUpdate={this.handleDateUpdate}
-          errorText={this.state.errorText}
-        />
-      )
+      console.log(this.state.card)
+        if (this.state.card) {
+          display = (<CardForm
+            card={this.state.card}
+            title="enter new card or coupon"
+            fail="You must be logged in before adding a card or coupon"
+            retailerNames={retailerNames}
+            onChange={this.updateCardState}
+            handleSubmit={this.handleNewSubmit}
+            handleSearchUpdate={this.handleSearchUpdate}
+            handleDateUpdate={this.handleDateUpdate}
+            errorText={this.state.errorText}
+                     />)
+        } else {
+          display = (<p>Loading...</p>)
+        }
     }
 
     return (
@@ -243,7 +258,6 @@ class CardHolder extends Component {
 }
 
 function mapStateToProps(state) {
-  let card = {type: 'gift card', retailer: '', number: '', pin: '', amount: '', expiration: ''}
   return {
     isAuthenticated: state.cardReducer.isAuthenticated,
     user: state.cardReducer.user,
@@ -257,7 +271,6 @@ function mapStateToProps(state) {
     alert: state.cardReducer.alert,
     alertOn: state.cardReducer.alertOn,
     retailers: state.cardReducer.retailers,
-    card: card
   }
 }
 
