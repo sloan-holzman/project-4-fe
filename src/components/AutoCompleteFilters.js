@@ -1,19 +1,6 @@
 import React, { Component } from 'react'
 import AutoComplete from 'material-ui/AutoComplete';
 
-// const AutoCompleteFilters = ({...props}) => (
-//   <div>
-//     <AutoComplete
-//       floatingLabelText="filter by retailer"
-//       filter={AutoComplete.fuzzyFilter}
-//       dataSource={props.retailers}
-//       maxSearchResults={5}
-//     />
-//   </div>
-// );
-//
-// export default AutoCompleteFilters;
-
 export default class AutoCompleteControlled extends Component {
   state = {
     searchText: '',

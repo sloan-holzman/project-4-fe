@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import CardForm from "../components/CardForm";
 import axios from "axios";
 import backend from "../BackendVariable";
-import { fetchUser } from '../actions/cards'
+import { fetchUser, clearAlert, setAlertSeen, setAlert, forceUpdate } from '../actions/cards'
 
 
 class CardHolder extends Component {
@@ -12,6 +12,7 @@ class CardHolder extends Component {
     super(props);
     this.state = {
       card: {type: 'gift card', retailer: '', number: '', pin: '', amount: '', expiration: ''},
+      cardLoaded: false,
       errorText: ''
     };
     this.updateCardState = this.updateCardState.bind(this);
@@ -26,21 +27,18 @@ class CardHolder extends Component {
 
   componentDidMount(){
     if (!this.props.alertOn) {
-      this.props.clearAlert()
+      this.props.dispatch(clearAlert())
     }
     if (this.props.alertOn && this.props.alert !== " ") {
-      this.props.setAlertSeen()
+      this.props.dispatch(setAlertSeen())
     }
-    if (this.props.cards && typeof this.props.match.params.id !== 'undefined') {
+    if (this.props.cards && typeof this.props.match !== 'undefined' && typeof this.props.match.params.id !== 'undefined') {
       let card = this.props.cards.find((card) => card._id === this.props.match.params.id)
-      console.log("card")
-      console.log(card)
       this.setState({
-        card: card
+        card: card,
+        cardLoaded: true
       })
-      console.log(this.state.card)
     }
-    console.log("test")
   }
 
   checkAmount(e) {
@@ -118,14 +116,14 @@ class CardHolder extends Component {
       })
       .then(response => {
         if (response.data) {
-          this.props.forceUpdate()
-          this.props.setAlert("card added successfully")
+          this.props.dispatch(forceUpdate())
+          this.props.dispatch(setAlert("card added successfully"))
           this.props.history.push(`/cards`)
         }
       })
       .catch(err => {
         localStorage.clear()
-        this.props.setAlert("woops, something went wrong")
+        this.props.dispatch(setAlert("woops, something went wrong"))
         this.props.history.push(`/login`)
       })
     }
@@ -154,14 +152,14 @@ class CardHolder extends Component {
       })
       .then(response => {
         if (response.data) {
-          this.props.forceUpdate()
-          this.props.setAlert("card added successfully")
+          this.props.dispatch(forceUpdate())
+          this.props.dispatch(setAlert("card added successfully"))
           this.props.history.push(`/cards`)
         }
       })
       .catch(err => {
         localStorage.clear()
-        this.props.setAlert("woops, something went wrong")
+        this.props.dispatch(setAlert("woops, something went wrong"))
         this.props.history.push(`/login`)
       })
     }
@@ -181,14 +179,14 @@ class CardHolder extends Component {
     .then(response => {
       if (response.data) {
         this.props.dispatch(fetchUser())
-        this.setAlert("card delete successfully")
+        this.props.dispatch(setAlert("card delete successfully"))
         this.props.history.push(`/cards`)
       }
     })
     .catch(err => {
       localStorage.clear()
       this.props.history.push(`/login`)
-      this.setAlert("woops, something went wrong")
+      this.props.dispatch(setAlert("woops, something went wrong"))
     })
   }
 
@@ -197,23 +195,19 @@ class CardHolder extends Component {
     let retailerNames = this.props.retailers.map((retailer, i) => retailer.name)
     let display
     if (this.props.type === "Show") {
-      if (this.state.card && this.state.card.retailer && this.state.card.retailer.length > 0) {
-        display = (
-          <Card
-            cards={this.props.cards}
-            history={this.props.history}
-            deleteCard={this.deleteCard}
-            clearAlert={this.props.clearAlert}
-            setAlertSeen={this.props.setAlertSeen}
-            setAlert={this.props.setAlert}
-            {...this.props}
-          />
-        )
-      } else {
-        display = (<p>Loading...</p>)
-      }
+      display = (
+        <Card
+          cards={this.props.cards}
+          history={this.props.history}
+          deleteCard={this.deleteCard}
+          clearAlert={this.props.dispatch(clearAlert())}
+          setAlertSeen={this.props.dispatch(setAlertSeen())}
+          setAlert={this.props.dispatch(setAlert())}
+          {...this.props}
+        />
+      )
     } else if (this.props.type === "Edit") {
-        if (this.state.card && this.state.card.retailer && this.state.card.retailer.length > 0) {
+        if (this.state.cardLoaded) {
           display = (
             <CardForm
               card={this.state.card}
@@ -273,5 +267,10 @@ function mapStateToProps(state) {
     retailers: state.cardReducer.retailers,
   }
 }
+
+CardHolder.defaultProps = {
+  type: "Edit",
+}
+
 
 export default connect(mapStateToProps)(CardHolder);

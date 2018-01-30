@@ -35,10 +35,6 @@ class App extends Component {
     }
   }
 
-
-
-
-
   logout = () => {
     localStorage.clear()
     this.props.dispatch(logout())
@@ -117,10 +113,6 @@ class App extends Component {
                     type="Edit"
                     cards={this.props.cards}
                     isFetching={this.props.isFetching}
-                    clearAlert={this.clearAlert}
-                    setAlertSeen={this.setAlertSeen}
-                    setAlert={this.setAlert}
-                    forceUpdate={this.forceUpdate}
                     isAuthenticated={this.props.isAuthenticated}
                     retailers={this.props.retailers}
                     {...props}
@@ -134,10 +126,6 @@ class App extends Component {
                     type="Show"
                     cards={this.props.cards}
                     history={this.props.history}
-                    deleteCard={this.deleteCard}
-                    clearAlert={this.clearAlert}
-                    setAlertSeen={this.setAlertSeen}
-                    setAlert={this.setAlert}
                     {...props}
                   />
                 );
