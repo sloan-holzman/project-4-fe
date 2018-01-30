@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import Card from "../components/Card";
 import CardForm from "../components/CardForm";
-import axios from "axios";
-import backend from "../BackendVariable";
+import CardApi from "../api/CardApi"
 import { fetchUser, clearAlert, setAlertSeen, setAlert, forceUpdate } from '../actions/cards'
 
 
@@ -23,6 +22,7 @@ class CardHolder extends Component {
     this.handleSearchUpdate = this.handleSearchUpdate.bind(this);
     this.handleDateUpdate = this.handleDateUpdate.bind(this);
     this.deleteCard = this.deleteCard.bind(this);
+    this.returnCardData = this.returnCardData.bind(this);
   }
 
   componentDidMount(){
@@ -95,100 +95,77 @@ class CardHolder extends Component {
     });
   };
 
+  returnCardData(e){
+    e.preventDefault();
+    let chosenRetailer = this.props.retailers.find(retailer => retailer.name === this.state.card.retailer)
+    let cardData = (chosenRetailer && this.state.card.type === 'gift card' ? {
+        type: this.state.card.type,
+        retailer: this.state.card.retailer,
+        number: this.state.card.number,
+        pin: this.state.card.pin,
+        amount: this.state.card.amount,
+        expiration: this.state.card.expiration,
+        cardHtml: chosenRetailer.cardSite
+      } : this.state.card)
+    return cardData
+  }
+
+
   handleEditSubmit(e) {
     e.preventDefault();
     if (this.state.errorText === '') {
-      let chosenRetailer = this.props.retailers.find(retailer => retailer.name === this.state.card.retailer)
-      let cardData = (chosenRetailer && this.state.card.type === 'gift card' ? {
-          type: this.state.card.type,
-          retailer: this.state.card.retailer,
-          number: this.state.card.number,
-          pin: this.state.card.pin,
-          amount: this.state.card.amount,
-          expiration: this.state.card.expiration,
-          cardHtml: chosenRetailer.cardSite
-        } : this.state.card)
-       axios({
-       method: "PUT",
-       url: `${backend}api/v1/cards/${this.props.match.params.id}`,
-       headers: {'Authorization': "Bearer " + localStorage.token},
-        data: cardData
-      })
-      .then(response => {
-        if (response.data) {
-          this.props.dispatch(forceUpdate())
-          this.props.dispatch(setAlert("card updated successfully"))
-          this.props.history.push(`/cards`)
-        }
-      })
-      .catch(err => {
-        localStorage.clear()
-        this.props.dispatch(setAlert("woops, something went wrong"))
-        this.props.history.push(`/login`)
-      })
+      let card = this.returnCardData(e)
+      let cardId = this.props.match.params.id
+      CardApi.editCard(card, cardId)
+        .then(response => {
+          if (response === "success") {
+            this.props.dispatch(forceUpdate())
+            this.props.dispatch(setAlert("card updated successfully"))
+            this.props.history.push(`/cards`)
+          } else {
+            localStorage.clear()
+            this.props.dispatch(setAlert("woops, something went wrong"))
+            this.props.history.push(`/login`)
+          }
+        })
     }
   }
-
 
   handleNewSubmit(e) {
     e.preventDefault();
     if (this.state.errorText === '') {
-      let chosenRetailer = this.props.retailers.find(retailer => retailer.name === this.state.card.retailer)
-      let cardData = (chosenRetailer && this.state.card.type === 'gift card' ? {
-          type: this.state.card.type,
-          retailer: this.state.card.retailer,
-          number: this.state.card.number,
-          pin: this.state.card.pin,
-          amount: this.state.card.amount,
-          expiration: this.state.card.expiration,
-          cardHtml: chosenRetailer.cardSite
-        } : this.state.card)
-       axios({
-        method: "POST",
-        url: `${backend}api/v1/cards`,
-        headers: {'Authorization': "Bearer " + localStorage.token},
-        data: cardData
-      })
-      .then(response => {
-        if (response.data) {
-          this.props.dispatch(forceUpdate())
-          this.props.dispatch(setAlert("card added successfully"))
-          this.props.history.push(`/cards`)
-        }
-      })
-      .catch(err => {
-        localStorage.clear()
-        this.props.dispatch(setAlert("woops, something went wrong"))
-        this.props.history.push(`/login`)
-      })
+      let card = this.returnCardData(e)
+      CardApi.newCard(card)
+        .then(response => {
+          if (response === "success") {
+            this.props.dispatch(forceUpdate())
+            this.props.dispatch(setAlert("card added successfully"))
+            this.props.history.push(`/cards`)
+          } else {
+            localStorage.clear()
+            this.props.dispatch(setAlert("woops, something went wrong"))
+            this.props.history.push(`/login`)
+          }
+        })
     }
   }
 
 
   deleteCard(e, id) {
     e.preventDefault();
-     axios({
-      method: "DELETE",
-      url: `${backend}api/v1/cards`,
-      headers: {'Authorization': "Bearer " + localStorage.token},
-      data: {
-        card_id: id
-      }
-    })
-    .then(response => {
-      if (response.data) {
-        this.props.dispatch(fetchUser())
-        this.props.dispatch(setAlert("card delete successfully"))
-        this.props.history.push(`/cards`)
-      }
-    })
-    .catch(err => {
-      localStorage.clear()
-      this.props.history.push(`/login`)
-      this.props.dispatch(setAlert("woops, something went wrong"))
-    })
+    CardApi.deleteCard(id)
+      .then(response => {
+        if (response === "success") {
+          this.props.dispatch(fetchUser())
+          this.props.dispatch(setAlert("card deleted successfully"))
+          this.props.history.push(`/cards`)
+        } else {
+          localStorage.clear()
+          this.props.dispatch(setAlert("woops, something went wrong"))
+          this.props.history.push(`/login`)
+        }
+      })
   }
-
 
   render () {
     let retailerNames = this.props.retailers.map((retailer, i) => retailer.name)
