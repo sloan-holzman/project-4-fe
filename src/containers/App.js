@@ -11,7 +11,7 @@ import LogOut from "../components/LogOut"
 import Navbar from "../components/Navbar"
 import Dashboard from "./Dashboard"
 import CardHolder from "../containers/CardHolder"
-import { logout, fetchUser, setAlert, clearAlert, setAlertSeen, forceUpdate } from '../actions/cards'
+import { logout, fetchUser } from '../actions/cards'
 import '../stylesheets/app.css'
 import '../stylesheets/mobile.css'
 import '../stylesheets/materialize.css'
@@ -21,10 +21,6 @@ class App extends Component {
   constructor() {
     super();
     this.logout = this.logout.bind(this)
-    this.clearAlert = this.clearAlert.bind(this)
-    this.setAlert = this.setAlert.bind(this)
-    this.setAlertSeen = this.setAlertSeen.bind(this)
-    this.forceUpdate = this.forceUpdate.bind(this)
   }
 
   componentDidMount(){
@@ -40,22 +36,6 @@ class App extends Component {
     this.props.dispatch(logout())
   };
 
-  clearAlert = () => {
-    this.props.dispatch(clearAlert())
-  }
-
-  setAlertSeen = () => {
-    this.props.dispatch(setAlertSeen())
-  }
-
-  setAlert = (alert) => {
-    this.props.dispatch(setAlert(alert))
-  }
-
-  forceUpdate = () => {
-    this.props.dispatch(forceUpdate())
-  }
-
   render() {
     return (
       <div>
@@ -65,9 +45,6 @@ class App extends Component {
             <Route exact path="/cards" render={props => {
               return (
                 <Dashboard
-                  clearAlert={this.clearAlert}
-                  setAlertSeen={this.setAlertSeen}
-                  setAlert={this.setAlert}
                   {...props}
                 />
               );
@@ -76,10 +53,6 @@ class App extends Component {
               render={props => {
                 return (
                   <LogInOut
-                    logout={this.logout}
-                    email={this.props.email}
-                    user={this.props.user}
-                    alert={this.props.alert}
                     {...props}
                   />
                 );
@@ -98,10 +71,6 @@ class App extends Component {
                 return (
                   <CardHolder
                     type="New"
-                    clearAlert={this.clearAlert}
-                    setAlertSeen={this.setAlertSeen}
-                    setAlert={this.setAlert}
-                    forceUpdate={this.forceUpdate}
                     {...props}
                   />
                 );
@@ -111,10 +80,6 @@ class App extends Component {
                 return (
                   <CardHolder
                     type="Edit"
-                    cards={this.props.cards}
-                    isFetching={this.props.isFetching}
-                    isAuthenticated={this.props.isAuthenticated}
-                    retailers={this.props.retailers}
                     {...props}
                   />
                 );
@@ -124,8 +89,6 @@ class App extends Component {
                 return (
                   <CardHolder
                     type="Show"
-                    cards={this.props.cards}
-                    history={this.props.history}
                     {...props}
                   />
                 );

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Card from "../components/Card";
 import CardForm from "../components/CardForm";
 import CardApi from "../api/CardApi"
-import { fetchUser, clearAlert, setAlertSeen, setAlert, forceUpdate } from '../actions/cards'
+import { fetchUser, setAlert, forceUpdate, handleAlert } from '../actions/cards'
 
 
 class CardHolder extends Component {
@@ -15,28 +15,17 @@ class CardHolder extends Component {
       errorText: ''
     };
     this.updateCardState = this.updateCardState.bind(this);
+    this.updateCardRetailerState = this.updateCardRetailerState.bind(this);
+    this.updateCardExpirationState = this.updateCardExpirationState.bind(this);
     this.checkAmount = this.checkAmount.bind(this);
-    this.handleEditSubmit = this.handleEditSubmit.bind(this);
+    this.handleUpdateSubmit = this.handleUpdateSubmit.bind(this);
     this.handleNewSubmit = this.handleNewSubmit.bind(this);
-    this.handleSearchUpdate = this.handleSearchUpdate.bind(this);
-    this.handleDateUpdate = this.handleDateUpdate.bind(this);
     this.deleteCard = this.deleteCard.bind(this);
     this.returnCardData = this.returnCardData.bind(this);
   }
 
   componentDidMount(){
-    if (localStorage.token && !this.props.upToDate) {
-      console.log("if 1")
-      this.props.dispatch(fetchUser())
-    }
-    if (!this.props.alertOn) {
-      console.log("if 2")
-      this.props.dispatch(clearAlert())
-    }
-    if (this.props.alertOn && this.props.alert !== " ") {
-      console.log("if 3")
-      this.props.dispatch(setAlertSeen())
-    }
+    this.props.dispatch(handleAlert(localStorage.token, this.props.upToDate, this.props.alertOn, this.props.alert))
     this.setCardState()
   }
 
@@ -52,7 +41,6 @@ class CardHolder extends Component {
 
   componentWillReceiveProps(nextProps){
       if(nextProps.cards!==this.props.cards){
-        console.log("next")
         this.setCardState()
       }
    }
@@ -62,22 +50,17 @@ class CardHolder extends Component {
     let dollarSignStart = e.target.value.charAt(0) === '$' ? true : false
     let percentEnd = e.target.value.substring(e.target.value.length-1) === "%" ? true : false
     let both = dollarSignStart && percentEnd ? false : true
-    if (this.state.type === 'gift card') {
-      if ((dollarSignStart || blank) && both) {
+    let giftCard = this.state.card.type === 'gift card' ? true : false
+    let giftCardPass = ((dollarSignStart || blank) && both)
+    let couponPass = ((dollarSignStart || percentEnd || blank) && both)
+    if (((giftCard && giftCardPass) || (!giftCard && couponPass) )) {
         this.setState({
           errorText: ''
         })
-      } else {
-        this.setState({ errorText: 'Gift card amounts must start with a $ and not end with a %' })
-      }
+    } else if (giftCard) {
+       this.setState({ errorText: 'Gift card amounts must start with a $ and not end with a %' })
     } else {
-      if ((dollarSignStart || percentEnd || blank) && both) {
-        this.setState({
-          errorText: ''
-        })
-      } else {
-        this.setState({ errorText: 'Coupon amounts must start with a $ or end with a %' })
-      }
+      this.setState({ errorText: 'Coupon amounts must start with a $ or end with a %' })
     }
   }
 
@@ -93,7 +76,7 @@ class CardHolder extends Component {
     }
   }
 
-  handleSearchUpdate = (value) => {
+  updateCardRetailerState = (value) => {
     const field = "retailer";
     const card = this.state.card;
     card[field] = value.toLowerCase();
@@ -102,7 +85,7 @@ class CardHolder extends Component {
     });
   };
 
-  handleDateUpdate = (e, value) => {
+  updateCardExpirationState = (e, value) => {
     const field = "expiration";
     const card = this.state.card;
     card[field] = value;
@@ -127,7 +110,7 @@ class CardHolder extends Component {
   }
 
 
-  handleEditSubmit(e) {
+  handleUpdateSubmit(e) {
     e.preventDefault();
     if (this.state.errorText === '') {
       let card = this.returnCardData(e)
@@ -197,8 +180,6 @@ class CardHolder extends Component {
       )
     } else if (this.props.type === "Edit") {
         if (this.state.cardLoaded && this.state.card) {
-          console.log("loaded!")
-          console.log(this.state.card)
           display = (
             <CardForm
               card={this.state.card}
@@ -206,14 +187,13 @@ class CardHolder extends Component {
               fail="card does not exist.  ensure you are logged in"
               retailerNames={retailerNames}
               onChange={this.updateCardState}
-              handleSubmit={this.handleEditSubmit}
-              handleSearchUpdate={this.handleSearchUpdate}
-              handleDateUpdate={this.handleDateUpdate}
+              handleSubmit={this.handleUpdateSubmit}
+              handleSearchUpdate={this.updateCardRetailerState}
+              handleDateUpdate={this.updateCardExpirationState}
               errorText={this.state.errorText}
             />
           )
         } else {
-          console.log("loading")
           display = (<p>Loading...</p>)
         }
     } else {
@@ -225,8 +205,8 @@ class CardHolder extends Component {
             retailerNames={retailerNames}
             onChange={this.updateCardState}
             handleSubmit={this.handleNewSubmit}
-            handleSearchUpdate={this.handleSearchUpdate}
-            handleDateUpdate={this.handleDateUpdate}
+            handleSearchUpdate={this.updateCardRetailerState}
+            handleDateUpdate={this.updateCardExpirationState}
             errorText={this.state.errorText}
                      />)
         } else {

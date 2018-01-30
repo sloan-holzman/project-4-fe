@@ -55,6 +55,22 @@ function receiveUser(response) {
   }
 }
 
+
+export function handleAlert(token, upToDate, alertOn, alert) {
+  return function (dispatch) {
+    if (token && !upToDate) {
+      dispatch(fetchUser())
+    }
+    if (!alertOn) {
+      dispatch(clearAlert())
+    }
+    if (alertOn && alert !== " ") {
+      dispatch(setAlertSeen())
+    }
+  }
+}
+
+
 export function fetchUser() {
   return function (dispatch) {
     dispatch(requestUser())

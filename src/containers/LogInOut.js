@@ -36,11 +36,6 @@ class LogInOut extends Component {
     if (localStorage.token && !this.props.user) {
       this.props.dispatch(fetchUser())
     }
-    // document.getElementById('alert').style.display = "none"
-  }
-
-  componentWillUnmount(){
-    // document.getElementById('alert').style.display = "block"
   }
 
   render() {
@@ -82,4 +77,10 @@ class LogInOut extends Component {
   }
 }
 
-export default connect()(LogInOut)
+const mapStateToProps = state => ({
+  user: state.cardReducer.user,
+  email: state.cardReducer.email,
+  alert: state.cardReducer.alert,
+})
+
+export default connect(mapStateToProps)(LogInOut)

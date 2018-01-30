@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchUser, filterCards, unFilterCards } from '../actions/cards'
+import { filterCards, unFilterCards, handleAlert } from '../actions/cards'
 import AutoCompleteFilters from "../components/AutoCompleteFilters"
 import MobileCardList from "../components/MobileCardList"
 import CardList from "../components/CardList"
@@ -42,15 +42,7 @@ class Dashboard extends Component {
   };
 
   componentDidMount(){
-    if (localStorage.token && !this.props.upToDate) {
-      this.props.dispatch(fetchUser())
-    }
-    if (!this.props.alertOn) {
-      this.props.clearAlert()
-    }
-    if (this.props.alertOn && this.props.alert !== " ") {
-      this.props.setAlertSeen()
-    }
+    this.props.dispatch(handleAlert(localStorage.token, this.props.upToDate, this.props.alertOn, this.props.alert))
   }
 
   goToCard(e, id) {
