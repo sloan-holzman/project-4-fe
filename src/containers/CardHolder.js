@@ -16,7 +16,6 @@ class CardHolder extends Component {
     };
     this.updateCardState = this.updateCardState.bind(this);
     this.checkAmount = this.checkAmount.bind(this);
-    this.checkAmount = this.checkAmount.bind(this);
     this.handleEditSubmit = this.handleEditSubmit.bind(this);
     this.handleNewSubmit = this.handleNewSubmit.bind(this);
     this.handleSearchUpdate = this.handleSearchUpdate.bind(this);
@@ -26,13 +25,23 @@ class CardHolder extends Component {
   }
 
   componentDidMount(){
+    if (localStorage.token && !this.props.upToDate) {
+      console.log("if 1")
+      this.props.dispatch(fetchUser())
+    }
     if (!this.props.alertOn) {
+      console.log("if 2")
       this.props.dispatch(clearAlert())
     }
     if (this.props.alertOn && this.props.alert !== " ") {
+      console.log("if 3")
       this.props.dispatch(setAlertSeen())
     }
-    if (this.props.cards && typeof this.props.match !== 'undefined' && typeof this.props.match.params.id !== 'undefined') {
+    this.setCardState()
+  }
+
+  setCardState(){
+    if (typeof this.props.match !== 'undefined' && typeof this.props.match.params.id !== 'undefined') {
       let card = this.props.cards.find((card) => card._id === this.props.match.params.id)
       this.setState({
         card: card,
@@ -40,6 +49,13 @@ class CardHolder extends Component {
       })
     }
   }
+
+  componentWillReceiveProps(nextProps){
+      if(nextProps.cards!==this.props.cards){
+        console.log("next")
+        this.setCardState()
+      }
+   }
 
   checkAmount(e) {
     let blank = e.target.value === '' ? true : false
@@ -180,7 +196,9 @@ class CardHolder extends Component {
         />
       )
     } else if (this.props.type === "Edit") {
-        if (this.state.cardLoaded) {
+        if (this.state.cardLoaded && this.state.card) {
+          console.log("loaded!")
+          console.log(this.state.card)
           display = (
             <CardForm
               card={this.state.card}
@@ -195,6 +213,7 @@ class CardHolder extends Component {
             />
           )
         } else {
+          console.log("loading")
           display = (<p>Loading...</p>)
         }
     } else {
@@ -240,9 +259,7 @@ function mapStateToProps(state) {
   }
 }
 
-CardHolder.defaultProps = {
-  type: "Edit",
-}
+
 
 
 export default connect(mapStateToProps)(CardHolder);

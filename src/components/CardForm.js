@@ -89,5 +89,8 @@ const CardForm = ({...props}) => {
   )
 }
 
+CardForm.defaultProps = {
+  card: "Edit",
+}
 
 export default CardForm
