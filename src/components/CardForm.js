@@ -21,7 +21,6 @@ const CardForm = ({...props}) => {
     } = props
   let expiration = card && card.expiration ? new Date(card.expiration) : null
 
-  console.log(card)
   return (
     <div>
       <h2>{title}</h2>

@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import CardBack from './CardBack'
 import CardFront from './CardFront'
+import CardButtons from './CardButtons'
 import ReactCardFlip from 'react-card-flip';
 import '../stylesheets/card.css'
 
@@ -13,7 +14,6 @@ class Card extends Component {
     this.state = {
       isFlipped: false,
       width: window.innerWidth
-      // height: window.innerHeight
     };
     this.flipCard = this.flipCard.bind(this);
     this.goToEdit = this.goToEdit.bind(this);
@@ -62,9 +62,9 @@ class Card extends Component {
           <CardBack key="back" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />
         </ReactCardFlip>)
     } else if (this.state.isFlipped) {
-      cardDisplay = (<CardFront key="front" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />)
-    } else {
       cardDisplay = (<CardBack key="back" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />)
+    } else {
+      cardDisplay = (<CardFront key="front" flipVerb={flipVerb} card={card} flipCard={this.flipCard} />)
     }
 
     return (
@@ -73,20 +73,7 @@ class Card extends Component {
           <div className="card">
             {cardDisplay}
             <br/>
-            <div className="card__buttons">
-              <button onClick={ (e) => this.props.deleteCard(e, card._id) } className="waves-effect waves-light btn" >
-                Delete
-              </button>
-              <button onClick={(e) => this.goToEdit(e, card._id)} className="waves-effect waves-light btn" >
-                Edit
-              </button>
-              {
-                card && card.type === 'gift card' && card.cardHtml ?
-                  <button onClick={()=> window.open(card.cardHtml, "_blank")} className="waves-effect waves-light btn" >
-                    Check Balance
-                  </button> : <p></p>
-              }
-            </div>
+            <CardButtons card={card} deleteCard={this.props.deleteCard} goToEdit={this.goToEdit}/>
           </div> :
           <p>card does not exist.  ensure you are logged in</p>
         }

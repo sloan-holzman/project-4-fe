@@ -7,18 +7,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: teal400,
-    // // primary1Color: teal400,
-    // primary2Color: teal400,
-    // primary3Color: teal400,
-    // accent1Color: teal400,
-    // accent2Color: teal400,
-    // accent3Color: teal400,
-    // textColor: teal400,
-    // alternateTextColor: teal400,
-    // borderColor: teal400,
-    // disabledColor: teal400,
     pickerHeaderColor: teal400,
-    clockCircleColor: teal400,
+    clockCircleColor: teal400
   }
 });
 

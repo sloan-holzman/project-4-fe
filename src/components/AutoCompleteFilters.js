@@ -7,14 +7,12 @@ export default class AutoCompleteControlled extends Component {
   };
 
   handleUpdateInput = (searchText) => {
-    console.log(this.state.searchText)
     this.setState({
       searchText: searchText,
     });
   };
 
   handleNewRequest = () => {
-    console.log("new request!")
     this.props.limitByRetailer(this.state.searchText)
   };
 
