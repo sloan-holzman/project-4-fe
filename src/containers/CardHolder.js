@@ -117,7 +117,7 @@ class CardHolder extends Component {
       .then(response => {
         if (response.data) {
           this.props.dispatch(forceUpdate())
-          this.props.dispatch(setAlert("card added successfully"))
+          this.props.dispatch(setAlert("card updated successfully"))
           this.props.history.push(`/cards`)
         }
       })
@@ -195,14 +195,12 @@ class CardHolder extends Component {
     let retailerNames = this.props.retailers.map((retailer, i) => retailer.name)
     let display
     if (this.props.type === "Show") {
+      console.log("show")
       display = (
         <Card
           cards={this.props.cards}
           history={this.props.history}
           deleteCard={this.deleteCard}
-          clearAlert={this.props.dispatch(clearAlert())}
-          setAlertSeen={this.props.dispatch(setAlertSeen())}
-          setAlert={this.props.dispatch(setAlert())}
           {...this.props}
         />
       )

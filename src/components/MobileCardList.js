@@ -12,7 +12,7 @@ const MobileCardList = ({...props}) => {
 
   let mobileCards = filteredCards.map((card, i) => {
     return (
-      <tr>
+      <tr key={card._id}>
         <td>{card.retailer}</td>
         <td>{card.type}</td>
         <td>{card.amount}</td>
