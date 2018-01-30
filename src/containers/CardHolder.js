@@ -134,7 +134,6 @@ class CardHolder extends Component {
     e.preventDefault();
     if (this.state.errorText === '') {
       let chosenRetailer = this.props.retailers.find(retailer => retailer.name === this.state.card.retailer)
-      console.log(chosenRetailer)
       let cardData = (chosenRetailer && this.state.card.type === 'gift card' ? {
           type: this.state.card.type,
           retailer: this.state.card.retailer,
@@ -195,7 +194,6 @@ class CardHolder extends Component {
     let retailerNames = this.props.retailers.map((retailer, i) => retailer.name)
     let display
     if (this.props.type === "Show") {
-      console.log("show")
       display = (
         <Card
           cards={this.props.cards}
@@ -223,7 +221,6 @@ class CardHolder extends Component {
           display = (<p>Loading...</p>)
         }
     } else {
-      console.log(this.state.card)
         if (this.state.card) {
           display = (<CardForm
             card={this.state.card}
