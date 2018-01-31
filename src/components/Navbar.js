@@ -17,7 +17,7 @@ const Navbar = ({...props}) => {
               <li><Link to="/cards">wallet</Link></li>
               <li><Link to="/cards/new">add new</Link></li>
               {
-                props.user ?
+                props.user && localStorage.token ?
                   <li><Link to="/logout">logout</Link></li> :
                   <li><Link to="/">login</Link></li>
               }
