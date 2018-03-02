@@ -1,5 +1,3 @@
-// handleWindowSizeChange copied from https://goshakkk.name/different-mobile-desktop-tablet-layouts-react/
-
 import React from 'react'
 import '../stylesheets/dashboard.css'
 

@@ -89,6 +89,7 @@ function cardReducer(
   }
 }
 
+// note to self: combineReducers not actually necessary, as I only have one reducer
 const rootReducer = combineReducers({
   cardReducer
 })

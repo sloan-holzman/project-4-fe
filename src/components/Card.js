@@ -1,5 +1,3 @@
-// handleWindowSizeChange copied from https://goshakkk.name/different-mobile-desktop-tablet-layouts-react/
-
 import React, { Component } from 'react'
 import CardBack from './CardBack'
 import CardFront from './CardFront'

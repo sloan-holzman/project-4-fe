@@ -45,6 +45,7 @@ class CardHolder extends Component {
       }
    }
 
+  // if it's a gift card, the "amount" should start with a dollar sign.  if it's a coupon, it can start with a dollar sign or end with percent sign, but not both
   checkAmount(e) {
     let blank = e.target.value === '' ? true : false
     let dollarSignStart = e.target.value.charAt(0) === '$' ? true : false
