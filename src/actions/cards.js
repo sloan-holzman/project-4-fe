@@ -5,6 +5,7 @@ import backend from "../BackendVariable";
 
 
 export function logout() {
+  localStorage.clear()
   return {
     type: LOG_OUT,
   }

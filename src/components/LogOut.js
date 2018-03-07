@@ -7,6 +7,7 @@ class LogOut extends Component {
     this.props.history.push(`/login`)
   }
   render() {
+    // never actually shown, as user is immediately sent to the login screen
     return (
       <div>
         <p>Logging out...</p>

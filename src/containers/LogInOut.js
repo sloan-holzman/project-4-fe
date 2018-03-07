@@ -4,7 +4,7 @@ import backend from "../BackendVariable";
 import Overview from "../components/Overview.js"
 import { connect } from 'react-redux'
 import '../stylesheets/loginout.css'
-import {fetchUser, setAlert, receiveUser} from '../actions/cards'
+import {fetchUser, setAlert, receiveUser, logout} from '../actions/cards'
 
 
 class LogInOut extends Component {
@@ -30,7 +30,7 @@ class LogInOut extends Component {
   };
 
   onFailedLogin = (error) => {
-    localStorage.clear()
+    this.props.dispatch(logout())
     this.props.dispatch(setAlert("woops, something went wrong"))
     alert(error);
   };

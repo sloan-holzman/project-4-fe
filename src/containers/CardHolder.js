@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Card from "../components/Card";
 import CardForm from "../components/CardForm";
 import CardApi from "../api/CardApi"
-import { fetchUser, setAlert, forceUpdate, handleAlert } from '../actions/cards'
+import { fetchUser, setAlert, forceUpdate, handleAlert, logout } from '../actions/cards'
 
 
 class CardHolder extends Component {
@@ -123,7 +123,7 @@ class CardHolder extends Component {
             this.props.dispatch(setAlert("card updated successfully"))
             this.props.history.push(`/cards`)
           } else {
-            localStorage.clear()
+            this.props.dispatch(logout())
             this.props.dispatch(setAlert("woops, something went wrong"))
             this.props.history.push(`/login`)
           }
@@ -142,7 +142,7 @@ class CardHolder extends Component {
             this.props.dispatch(setAlert("card added successfully"))
             this.props.history.push(`/cards`)
           } else {
-            localStorage.clear()
+            this.props.dispatch(logout())
             this.props.dispatch(setAlert("woops, something went wrong"))
             this.props.history.push(`/login`)
           }
@@ -160,7 +160,7 @@ class CardHolder extends Component {
           this.props.dispatch(setAlert("card deleted successfully"))
           this.props.history.push(`/cards`)
         } else {
-          localStorage.clear()
+          this.props.dispatch(logout())
           this.props.dispatch(setAlert("woops, something went wrong"))
           this.props.history.push(`/login`)
         }

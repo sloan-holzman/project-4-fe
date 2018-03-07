@@ -24,7 +24,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    if (localStorage.token && localStorage.length > 0) {
+    if (localStorage.token && localStorage.token.length > 0) {
       this.props.dispatch(fetchUser())
     } else {
       this.logout()
@@ -32,7 +32,6 @@ class App extends Component {
   }
 
   logout = () => {
-    localStorage.clear()
     this.props.dispatch(logout())
   };
 
