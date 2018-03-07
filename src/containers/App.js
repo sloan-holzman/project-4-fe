@@ -112,7 +112,6 @@ const mapStateToProps = state => ({
   token: state.cardReducer.token,
   cards: state.cardReducer.cards,
   isFetching: state.cardReducer.isFetching,
-  didInvalidate: state.cardReducer.didInvalidate,
   alert: state.cardReducer.alert,
   alertOn: state.cardReducer.alertOn,
   retailers: state.cardReducer.retailers

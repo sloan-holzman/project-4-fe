@@ -75,7 +75,6 @@ export function fetchUser() {
         response => dispatch(receiveUser(response))
       )
       .catch(err => {
-        localStorage.clear()
         dispatch(logout())
       })
   }

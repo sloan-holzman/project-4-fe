@@ -96,7 +96,6 @@ const mapStateToProps = state => ({
   token: state.cardReducer.token,
   cards: state.cardReducer.cards,
   isFetching: state.cardReducer.isFetching,
-  didInvalidate: state.cardReducer.didInvalidate,
   selectedRetailer: state.cardReducer.selectedRetailer,
   hasSelected: state.cardReducer.selectedRetailer,
   upToDate: state.cardReducer.upToDate,

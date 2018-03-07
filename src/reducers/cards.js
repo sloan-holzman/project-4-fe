@@ -8,7 +8,6 @@ function cardReducer(
     cards: [],
     retailers: [],
     isFetching: false,
-    didInvalidate: false,
     email: null,
     selectedRetailer: null,
     hasSelected: false,
@@ -27,7 +26,6 @@ function cardReducer(
         cards: [],
         retailers: [],
         isFetching: false,
-        didInvalidate: false,
         email: null,
         alertOn: true,
         alert: " "
@@ -35,12 +33,10 @@ function cardReducer(
     case REQUEST_USER:
       return Object.assign({}, state, {
         isFetching: true,
-        didInvalidate: false
       })
     case RECEIVE_USER:
       return Object.assign({}, state, {
         isFetching: false,
-        didInvalidate: false,
         isAuthenticated: true,
         upToDate: true,
         user: action.payload.response.data.user,
