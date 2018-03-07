@@ -21,6 +21,7 @@ class CardHolder extends Component {
     this.handleNewSubmit = this.handleNewSubmit.bind(this);
     this.deleteCard = this.deleteCard.bind(this);
     this.returnCardData = this.returnCardData.bind(this);
+    this.afterCardApi = this.afterCardApi.bind(this);
   }
 
   componentDidMount(){
@@ -111,17 +112,7 @@ class CardHolder extends Component {
       let card = this.returnCardData(e)
       let cardId = this.props.match.params.id
       CardApi.editCard(card, cardId)
-        .then(response => {
-          if (response === "success") {
-            this.props.dispatch(fetchUser())
-            this.props.dispatch(setAlert("card updated successfully"))
-            this.props.history.push(`/cards`)
-          } else {
-            this.props.dispatch(logout())
-            this.props.dispatch(setAlert("woops, something went wrong"))
-            this.props.history.push(`/login`)
-          }
-        })
+      .then(response => {this.afterCardApi(response,"card updated successfully")})
     }
   }
 
@@ -130,17 +121,7 @@ class CardHolder extends Component {
     if (this.state.errorText === '') {
       let card = this.returnCardData(e)
       CardApi.newCard(card)
-        .then(response => {
-          if (response === "success") {
-            this.props.dispatch(fetchUser())
-            this.props.dispatch(setAlert("card added successfully"))
-            this.props.history.push(`/cards`)
-          } else {
-            this.props.dispatch(logout())
-            this.props.dispatch(setAlert("woops, something went wrong"))
-            this.props.history.push(`/login`)
-          }
-        })
+      .then(response => {this.afterCardApi(response,"card added successfully")})
     }
   }
 
@@ -148,17 +129,20 @@ class CardHolder extends Component {
   deleteCard(e, id) {
     e.preventDefault();
     CardApi.deleteCard(id)
-      .then(response => {
-        if (response === "success") {
-          this.props.dispatch(fetchUser())
-          this.props.dispatch(setAlert("card deleted successfully"))
-          this.props.history.push(`/cards`)
-        } else {
-          this.props.dispatch(logout())
-          this.props.dispatch(setAlert("woops, something went wrong"))
-          this.props.history.push(`/login`)
-        }
-      })
+      .then(response => {this.afterCardApi(response,"card deleted successfully")})
+  }
+
+
+  afterCardApi(response, phrase) {
+    if (response === "success") {
+      this.props.dispatch(fetchUser())
+      this.props.dispatch(setAlert(phrase))
+      this.props.history.push(`/cards`)
+    } else {
+      this.props.dispatch(logout())
+      this.props.dispatch(setAlert("woops, something went wrong"))
+      this.props.history.push(`/login`)
+    }
   }
 
   render () {
