@@ -4,8 +4,7 @@ import backend from "../BackendVariable";
 import Overview from "../components/Overview.js"
 import { connect } from 'react-redux'
 import '../stylesheets/loginout.css'
-import { login, fetchUser, setAlert } from '../actions/cards'
-
+import {fetchUser, setAlert, receiveUser} from '../actions/cards'
 
 
 class LogInOut extends Component {
@@ -17,10 +16,10 @@ class LogInOut extends Component {
 
   onSuccessLogin = (response) => {
     response.json()
-    .then(user => {
+    .then(userInfo => {
       if (response.headers.get('x-auth-token')) {
         localStorage.token = response.headers.get('x-auth-token');
-        this.props.dispatch(login(user))
+        this.props.dispatch(receiveUser({data: userInfo}))
         this.props.dispatch(setAlert("congrats, you logged in successfully"))
         this.props.history.push(`/cards`)
       }
@@ -39,8 +38,12 @@ class LogInOut extends Component {
   }
 
   render() {
-    let loginUrl=`${backend}api/v1/auth/twitter`
+    // request token is what's originally hit when the user clicks the TwitterLogin button
     let requestTokenUrl=`${backend}api/v1/auth/twitter/reverse`
+    // after receiving back the request token, opening twitter.com to get authorization from the user and receiving the verification code, the front end then hits the loginURL with the verification code (oauth_verifier) included
+    let loginUrl=`${backend}api/v1/auth/twitter`
+    // full details on how TwitterLogin works can be found at https://www.npmjs.com/package/react-twitter-auth and https://medium.com/@robince885/how-to-do-twitter-authentication-with-react-and-restful-api-e525f30c62bb
+
     let content =
       (
         <div className= "home">

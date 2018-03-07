@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT, REQUEST_USER, RECEIVE_USER, FILTER_CARDS, UNFILTER_CARDS, CLEAR_ALERT, SET_ALERT, SET_ALERT_SEEN, FORCE_UPDATE } from '../constants/cards'
+import { LOG_OUT, REQUEST_USER, RECEIVE_USER, FILTER_CARDS, UNFILTER_CARDS, CLEAR_ALERT, SET_ALERT, SET_ALERT_SEEN, FORCE_UPDATE } from '../constants/cards'
 import { combineReducers } from 'redux'
 
 function cardReducer(
@@ -19,15 +19,6 @@ function cardReducer(
   action
 ) {
   switch (action.type) {
-    case LOG_IN:
-      return Object.assign({}, state, {
-        isAuthenticated: true,
-        upToDate: true,
-        user: action.payload.response.user,
-        retailers: action.payload.response.retailers,
-        cards: action.payload.response.user.cards,
-        email: action.payload.response.user.email
-      })
     case LOG_OUT:
       return Object.assign({}, state, {
         isAuthenticated: false,

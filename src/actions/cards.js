@@ -1,17 +1,8 @@
-import { LOG_IN, LOG_OUT, REQUEST_USER, RECEIVE_USER, FILTER_CARDS, UNFILTER_CARDS, CLEAR_ALERT, SET_ALERT, SET_ALERT_SEEN, FORCE_UPDATE } from '../constants/cards'
+import { LOG_OUT, REQUEST_USER, RECEIVE_USER, FILTER_CARDS, UNFILTER_CARDS, CLEAR_ALERT, SET_ALERT, SET_ALERT_SEEN, FORCE_UPDATE } from '../constants/cards'
 import 'babel-polyfill'
 import axios from "axios";
 import backend from "../BackendVariable";
 
-
-export function login(response) {
-  return {
-    type: LOG_IN,
-    payload: {
-      response
-    }
-  }
-}
 
 export function logout() {
   return {
@@ -46,7 +37,7 @@ function requestUser() {
   }
 }
 
-function receiveUser(response) {
+export function receiveUser(response) {
   return {
     type: RECEIVE_USER,
     payload: {
