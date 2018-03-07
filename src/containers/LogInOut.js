@@ -23,11 +23,15 @@ class LogInOut extends Component {
         this.props.dispatch(setAlert("congrats, you logged in successfully"))
         this.props.history.push(`/cards`)
       }
+    })
+    .catch(err => {
+      this.onFailedLogin(err)
     });
   };
 
   onFailedLogin = (error) => {
     localStorage.clear()
+    this.props.dispatch(setAlert("woops, something went wrong"))
     alert(error);
   };
 
