@@ -22,6 +22,7 @@ class CardHolder extends Component {
     this.deleteCard = this.deleteCard.bind(this);
     this.returnCardData = this.returnCardData.bind(this);
     this.afterCardApi = this.afterCardApi.bind(this);
+    this.handleError = this.handleError.bind(this);
   }
 
   componentDidMount(){
@@ -113,6 +114,7 @@ class CardHolder extends Component {
       let cardId = this.props.match.params.id
       CardApi.editCard(card, cardId)
       .then(response => {this.afterCardApi(response,"card updated successfully")})
+      .catch(this.handleError)
     }
   }
 
@@ -122,6 +124,7 @@ class CardHolder extends Component {
       let card = this.returnCardData(e)
       CardApi.newCard(card)
       .then(response => {this.afterCardApi(response,"card added successfully")})
+      .catch(this.handleError)
     }
   }
 
@@ -130,6 +133,7 @@ class CardHolder extends Component {
     e.preventDefault();
     CardApi.deleteCard(id)
       .then(response => {this.afterCardApi(response,"card deleted successfully")})
+      .catch(this.handleError)
   }
 
 
@@ -139,10 +143,14 @@ class CardHolder extends Component {
       this.props.dispatch(setAlert(phrase))
       this.props.history.push(`/cards`)
     } else {
-      this.props.dispatch(logout())
-      this.props.dispatch(setAlert("woops, something went wrong"))
-      this.props.history.push(`/login`)
+      this.handleError()
     }
+  }
+
+  handleError() {
+    this.props.dispatch(logout())
+    this.props.dispatch(setAlert("woops, something went wrong"))
+    this.props.history.push(`/login`)
   }
 
   render () {
