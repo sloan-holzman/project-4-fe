@@ -13,8 +13,7 @@ const CardForm = ({...props}) => {
       card,
       title,
       handleSubmit,
-      handleSearchUpdate,
-      handleDateUpdate,
+      updateCardRetailerOrExpirationState,
       onChange,
       errorText,
       retailerNames
@@ -42,7 +41,7 @@ const CardForm = ({...props}) => {
               hintText="e.g. j crew, walmart, amazon"
               floatingLabelText="retailer"
               searchText={card.retailer}
-              onUpdateInput={handleSearchUpdate}
+              onUpdateInput={(val) => updateCardRetailerOrExpirationState("retailer", val)}
               dataSource={retailerNames}
               filter={AutoComplete.fuzzyFilter}
               openOnFocus={true}
@@ -78,7 +77,7 @@ const CardForm = ({...props}) => {
             defaultValue={card.amount}
           /><br/>
           {
-            expiration ? <DatePicker name="expiration" hintText="expiration date" fullWidth={true} defaultDate={expiration} onChange={handleDateUpdate} /> : <DatePicker name="expiration" hintText="expiration date" fullWidth={true} onChange={handleDateUpdate} />
+            expiration ? <DatePicker name="expiration" hintText="expiration date" fullWidth={true} defaultDate={expiration} onChange={(e, date) => updateCardRetailerOrExpirationState("expiration", date)} /> : <DatePicker name="expiration" hintText="expiration date" fullWidth={true} onChange={(e, date) => updateCardRetailerOrExpirationState("expiration", date)} />
           }
           <br/>
           <br/>

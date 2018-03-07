@@ -15,8 +15,7 @@ class CardHolder extends Component {
       errorText: ''
     };
     this.updateCardState = this.updateCardState.bind(this);
-    this.updateCardRetailerState = this.updateCardRetailerState.bind(this);
-    this.updateCardExpirationState = this.updateCardExpirationState.bind(this);
+    this.updateCardRetailerOrExpirationState = this.updateCardRetailerOrExpirationState.bind(this);
     this.checkAmount = this.checkAmount.bind(this);
     this.handleUpdateSubmit = this.handleUpdateSubmit.bind(this);
     this.handleNewSubmit = this.handleNewSubmit.bind(this);
@@ -77,19 +76,14 @@ class CardHolder extends Component {
     }
   }
 
-  updateCardRetailerState = (value) => {
-    const field = "retailer";
+  updateCardRetailerOrExpirationState(field, value) {
+    console.log(value)
     const card = this.state.card;
-    card[field] = value.toLowerCase();
-    this.setState({
-      card: card,
-    });
-  };
-
-  updateCardExpirationState = (e, value) => {
-    const field = "expiration";
-    const card = this.state.card;
-    card[field] = value;
+    if (field === "retailer") {
+      card[field] = value.toLowerCase();
+    } else {
+      card[field] = value;
+    }
     this.setState({
       card: card,
     });
@@ -156,6 +150,7 @@ class CardHolder extends Component {
     CardApi.deleteCard(id)
       .then(response => {
         if (response === "success") {
+          // have to use fetchUser (instead of justforceupdate) because deleteCard doesn't require changing pages to Dashboard and the update resulting from forceUpdate is only triggered when Dashboard mounts
           this.props.dispatch(fetchUser())
           this.props.dispatch(setAlert("card deleted successfully"))
           this.props.history.push(`/cards`)
@@ -189,8 +184,7 @@ class CardHolder extends Component {
               retailerNames={retailerNames}
               onChange={this.updateCardState}
               handleSubmit={this.handleUpdateSubmit}
-              handleSearchUpdate={this.updateCardRetailerState}
-              handleDateUpdate={this.updateCardExpirationState}
+              updateCardRetailerOrExpirationState={this.updateCardRetailerOrExpirationState}
               errorText={this.state.errorText}
             />
           )
@@ -206,8 +200,7 @@ class CardHolder extends Component {
             retailerNames={retailerNames}
             onChange={this.updateCardState}
             handleSubmit={this.handleNewSubmit}
-            handleSearchUpdate={this.updateCardRetailerState}
-            handleDateUpdate={this.updateCardExpirationState}
+            updateCardRetailerOrExpirationState={this.updateCardRetailerOrExpirationState}
             errorText={this.state.errorText}
                      />)
         } else {
