@@ -1,4 +1,4 @@
-import { LOG_OUT, REQUEST_USER, RECEIVE_USER, FILTER_CARDS, UNFILTER_CARDS, CLEAR_ALERT, SET_ALERT, SET_ALERT_SEEN, FORCE_UPDATE } from '../constants/cards'
+import { LOG_OUT, REQUEST_USER, RECEIVE_USER, FILTER_CARDS, UNFILTER_CARDS, CLEAR_ALERT, SET_ALERT, SET_ALERT_SEEN } from '../constants/cards'
 import 'babel-polyfill'
 import axios from "axios";
 import backend from "../BackendVariable";
@@ -77,12 +77,6 @@ export function fetchUser() {
       .catch(err => {
         dispatch(logout())
       })
-  }
-}
-
-export function forceUpdate() {
-  return {
-    type: FORCE_UPDATE
   }
 }
 

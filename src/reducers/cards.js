@@ -1,4 +1,4 @@
-import { LOG_OUT, REQUEST_USER, RECEIVE_USER, FILTER_CARDS, UNFILTER_CARDS, CLEAR_ALERT, SET_ALERT, SET_ALERT_SEEN, FORCE_UPDATE } from '../constants/cards'
+import { LOG_OUT, REQUEST_USER, RECEIVE_USER, FILTER_CARDS, UNFILTER_CARDS, CLEAR_ALERT, SET_ALERT, SET_ALERT_SEEN } from '../constants/cards'
 import { combineReducers } from 'redux'
 
 function cardReducer(
@@ -66,10 +66,6 @@ function cardReducer(
       return Object.assign({}, state, {
         alertOn: true,
         alert: " "
-      })
-    case FORCE_UPDATE:
-      return Object.assign({}, state, {
-        upToDate: false
       })
     default:
       return state

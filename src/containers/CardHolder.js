@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Card from "../components/Card";
 import CardForm from "../components/CardForm";
 import CardApi from "../api/CardApi"
-import { fetchUser, setAlert, forceUpdate, handleAlert, logout } from '../actions/cards'
+import { fetchUser, setAlert, handleAlert, logout } from '../actions/cards'
 
 
 class CardHolder extends Component {
@@ -113,7 +113,7 @@ class CardHolder extends Component {
       CardApi.editCard(card, cardId)
         .then(response => {
           if (response === "success") {
-            this.props.dispatch(forceUpdate())
+            this.props.dispatch(fetchUser())
             this.props.dispatch(setAlert("card updated successfully"))
             this.props.history.push(`/cards`)
           } else {
@@ -132,7 +132,7 @@ class CardHolder extends Component {
       CardApi.newCard(card)
         .then(response => {
           if (response === "success") {
-            this.props.dispatch(forceUpdate())
+            this.props.dispatch(fetchUser())
             this.props.dispatch(setAlert("card added successfully"))
             this.props.history.push(`/cards`)
           } else {
@@ -150,7 +150,6 @@ class CardHolder extends Component {
     CardApi.deleteCard(id)
       .then(response => {
         if (response === "success") {
-          // have to use fetchUser (instead of justforceupdate) because deleteCard doesn't require changing pages to Dashboard and the update resulting from forceUpdate is only triggered when Dashboard mounts
           this.props.dispatch(fetchUser())
           this.props.dispatch(setAlert("card deleted successfully"))
           this.props.history.push(`/cards`)
