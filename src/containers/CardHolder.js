@@ -30,6 +30,7 @@ class CardHolder extends Component {
     this.setCardState()
   }
 
+  // finds the card that matches the params id, if and only if there is a valid params id.  then, set's that card to state and let's cardHolder know that the card is "loaded", which is required before we can render the edit card form with the card's default information
   setCardState(){
     if (typeof this.props.match !== 'undefined' && typeof this.props.match.params.id !== 'undefined') {
       let card = this.props.cards.find((card) => card._id === this.props.match.params.id)
@@ -40,6 +41,7 @@ class CardHolder extends Component {
     }
   }
 
+  // if there's an update to the list of cards, then make sure to get the latest card data
   componentWillReceiveProps(nextProps){
       if(nextProps.cards!==this.props.cards){
         this.setCardState()
